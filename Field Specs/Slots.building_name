@@ -1,0 +1,68 @@
+# Field Specifications
+
+## General Elements
+
+### __*Slots.building_name*__
+
+| Field                 | Value                             |
+|-----------------------|-----------------------------------|
+| Field Name            | building_name                     |
+| Parent Table          | Slots                             |
+| Alias(es)             |                                   |
+| Specification Type    | [ ] Unique                        |
+|                       | [ ] Generic                       |
+|                       | [X] Replica                       |
+|                       |                                   |
+| Source Specification  | Foreign key from the Building table|
+| Shared By             |                                   |
+| Description           | Used in conjunction with room number 
+to represent location of tutoring |
+
+
+## Physical Elements
+
+| Field                 | Value                             |
+|-----------------------|-----------------------------------|
+| Data Type             | String                            |
+| Length                | 20                                |
+| Decimal Places        | N/A                               |
+| Character Support     | [X] Letters (A-Z)                 |
+|                       | [ ] Numbers (0-9)                 |
+|                       | [ ] Keyboard (.,/$#%)             |
+|                       | [ ] Special (©®™Σπ)               |
+
+
+## Logical Elements
+
+| Field                 | Value                             |
+|-----------------------|-----------------------------------|
+| Key Type              | [ ] Non                           |
+|                       | [ ] Primary                       |   
+|                       | [X] Foreign                       |
+|                       | [ ] Alternate                     |
+|                       |                                   |
+| Key Structure         | [ ] Simple                        |
+|                       | [ ] Composite                     |
+|                       |                                   |
+| Uniqueness            | [X] Non-unique                    |
+|                       | [ ] Unique                        |
+|                       |                                   |
+| Null Support          | [ ] Nulls OK                      |
+|                       | [X] No nulls                      |
+|                       |                                   |
+| Values Entered By     | [X] User                          |
+|                       | [ ] System                        |
+|                       |                                   |
+| Required Value        | [ ] No                            |
+|                       | [X] Yes                           |
+|                       |                                   |
+| Range of Values       |                                   |
+| Edit Rule             | [ ] Enter now, edits allowed      |
+|                       | [ ] Enter now, edits not allowed  |
+|                       | [X] Enter later, edits allowed    |
+|                       | [ ] Enter later, edits not allowed|
+|                       | [ ] Not determined at this time   |
+
+## Note: Nulls are not accepted because we plan to use a default value 
+such as "building not yet set" if a slot is created but not immediately assigned
+a location. 
