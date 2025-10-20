@@ -5,7 +5,7 @@
 | Field                 | Value                             |
 |-----------------------|-----------------------------------|
 | Field Name            | time_id                           |
-| Parent Table          | Schedules                         |
+| Parent Table          | slot_times                        |
 | Alias(es)             |                                   |
 | Specification Type    | [ ] Unique                        |
 |                       | [ ] Generic                       |
