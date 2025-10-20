@@ -2,6 +2,20 @@ CREATE DATABASE clc_tutoring;
 
 USE DATABASE clc_tutoring;
 
+CREATE TABLE slots
+(
+    slot_id           INT unsigned NOT NULL AUTO_INCREMENT,
+    building_name     VARCHAR(7),
+    class_id          INT,
+    tutor_id          INT,
+    room_number       INT,
+    slot_year         INT NOT NULL,
+    slot_term         VARCHAR(3) NOT NULL
+    FOREIGN KEY       (building_name) references buildings(building_name),
+    FOREIGN KEY       (class_id) references classes(class_id),
+    FOREIGN KEY       (tutor_id) references tutors(tutor_id),
+    PRIMARY KEY       (slot_id)
+);
 CREATE TABLE times
 (
     time_id           INT unsigned NOT NULL AUTO_INCREMENT,
@@ -16,7 +30,7 @@ CREATE TABLE times
 CREATE TABLE schedules
 (
     slot_id         INT unsigned NOT NULL,
-    time_id,        INT unsigned NOT NULL,
+    time_id         INT unsigned NOT NULL,
     FOREIGN KEY    (slot_id) references slots(slot_id),
     FOREIGN KEY    (time_id) references times(time_id) ON DELETE RESTRICT,
     PRIMARY KEY    (slot_id, time_id)
