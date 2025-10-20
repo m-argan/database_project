@@ -1,6 +1,8 @@
+DROP DATABASE IF EXISTS clc_tutoring;
+
 CREATE DATABASE clc_tutoring;
 
-USE DATABASE clc_tutoring;
+USE clc_tutoring;
 
 CREATE TABLE slots
 (
