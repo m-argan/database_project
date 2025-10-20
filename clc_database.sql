@@ -67,6 +67,38 @@ CREATE TABLE buildings
     PRIMARY KEY     (building_name)
 );
 
+CREATE TABLE tutors(
+    PRIMARY KEY     (tutor.id);                 --Still needs deny rule implemented
+    tutor_id            INT NOT NULL,
+    tutor_first_name    VARCHAR(30) NOT NULL,
+    tutor_last_name     VARCHAR(30) NOT NULL,
+    tutor_email         VARCHAR(80) NOT NULL,
+);
+
+CREATE TABLE tutor_course_agreements(
+    tutor_id        INT NOT NULL,
+    class_id        INT NOT NULL,
+    PRIMARY KEY     (tutor_id, class_id),
+    FOREIGN KEY     (tutor_id) REFERENCES tutors,
+    FOREIGN KEY     (class_id) REFERENCES classes
+);
+
+CREATE TABLE tutor_availibility(
+    tutor_id        INT NOT NULL,
+    time_id        INT NOT NULL,
+    PRIMARY KEY     (tutor_id, time_id),
+    FOREIGN KEY     (tutor_id) REFERENCES tutors,
+    FOREIGN KEY     (time_id) REFERENCES times
+);
+
+CREATE TABLE tutor_qualified_subjects(
+    tutor_id        INT NOT NULL,
+    subject_code    CHAR(3) NOT NULL,
+    PRIMARY KEY     (tutor_id, subject_code),
+    FOREIGN KEY     (tutor_id) REFERENCES tutors,
+    FOREIGN KEY     (subject_code) REFERENCES subjects
+);
+
 
 
 
