@@ -5,7 +5,7 @@
 | Field                 | Value                             |
 |-----------------------|-----------------------------------|
 | Field Name            | class_id                                  |
-| Parent Table          | Tutor_Course_Agreements                                  |
+| Parent Table          | Tutor_Agreed_Classes                                  |
 | Alias(es)             | N/A                                  |
 | Specification Type    | [ ] Unique                        |
 |                       | [ ] Generic                       |
@@ -59,5 +59,6 @@
 |                       | [ ] Enter later, edits allowed    |
 |                       | [ ] Enter later, edits not allowed|
 |                       | [ ] Not determined at this time   |
+
 
 ## Note
