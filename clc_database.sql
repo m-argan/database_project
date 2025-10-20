@@ -8,13 +8,14 @@ CREATE TABLE slots
 (
     slot_id           INT unsigned NOT NULL AUTO_INCREMENT,
     building_name     VARCHAR(7),
-    class_id          INT,
+    subject_code      INT,
+    class_number      INT,
     tutor_id          INT,
     room_number       INT,
     slot_year         INT NOT NULL,
     slot_term         VARCHAR(3) NOT NULL
     FOREIGN KEY       (building_name) references buildings(building_name),
-    FOREIGN KEY       (class_id) references classes(class_id),
+    FOREIGN KEY       (subject_code, class_number) references classes(subject_code, class_number),
     FOREIGN KEY       (tutor_id) references tutors(tutor_id),
     PRIMARY KEY       (slot_id)
 );
@@ -40,12 +41,11 @@ CREATE TABLE schedules
 
 CREATE TABLE classes
 (
-    class_id         INT unsigned NOT NULL AUTO_INCREMENT,
     subject_code     VARCHAR(3) NOT NULL,
     class_number     INT unsigned NOT NULL,
     class_name       VARCHAR(32) NOT NULL,
     FOREIGN KEY      (subject_code) references subjects(subject_code) ON DELETE RESTRICT,
-    PRIMARY KEY      (class_id)
+    PRIMARY KEY      (subject_code, class_number)
 );
 
 CREATE TABLE subjects
@@ -68,7 +68,7 @@ CREATE TABLE buildings
 );
 
 CREATE TABLE tutors(
-    PRIMARY KEY     (tutor.id);                 --Still needs deny rule implemented
+    PRIMARY KEY     (tutor_id);                 --Still needs deny rule implemented
     tutor_id            INT NOT NULL,
     tutor_first_name    VARCHAR(30) NOT NULL,
     tutor_last_name     VARCHAR(30) NOT NULL,
@@ -77,18 +77,19 @@ CREATE TABLE tutors(
 
 CREATE TABLE tutor_course_agreements(
     tutor_id        INT NOT NULL,
-    class_id        INT NOT NULL,
-    PRIMARY KEY     (tutor_id, class_id),
-    FOREIGN KEY     (tutor_id) REFERENCES tutors,
-    FOREIGN KEY     (class_id) REFERENCES classes
+    subject_code    INT NOT NULL,
+    class_number    INT NOT NULL,
+    PRIMARY KEY     (tutor_id, subject_code, class_number),
+    FOREIGN KEY     (tutor_id) REFERENCES tutors(tutor_id),
+    FOREIGN KEY     (subject_code,class_number) REFERENCES classes(subject_code,class_number)
 );
 
 CREATE TABLE tutor_availibility(
     tutor_id        INT NOT NULL,
     time_id        INT NOT NULL,
     PRIMARY KEY     (tutor_id, time_id),
-    FOREIGN KEY     (tutor_id) REFERENCES tutors,
-    FOREIGN KEY     (time_id) REFERENCES times
+    FOREIGN KEY     (tutor_id) REFERENCES tutors(tutor_id),
+    FOREIGN KEY     (time_id) REFERENCES times(time_id)
 );
 
 CREATE TABLE tutor_qualified_subjects(
@@ -96,7 +97,7 @@ CREATE TABLE tutor_qualified_subjects(
     subject_code    CHAR(3) NOT NULL,
     PRIMARY KEY     (tutor_id, subject_code),
     FOREIGN KEY     (tutor_id) REFERENCES tutors,
-    FOREIGN KEY     (subject_code) REFERENCES subjects
+    FOREIGN KEY     (subject_code) REFERENCES subjects(subject_code)
 );
 
 
