@@ -4,16 +4,16 @@
 
 | Field                 | Value                             |
 |-----------------------|-----------------------------------|
-| Field Name            | class_number                      |
-| Parent Table          | Classes                           |
+| Field Name            | term_id                                  |
+| Parent Table          | Year_Terms                                  |
 | Alias(es)             |                                   |
-| Specification Type    | [ ] Unique                        |
+| Specification Type    | [X] Unique                        |
 |                       | [ ] Generic                       |
 |                       | [ ] Replica                       |
 |                       |                                   |
 | Source Specification  |                                   |
 | Shared By             |                                   |
-| Description           | Represents the 3-letter string of digits that follows a subject code to represent a course.  |
+| Description           | ID number to identify a unique combination of term year and term name in the Terms Entity.                                  |
 
 
 ## Physical Elements
@@ -38,22 +38,22 @@
 |                       | [ ] Foreign                       |
 |                       | [ ] Alternate                     |
 |                       |                                   |
-| Key Structure         | [ ] Simple                        |
-|                       | [X] Composite                     |
+| Key Structure         | [X] Simple                        |
+|                       | [ ] Composite                     |
 |                       |                                   |
-| Uniqueness            | [X] Non-unique                    |
-|                       | [ ] Unique                        |
+| Uniqueness            | [ ] Non-unique                    |
+|                       | [X] Unique                        |
 |                       |                                   |
 | Null Support          | [ ] Nulls OK                      |
 |                       | [X] No nulls                      |
 |                       |                                   |
-| Values Entered By     | [X] User                          |
-|                       | [ ] System                        |
+| Values Entered By     | [ ] User                          |
+|                       | [X] System                        |
 |                       |                                   |
 | Required Value        | [ ] No                            |
 |                       | [X] Yes                           |
 |                       |                                   |
-| Range of Values       | Any number between 100 and 500.                                  |
+| Range of Values       | (0, inf)                                |
 | Edit Rule             | [ ] Enter now, edits allowed      |
 |                       | [X] Enter now, edits not allowed  |
 |                       | [ ] Enter later, edits allowed    |

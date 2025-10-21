@@ -4,27 +4,27 @@
 
 | Field                 | Value                             |
 |-----------------------|-----------------------------------|
-| Field Name            | class_number                      |
-| Parent Table          | Classes                           |
+| Field Name            | term_name                                  |
+| Parent Table          | Year_Terms                                  |
 | Alias(es)             |                                   |
 | Specification Type    | [ ] Unique                        |
 |                       | [ ] Generic                       |
-|                       | [ ] Replica                       |
+|                       | [X] Replica                       |
 |                       |                                   |
-| Source Specification  |                                   |
-| Shared By             |                                   |
-| Description           | Represents the 3-letter string of digits that follows a subject code to represent a course.  |
+| Source Specification  | Terms.term_name                                  |
+| Shared By             | Terms                                  |
+| Description           |  Describes an academic term.                                 |
 
 
 ## Physical Elements
 
 | Field                 | Value                             |
 |-----------------------|-----------------------------------|
-| Data Type             | INT                                  |
-| Length                |                                   |
+| Data Type             | CHAR                                  |
+| Length                | 2                                  |
 | Decimal Places        |                                   |
-| Character Support     | [ ] Letters (A-Z)                 |
-|                       | [X] Numbers (0-9)                 |
+| Character Support     | [X] Letters (A-Z)                 |
+|                       | [ ] Numbers (0-9)                 |
 |                       | [ ] Keyboard (.,/$#%)             |
 |                       | [ ] Special (©®™Σπ)               |
 
@@ -33,13 +33,13 @@
 
 | Field                 | Value                             |
 |-----------------------|-----------------------------------|
-| Key Type              | [ ] Non                           |
-|                       | [X] Primary                       |   
+| Key Type              | [X] Non                           |
+|                       | [ ] Primary                       |   
 |                       | [ ] Foreign                       |
 |                       | [ ] Alternate                     |
 |                       |                                   |
 | Key Structure         | [ ] Simple                        |
-|                       | [X] Composite                     |
+|                       | [ ] Composite                     |
 |                       |                                   |
 | Uniqueness            | [X] Non-unique                    |
 |                       | [ ] Unique                        |
@@ -53,7 +53,7 @@
 | Required Value        | [ ] No                            |
 |                       | [X] Yes                           |
 |                       |                                   |
-| Range of Values       | Any number between 100 and 500.                                  |
+| Range of Values       |                                   |
 | Edit Rule             | [ ] Enter now, edits allowed      |
 |                       | [X] Enter now, edits not allowed  |
 |                       | [ ] Enter later, edits allowed    |

@@ -4,23 +4,23 @@
 
 | Field                 | Value                             |
 |-----------------------|-----------------------------------|
-| Field Name            |  class_id                         |
-| Parent Table          |  Classes                          |
+| Field Name            | term_year                                  |
+| Parent Table          | Year_Terms                                  |
 | Alias(es)             |                                   |
-| Specification Type    | [X] Unique                        |
+| Specification Type    | [ ] Unique                        |
 |                       | [ ] Generic                       |
 |                       | [ ] Replica                       |
 |                       |                                   |
 | Source Specification  |                                   |
-| Shared By             | Slots, Tutor_Course_Agreements    |
-| Description           | Primary key for the Classes entity which uniquely identifies a single course.  |
+| Shared By             |                                   |
+| Description           | Specifies a year that a term takes place in.                                  |
 
 
 ## Physical Elements
 
 | Field                 | Value                             |
 |-----------------------|-----------------------------------|
-| Data Type             | INT                               |
+| Data Type             | INT                                  |
 | Length                |                                   |
 | Decimal Places        |                                   |
 | Character Support     | [ ] Letters (A-Z)                 |
@@ -33,27 +33,27 @@
 
 | Field                 | Value                             |
 |-----------------------|-----------------------------------|
-| Key Type              | [ ] Non                           |
-|                       | [X] Primary                       |   
+| Key Type              | [X] Non                           |
+|                       | [ ] Primary                       |   
 |                       | [ ] Foreign                       |
 |                       | [ ] Alternate                     |
 |                       |                                   |
-| Key Structure         | [X] Simple                        |
+| Key Structure         | [ ] Simple                        |
 |                       | [ ] Composite                     |
 |                       |                                   |
-| Uniqueness            | [ ] Non-unique                    |
-|                       | [X] Unique                        |
+| Uniqueness            | [X] Non-unique                    |
+|                       | [ ] Unique                        |
 |                       |                                   |
 | Null Support          | [ ] Nulls OK                      |
 |                       | [X] No nulls                      |
 |                       |                                   |
-| Values Entered By     | [ ] User                          |
-|                       | [X] System                        |
+| Values Entered By     | [X] User                          |
+|                       | [ ] System                        |
 |                       |                                   |
 | Required Value        | [ ] No                            |
 |                       | [X] Yes                           |
 |                       |                                   |
-| Range of Values       | (0, inf)                                  |
+| Range of Values       | Four-digit numbers > 1000.                                |
 | Edit Rule             | [ ] Enter now, edits allowed      |
 |                       | [X] Enter now, edits not allowed  |
 |                       | [ ] Enter later, edits allowed    |

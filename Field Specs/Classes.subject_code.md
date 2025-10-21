@@ -33,12 +33,12 @@
 | Field                 | Value                             |
 |-----------------------|-----------------------------------|
 | Key Type              | [ ] Non                           |
-|                       | [ ] Primary                       |   
+|                       | [X] Primary                       |   
 |                       | [X] Foreign                       |
 |                       | [ ] Alternate                     |
 |                       |                                   |
-| Key Structure         | [X] Simple                        |
-|                       | [ ] Composite                     |
+| Key Structure         | [ ] Simple                        |
+|                       | [X] Composite                     |
 |                       |                                   |
 | Uniqueness            | [X] Non-unique (i.e., multiple records in Classes can pertain to the same subject_code)                   |
 |                       | [ ] Unique                        |
