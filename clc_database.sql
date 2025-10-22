@@ -13,7 +13,7 @@ CREATE TABLE subjects
 
 CREATE TABLE week_days
 (
-    week_day_name        VARCHAR(1) NOT NULL,
+    week_day_name    VARCHAR(2) NOT NULL,
     PRIMARY KEY     (week_day_name)
 );
 
@@ -74,16 +74,16 @@ CREATE TABLE tutors(
 
 CREATE TABLE tutor_agreed_classes(
     tutor_id        INT NOT NULL,
-    subject_code    INT NOT NULL,
-    class_number    INT NOT NULL,
+    subject_code    VARCHAR(3) NOT NULL,
+    class_number    INT unsigned NOT NULL,
     PRIMARY KEY     (tutor_id, subject_code, class_number),
     FOREIGN KEY     (tutor_id) REFERENCES tutors(tutor_id),
     FOREIGN KEY     (subject_code,class_number) REFERENCES classes(subject_code,class_number)
 );
 
-CREATE TABLE tutor_availibilities(
+CREATE TABLE tutor_availabilities(
     tutor_id        INT NOT NULL,
-    time_id        INT NOT NULL,
+    time_id         INT unsigned NOT NULL,
     PRIMARY KEY     (tutor_id, time_id),
     FOREIGN KEY     (tutor_id) REFERENCES tutors(tutor_id),
     FOREIGN KEY     (time_id) REFERENCES time_blocks(time_id) ON DELETE RESTRICT
@@ -103,7 +103,7 @@ CREATE TABLE terms(
 );
 
 CREATE TABLE year_terms(
-    term_id         INT NOT NULL,
+    term_id         INT NOT NULL AUTO_INCREMENT,
     term_code       CHAR(3) NOT NULL,
     term_year       INT NOT NULL,
     PRIMARY KEY     (term_id),
@@ -112,15 +112,15 @@ CREATE TABLE year_terms(
 
 
 CREATE TABLE slot_terms(
-    slot_id         INT NOT NULL,
-    term_id         CHAR(6) NOT NULL,
+    slot_id         INT unsigned NOT NULL,
+    term_id         INT NOT NULL,
     PRIMARY KEY     (slot_id, term_id),
     FOREIGN KEY     (slot_id) REFERENCES slots,
     FOREIGN KEY     (term_id) REFERENCES year_terms(term_id) ON DELETE RESTRICT
 );
 
 CREATE TABLE slot_tutors(
-    slot_id         INT NOT NULL,
+    slot_id         INT unsigned NOT NULL,
     tutor_id        INT NOT NULL,
     PRIMARY KEY     (tutor_id, slot_id),
     FOREIGN KEY     (tutor_id) REFERENCES tutors,
@@ -162,15 +162,15 @@ INSERT INTO year_terms(term_code, term_year) VALUES
 ("FA", 2025);
 
 INSERT INTO classes(subject_code, class_number, class_name) VALUES
-("MAT", 330),
-("CSC", 332),
-("ARS", 250),
-("ENS", 110);
+("MAT", 330, "Abstract Algebra"),
+("CSC", 362, "Databases"),
+("ARS", 250, "Photography 1"),
+("ENS", 110, "Intro to Environmental Science");
 
 INSERT INTO tutors(tutor_id, tutor_first_name, tutor_last_name, tutor_email) VALUES
 (380932, "Hannah", "Morrison", "hannah.morrison@centre.edu");
 
-INSERT INTO SLOTS(building_name, subject_code,class_number,room_number) VALUES
+INSERT INTO slots(building_name, subject_code,class_number,room_number) VALUES
 ("Crounse", "MAT", "330", 215);
 
 INSERT INTO time_blocks(time_start, time_end, week_day_name) VALUES
@@ -191,7 +191,7 @@ INSERT INTO slot_times(slot_id, time_id) VALUES
 INSERT INTO slot_tutors(slot_id, tutor_id) VALUES
 (1,380932);
 
-INSERT INTO tutor_availibilities(tutor_id, time_id) VALUES
+INSERT INTO tutor_availabilities(tutor_id, time_id) VALUES
 (380932,1);
 
 
