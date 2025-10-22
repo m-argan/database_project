@@ -8,7 +8,7 @@
     error_reporting(E_ALL);
 
      // Config
-    $config = parse_ini_file('/home/jenna.nicodemus/mysql.ini');    // NOTE: NEED TO CHANGE
+    $config = parse_ini_file('../../mysql.ini');
     $dbname = 'clc_tutoring';
     $conn = new mysqli(
         $config['mysqli.default_host'],
