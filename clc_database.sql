@@ -15,13 +15,13 @@ CREATE TABLE slots
     FOREIGN KEY       (subject_code, class_number) references classes(subject_code, class_number),
     PRIMARY KEY       (slot_id)
 );
-CREATE TABLE times
+CREATE TABLE time_blocks
 (
     time_id           INT unsigned NOT NULL AUTO_INCREMENT,
     time_start        VARCHAR(32) NOT NULL,
     time_end          VARCHAR(32) NOT NULL,
-    day_name          VARCHAR(8) NOT NULL,
-    FOREIGN KEY       (day_name) references day_names(day_name) ON DELETE RESTRICT,
+    week_day_name          VARCHAR(8) NOT NULL,
+    FOREIGN KEY       (week_day_name) references week_days(week_day_name) ON DELETE RESTRICT,
     PRIMARY KEY       (time_id)
 );
 
@@ -31,7 +31,7 @@ CREATE TABLE slot_times
     slot_id         INT unsigned NOT NULL,
     time_id         INT unsigned NOT NULL,
     FOREIGN KEY     (slot_id) references slots(slot_id),
-    FOREIGN KEY     (time_id) references times(time_id) ON DELETE RESTRICT,
+    FOREIGN KEY     (time_id) references time_blocks(time_id) ON DELETE RESTRICT,
     PRIMARY KEY     (slot_id, time_id)
 );
 
@@ -51,10 +51,10 @@ CREATE TABLE subjects
     PRIMARY KEY      (subject_code)
 );
 
-CREATE TABLE days
+CREATE TABLE week_days
 (
-    day_name        VARCHAR(1) NOT NULL,
-    PRIMARY KEY     (day_name)
+    week_day_name        VARCHAR(1) NOT NULL,
+    PRIMARY KEY     (week_day_name)
 );
 
 CREATE TABLE buildings
@@ -85,7 +85,7 @@ CREATE TABLE tutor_availibilities(
     time_id        INT NOT NULL,
     PRIMARY KEY     (tutor_id, time_id),
     FOREIGN KEY     (tutor_id) REFERENCES tutors(tutor_id),
-    FOREIGN KEY     (time_id) REFERENCES times(time_id) ON DELETE RESTRICT
+    FOREIGN KEY     (time_id) REFERENCES time_blocks(time_id) ON DELETE RESTRICT
 );
 
 CREATE TABLE tutor_qualified_subjects(
@@ -138,7 +138,7 @@ INSERT INTO buildings(building_name) VALUES
 ("Crounse"),
 ("Grant");
 
-INSERT INTO days(day_name) VALUES
+INSERT INTO week_days(week_day_name) VALUES
 ("M"),
 ("T"),
 ("W"),
@@ -172,7 +172,7 @@ INSERT INTO tutors(tutor_id, tutor_first_name, tutor_last_name, tutor_email) VAL
 INSERT INTO SLOTS(building_name, subject_code,class_number,room_number) VALUES
 ("Crounse", "MAT", "330", 215);
 
-INSERT INTO times(time_start, time_end, day_name) VALUES
+INSERT INTO time_blocks(time_start, time_end, week_day_name) VALUES
 ("7:00", "8:00", "Su");
 
 INSERT INTO tutor_agreed_classes(tutor_id,subject_code, class_number) VALUES
