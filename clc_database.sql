@@ -4,12 +4,40 @@ CREATE DATABASE clc_tutoring;
 
 USE clc_tutoring;
 
+CREATE TABLE subjects
+(
+    subject_code     VARCHAR(3) NOT NULL,
+    subject_name     VARCHAR(32) NOT NULL,
+    PRIMARY KEY      (subject_code)
+);
+
+CREATE TABLE week_days
+(
+    week_day_name        VARCHAR(1) NOT NULL,
+    PRIMARY KEY     (week_day_name)
+);
+
+CREATE TABLE buildings
+(
+    building_name   VARCHAR(7),
+    PRIMARY KEY     (building_name)
+);
+
+CREATE TABLE classes
+(
+    subject_code     VARCHAR(3) NOT NULL,
+    class_number     INT unsigned NOT NULL,
+    class_name       VARCHAR(32) NOT NULL,
+    FOREIGN KEY      (subject_code) references subjects(subject_code) ON DELETE RESTRICT,
+    PRIMARY KEY      (subject_code, class_number)
+);
+
 CREATE TABLE slots
 (
     slot_id           INT unsigned NOT NULL AUTO_INCREMENT,
     building_name     VARCHAR(7),
-    subject_code      INT,
-    class_number      INT,
+    subject_code      VARCHAR(3) NOT NULL,
+    class_number      INT unsigned NOT NULL,
     room_number       INT,
     FOREIGN KEY       (building_name) references buildings(building_name),
     FOREIGN KEY       (subject_code, class_number) references classes(subject_code, class_number),
@@ -35,40 +63,13 @@ CREATE TABLE slot_times
     PRIMARY KEY     (slot_id, time_id)
 );
 
-CREATE TABLE classes
-(
-    subject_code     VARCHAR(3) NOT NULL,
-    class_number     INT unsigned NOT NULL,
-    class_name       VARCHAR(32) NOT NULL,
-    FOREIGN KEY      (subject_code) references subjects(subject_code) ON DELETE RESTRICT,
-    PRIMARY KEY      (subject_code, class_number)
-);
-
-CREATE TABLE subjects
-(
-    subject_code     VARCHAR(3) NOT NULL,
-    subject_name     VARCHAR(32) NOT NULL,
-    PRIMARY KEY      (subject_code)
-);
-
-CREATE TABLE week_days
-(
-    week_day_name        VARCHAR(1) NOT NULL,
-    PRIMARY KEY     (week_day_name)
-);
-
-CREATE TABLE buildings
-(
-    building_name   VARCHAR(7),
-    PRIMARY KEY     (building_name)
-);
 
 CREATE TABLE tutors(
-    PRIMARY KEY     (tutor_id);                 --Still needs deny rule implemented
     tutor_id            INT NOT NULL,
     tutor_first_name    VARCHAR(30) NOT NULL,
     tutor_last_name     VARCHAR(30) NOT NULL,
     tutor_email         VARCHAR(80) NOT NULL,
+    PRIMARY KEY     (tutor_id)             
 );
 
 CREATE TABLE tutor_agreed_classes(
