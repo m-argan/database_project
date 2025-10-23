@@ -12,7 +12,7 @@
 |                       | [X] Replica                       |
 |                       |                                   |
 | Source Specification  |                                   |
-| Shared By             | Week_Days                         |
+| Shared By             | Week_Days, Time_Blocks            |
 | Description           |Used to represent day of time slot |
 
 
@@ -61,4 +61,5 @@
 |                       | [ ] Not determined at this time   |
 
 ## Notes
+
 
