@@ -4,14 +4,14 @@
 
 | Field                 | Value                             |
 |-----------------------|-----------------------------------|
-| Field Name            | term_name                                  |
-| Parent Table          | Year_Terms                                  |
+| Field Name            | term_code                         |
+| Parent Table          | Year_Terms                        |
 | Alias(es)             |                                   |
 | Specification Type    | [ ] Unique                        |
 |                       | [ ] Generic                       |
 |                       | [X] Replica                       |
 |                       |                                   |
-| Source Specification  | Terms.term_name                                  |
+| Source Specification  | Terms.term_code                                  |
 | Shared By             | Terms                                  |
 | Description           |  Describes an academic term.                                 |
 
