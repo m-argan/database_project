@@ -20,7 +20,7 @@
 
 | Field                 | Value                             |
 |-----------------------|-----------------------------------|
-| Data Type             | String                                  |
+| Data Type             | Varchar                                  |
 | Length                | 40                                  |
 | Decimal Places        | N/A                                  |
 | Character Support     | [X] Letters (A-Z)                 |
@@ -59,5 +59,6 @@
 |                       | [ ] Enter later, edits allowed    |
 |                       | [ ] Enter later, edits not allowed|
 |                       | [ ] Not determined at this time   |
+
 
 ## Notes
