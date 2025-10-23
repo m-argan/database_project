@@ -9,14 +9,16 @@ import subprocess   # for invoking the MariaDB interpreter
 import configparser # for reading .ini files
 import os.path      # for constructing file paths
 
-class TestInstrumentRentals(unittest.TestCase):
+class TestCLCDatabase(unittest.TestCase):
     
     TEST_DB_NAME = "clc_tutoring"
-    TEST_MAIN_FILE = "clc_database_main.sql"
+    TEST_MAIN_FILE = "clc_database_test_main.sql"
 
     @classmethod
     def getDefaultPassword(cls):
-        return cls.config["default"]["mysqli.default_pw"]
+        print(cls.config.sections())
+        print(cls.config.defaults())
+        return cls.config['default']['mysqli_default_pw']
 
 
     @classmethod
@@ -32,13 +34,17 @@ class TestInstrumentRentals(unittest.TestCase):
         '''
         # Construct the absolute path to the .ini file. 
         # NOTE: You will need to change this section to make this module find your .ini file.
-        this_file_dir = os.path.dirname(__file__)
-        one_dir_up = os.path.join("/", *this_file_dir.split(os.sep)[:-1])
-        ini_path = os.path.join(one_dir_up, "home_volume", "mysqli.ini")
+        script_dir = os.path.dirname(os.path.abspath(__file__))
+        parent_of_script_dir = os.path.dirname(script_dir)
+        config_path = os.path.join(parent_of_script_dir, "mysqli.ini")
+        # print("path:", config_path)
+        # one_dir_up = os.path.join("/", *this_file_dir.split(os.sep)[:-2])
+        # print("pathup:", config_path)
+        # ini_path = os.path.join(one_dir_up, "home_volume", "mysqli.ini")
 
         # read the config parser
         cls.config = configparser.ConfigParser()
-        cls.config.read(ini_path)
+        cls.config.read(config_path)
 
         # Run the test main file to build the test database. This relies on the config read above.
         cls.runMariaDBTerminalCommandAsDefaultUser([f"SOURCE {cls.TEST_MAIN_FILE};"])
@@ -70,8 +76,19 @@ class TestInstrumentRentals(unittest.TestCase):
     # NOTE: Test class names should start with "test".
     # NOTE: Test module name should start with "test".
     
-    # write tests here
-    print("worked!")
+    # deletion rule tests
+    @unittest.expectedFailure
+    def testCannotDeleteCheckedOutInstrument(self):
+        # can't delete monday :/
+        delete_query = "DELETE FROM time_blocks WHERE week_day_name = (?);"
+        self.cur.execute(delete_query, (0,))
+    # query return tests
+
+    # tables exist tests
+
+    # constraints / CHECKS are followed
+
+
     # ----- END ACTUAL TEST METHODS -------------------------------------------
 
 if __name__ == "__main__":

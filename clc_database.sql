@@ -48,7 +48,7 @@ CREATE TABLE time_blocks
     time_id           INT unsigned NOT NULL AUTO_INCREMENT,
     time_start        VARCHAR(32) NOT NULL,
     time_end          VARCHAR(32) NOT NULL,
-    week_day_name          VARCHAR(8) NOT NULL,
+    week_day_name     VARCHAR(8) NOT NULL,
     FOREIGN KEY       (week_day_name) references week_days(week_day_name) ON DELETE RESTRICT,
     PRIMARY KEY       (time_id)
 );
