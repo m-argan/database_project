@@ -4,10 +4,10 @@
 
 | Field                 | Value                             |
 |-----------------------|-----------------------------------|
-| Field Name            | time_end                          |
-| Parent Table          | Times                             |
+| Field Name            | time_block_end                    |
+| Parent Table          | Time_blocks                       |
 | Alias(es)             |                                   |
-| Specification Type    | [ ] Unique                        |
+| Specification Type    | [X] Unique                        |
 |                       | [ ] Generic                       |
 |                       | [ ] Replica                       |
 |                       |                                   |
@@ -21,7 +21,7 @@
 
 | Field                 | Value                             |
 |-----------------------|-----------------------------------|
-| Data Type             | Char                              |
+| Data Type             | TIME                              |
 | Length                | 5                                 |
 | Decimal Places        |                                   |
 | Character Support     | [ ] Letters (A-Z)                 |
