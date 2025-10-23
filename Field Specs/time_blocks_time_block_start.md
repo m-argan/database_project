@@ -4,10 +4,10 @@
 
 | Field                 | Value                             |
 |-----------------------|-----------------------------------|
-| Field Name            | time_start                        |
-| Parent Table          | Times                             |
+| Field Name            | time_block_start                  |
+| Parent Table          | Time_Blocks                       |
 | Alias(es)             |                                   |
-| Specification Type    | [ ] Unique                        |
+| Specification Type    | [X] Unique                        |
 |                       | [ ] Generic                       |
 |                       | [ ] Replica                       |
 |                       |                                   |
@@ -21,8 +21,8 @@
 
 | Field                 | Value                             |
 |-----------------------|-----------------------------------|
-| Data Type             | Char                              |
-| Length                | 5                                 |
+| Data Type             | TIME                              |
+| Length                |                                   |
 | Decimal Places        |                                   |
 | Character Support     | [ ] Letters (A-Z)                 |
 |                       | [X] Numbers (0-9)                 |
@@ -42,8 +42,8 @@
 | Key Structure         | [X] Simple                        |
 |                       | [ ] Composite                     |
 |                       |                                   |
-| Uniqueness            | [X] Non-unique                    |
-|                       | [ ] Unique                        |
+| Uniqueness            | [ ] Non-unique                    |
+|                       | [X] Unique                        |
 |                       |                                   |
 | Null Support          | [ ] Nulls OK                      |
 |                       | [X] No nulls                      |
