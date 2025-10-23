@@ -26,6 +26,11 @@ class TestCLCDatabase(unittest.TestCase):
     
 
     @classmethod
+    def performDelete(self,dir,field,index):
+        delete_query = "DELETE FROM "+dir+" WHERE "+field+" = ?;"
+        self.cur.execute(delete_query, (0,))
+
+    @classmethod
     def setUpClass(cls):
         '''
         This is run once, before all tests (not once per test).
@@ -53,10 +58,6 @@ class TestCLCDatabase(unittest.TestCase):
 
         return super().setUpClass() # just in case, call the default constructor too.
     
-    @classmethod
-    def performDelete(self,dir,field,index):
-        delete_query = "DELETE FROM "+dir+" WHERE "+field+" = "+index+";"
-        self.cur.execute(delete_query, (0,))
         
     @classmethod
     def tearDownClass(cls):
@@ -78,13 +79,17 @@ class TestCLCDatabase(unittest.TestCase):
     @unittest.expectedFailure
     def testDeleteTimeBlock(self):
         # can't delete time block
-        self.performDelete(self,"time_blocks","week_day_name",0)
+        self.performDelete("time_blocks","time_id",1)
 
     @unittest.expectedFailure
     def testDeleteSubjectCode(self):
         # can't delete subject code
-        delete_query = "DELETE FROM classes WHERE subject_code = (?);" #should this be classes or subjects?
-        self.cur.execute(delete_query, (0,))
+        self.performDelete("classes","subject_code",0)
+
+    @unittest.expectedFailure
+    def testDeleteWeekDayName(self):
+        # can't delete subject code
+        self.performDelete("week_days","week_day_name",0)
 
 
     # query return tests

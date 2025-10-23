@@ -44,8 +44,8 @@ INSERT INTO tutors(tutor_id, tutor_first_name, tutor_last_name, tutor_email) VAL
 INSERT INTO slots(building_name, subject_code,class_number,room_number) VALUES
 ("Crounse", "MAT", "330", 215);
 
-INSERT INTO time_blocks(time_start, time_end, week_day_name) VALUES
-("7:00", "8:00", "Su");
+INSERT INTO time_blocks(time_id,time_start, time_end, week_day_name) VALUES
+(1,"7:00", "8:00", "Su");
 
 INSERT INTO tutor_agreed_classes(tutor_id,subject_code, class_number) VALUES
 (380932, "MAT", 330);
