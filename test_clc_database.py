@@ -28,7 +28,7 @@ class TestCLCDatabase(unittest.TestCase):
     @classmethod
     def performDelete(self,dir,field,index):
         delete_query = "DELETE FROM "+dir+" WHERE "+field+" = ?;"
-        self.cur.execute(delete_query, (0,))
+        self.cur.execute(delete_query, (index,))
 
     @classmethod
     def setUpClass(cls):
@@ -88,10 +88,24 @@ class TestCLCDatabase(unittest.TestCase):
 
     @unittest.expectedFailure
     def testDeleteWeekDayName(self):
-        # can't delete subject code
+        # can't delete week day
         self.performDelete("week_days","week_day_name",0)
 
+    @unittest.expectedFailure
+    def testDeleteTerms(self):
+        # can't delete delete terms
+        self.performDelete("terms","term_code","FA")
 
+    @unittest.expectedFailure
+    def testDeleteYearID(self):
+        # can't delete subject code
+        self.performDelete("year_term","term_id",1)
+
+    @unittest.expectedFailure
+    def testDeleteSubjectCodes(self):
+        # can't delete subject code
+        self.performDelete("subjects","subject_code","MAT")
+        
     # query return tests
 
     # tables exist tests
