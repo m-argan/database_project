@@ -16,8 +16,6 @@ class TestCLCDatabase(unittest.TestCase):
 
     @classmethod
     def getDefaultPassword(cls):
-        print(cls.config.sections())
-        print(cls.config.defaults())
         return cls.config['default']['mysqli_default_pw']
 
 
@@ -37,10 +35,6 @@ class TestCLCDatabase(unittest.TestCase):
         script_dir = os.path.dirname(os.path.abspath(__file__))
         parent_of_script_dir = os.path.dirname(script_dir)
         config_path = os.path.join(parent_of_script_dir, "mysqli.ini")
-        # print("path:", config_path)
-        # one_dir_up = os.path.join("/", *this_file_dir.split(os.sep)[:-2])
-        # print("pathup:", config_path)
-        # ini_path = os.path.join(one_dir_up, "home_volume", "mysqli.ini")
 
         # read the config parser
         cls.config = configparser.ConfigParser()
@@ -59,7 +53,11 @@ class TestCLCDatabase(unittest.TestCase):
 
         return super().setUpClass() # just in case, call the default constructor too.
     
-
+    @classmethod
+    def performDelete(self,dir,field,index):
+        delete_query = "DELETE FROM "+dir+" WHERE "+field+" = "+index+";"
+        self.cur.execute(delete_query, (0,))
+        
     @classmethod
     def tearDownClass(cls):
         '''
@@ -78,10 +76,17 @@ class TestCLCDatabase(unittest.TestCase):
     
     # deletion rule tests
     @unittest.expectedFailure
-    def testCannotDeleteCheckedOutInstrument(self):
-        # can't delete monday :/
-        delete_query = "DELETE FROM time_blocks WHERE week_day_name = (?);"
+    def testDeleteTimeBlock(self):
+        # can't delete time block
+        self.performDelete(self,"time_blocks","week_day_name",0)
+
+    @unittest.expectedFailure
+    def testDeleteSubjectCode(self):
+        # can't delete subject code
+        delete_query = "DELETE FROM classes WHERE subject_code = (?);" #should this be classes or subjects?
         self.cur.execute(delete_query, (0,))
+
+
     # query return tests
 
     # tables exist tests

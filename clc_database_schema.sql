@@ -1,13 +1,13 @@
 CREATE TABLE subjects
 (
-    subject_code     VARCHAR(3) NOT NULL,
+    subject_code     CHAR(3) NOT NULL,
     subject_name     VARCHAR(32) NOT NULL,
     PRIMARY KEY      (subject_code)
 );
 
 CREATE TABLE classes
 (
-    subject_code     VARCHAR(3) NOT NULL,
+    subject_code     CHAR(3) NOT NULL,
     class_number     INT unsigned NOT NULL,
     class_name       VARCHAR(32) NOT NULL,
     FOREIGN KEY      (subject_code) references subjects(subject_code) ON DELETE RESTRICT,
@@ -30,7 +30,7 @@ CREATE TABLE slots
 (
     slot_id           INT unsigned NOT NULL AUTO_INCREMENT,
     building_name     VARCHAR(7),
-    subject_code      VARCHAR(3) NOT NULL,/*made this varchar(3)*/
+    subject_code      CHAR(3) NOT NULL,/*made this varchar(3)*/
     class_number      INT unsigned NOT NULL, /*made this unsigned*/
     room_number       INT,
     FOREIGN KEY       (building_name) references buildings(building_name),
@@ -68,7 +68,7 @@ CREATE TABLE tutors(
 
 CREATE TABLE tutor_agreed_classes(
     tutor_id        INT NOT NULL,
-    subject_code    VARCHAR(3) NOT NULL, /* changed to VARCHAR(3)*/
+    subject_code    CHAR(3) NOT NULL, /* changed to VARCHAR(3)*/
     class_number    INT unsigned NOT NULL, /*added unsigned*/
     PRIMARY KEY     (tutor_id, subject_code, class_number),
     FOREIGN KEY     (tutor_id) REFERENCES tutors(tutor_id),
@@ -77,7 +77,7 @@ CREATE TABLE tutor_agreed_classes(
 
 CREATE TABLE tutor_qualified_subjects(
     tutor_id        INT NOT NULL,
-    subject_code    VARCHAR(3) NOT NULL, /*changed to VARCHAR instead of CHAR*/
+    subject_code    CHAR(3) NOT NULL, /*changed to VARCHAR instead of CHAR*/
     PRIMARY KEY     (tutor_id, subject_code),
     FOREIGN KEY     (tutor_id) REFERENCES tutors(tutor_id),
     FOREIGN KEY     (subject_code) REFERENCES subjects(subject_code) ON DELETE RESTRICT
