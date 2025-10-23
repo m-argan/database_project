@@ -11,7 +11,8 @@ CREATE TABLE classes
     class_number     INT unsigned NOT NULL,
     class_name       VARCHAR(32) NOT NULL,
     FOREIGN KEY      (subject_code) references subjects(subject_code) ON DELETE RESTRICT,
-    PRIMARY KEY      (subject_code, class_number)
+    PRIMARY KEY      (subject_code, class_number),
+    CONSTRAINT correct_code_num CHECK (class_number BETWEEN 100 AND 500)
 );
 
 CREATE TABLE week_days
@@ -35,7 +36,8 @@ CREATE TABLE slots
     room_number       INT,
     FOREIGN KEY       (building_name) references buildings(building_name),
     FOREIGN KEY       (subject_code, class_number) references classes(subject_code, class_number),
-    PRIMARY KEY       (slot_id)
+    PRIMARY KEY       (slot_id),
+    CONSTRAINT correct_room_num CHECK (room_number BETWEEN 0 AND 600)
 );
 
 CREATE TABLE time_blocks
