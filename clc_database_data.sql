@@ -25,23 +25,23 @@ INSERT INTO subjects(subject_code, subject_name) VALUES
 ("ARS", "Studio Art"),
 ("CSC", "Computer Science");
 
-INSERT INTO year_terms(term_code, term_year) VALUES
-("FA", 2024),
-("SP", 2024),
-("WI", 2025),
-("SU", 2025),
-("FA", 2025);
+INSERT INTO year_terms(term_id, term_code, term_year) VALUES
+(1, "FA", 2024),
+(2, "SP", 2024),
+(3, "WI", 2025),
+(4, "SU", 2025),
+(5, "FA", 2025);
 
 INSERT INTO classes(subject_code, class_number, class_name) VALUES
-("MAT", 330),
-("CSC", 332),
-("ARS", 250),
-("ENS", 110);
+("MAT", 330, "Example Math Class"),
+("CSC", 332, "Example CSC Class"),
+("ARS", 250, "Example Art Class"),
+("ENS", 110, "Example ENS Class");
 
 INSERT INTO tutors(tutor_id, tutor_first_name, tutor_last_name, tutor_email) VALUES
 (380932, "Hannah", "Morrison", "hannah.morrison@centre.edu");
 
-INSERT INTO SLOTS(building_name, subject_code,class_number,room_number) VALUES
+INSERT INTO slots(building_name, subject_code,class_number,room_number) VALUES
 ("Crounse", "MAT", "330", 215);
 
 INSERT INTO time_blocks(time_start, time_end, week_day_name) VALUES
