@@ -4,7 +4,7 @@
 
 | Field                 | Value                             |
 |-----------------------|-----------------------------------|
-| Field Name            | time_block_week_day_name          |
+| Field Name            | week_day_name                     |
 | Parent Table          | Time_blocks                       |
 | Alias(es)             |                                   |
 | Specification Type    | [ ] Unique                        |
@@ -61,3 +61,4 @@
 |                       | [ ] Not determined at this time   |
 
 ## Notes
+
