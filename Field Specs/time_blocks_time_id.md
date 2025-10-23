@@ -4,7 +4,7 @@
 
 | Field                 | Value                             |
 |-----------------------|-----------------------------------|
-| Field Name            | time_id                           |
+| Field Name            | time_block_id                     |
 | Parent Table          | Times                             |
 | Alias(es)             |                                   |
 | Specification Type    | [X] Unique                        |
@@ -13,7 +13,7 @@
 |                       |                                   |
 | Source Specification  |                                   |
 | Shared By             | Times, Schedules                  |
-| Description           | Primary key for Times entity.     |
+| Description           | Primary key for Time_Blocks entity|
 |                       | Used to identify a single time    |
 |                       | slot.                             |              
 
