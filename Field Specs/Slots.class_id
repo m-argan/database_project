@@ -6,7 +6,7 @@
 
 | Field                 | Value                             |
 |-----------------------|-----------------------------------|
-| Field Name            | class_id                          |
+| Field Name            | class_number                      |
 | Parent Table          | Slots                             |
 | Alias(es)             |                                   |
 | Specification Type    | [ ] Unique                        |
