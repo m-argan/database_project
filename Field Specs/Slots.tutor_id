@@ -2,28 +2,28 @@
 
 ## General Elements
 
-### __*Slots.tutor_id*__
+### __*Slots.subject_code*__
 
 | Field                 | Value                             |
 |-----------------------|-----------------------------------|
-| Field Name            | tutor_id                          |
+| Field Name            | subject_code                      |
 | Parent Table          | Slots                             |
 | Alias(es)             |                                   |
 | Specification Type    | [ ] Unique                        |
 |                       | [ ] Generic                       |
 |                       | [X] Replica                       |
 |                       |                                   |
-| Source Specification  | Foreign key from the Tutors table |
+| Source Specification  | Foreign key from the Classes table|
 | Shared By             |                                   |
-| Description           | Student id of the tutor leading the session|
+| Description           | Code representing the subject being tutored|
 
 
 ## Physical Elements
 
 | Field                 | Value                             |
 |-----------------------|-----------------------------------|
-| Data Type             | Integer                           |
-| Length                | 6                                 |
+| Data Type             | Char                              |
+| Length                | 3                                 |
 | Decimal Places        | N/A                               |
 | Character Support     | [ ] Letters (A-Z)                 |
 |                       | [X] Numbers (0-9)                 |
@@ -61,6 +61,3 @@
 |                       | [ ] Enter later, edits allowed    |
 |                       | [ ] Enter later, edits not allowed|
 |                       | [ ] Not determined at this time   |
-
-## Note: Nulls are not accepted because we plan to use a default value 
-such as "tutor not yet assigned" if a slot does not yet have a tutor assigned to it
