@@ -4,10 +4,12 @@
     ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);
 
-    
+
     // Config
     $config = parse_ini_file('../../../mysql.ini');
-    $dbname = 'clc_tutoring';
+    if ($config === false) {
+        $config = parse_ini_file('../mysql.ini');
+    }    $dbname = 'clc_tutoring';
     $conn = new mysqli(
         $config['mysqli.default_host'],
         $config['mysqli.default_user'],
@@ -22,7 +24,7 @@
     }
 
 
-    // Formatting function
+    // Function for formatting
     function format_result_as_table(mysqli_result $result): void {  ?>
         <table style="width:100%">
             <thead>
@@ -52,32 +54,40 @@
     }
 
 
-    // Whitelist possibilities for valid tables -- I'm sure there's a better way to check this...
-    $result = $conn->query("SHOW TABLES");
-    $is_a_table = false;
-    while ($tablename = $result->fetch_array()) {
-        if ($tablename[0] === htmlspecialchars( $_GET['tablename'] )) {
-            $is_a_table = true;
-            break;
+    // Function for whitelisting possibilities for valid tables
+    function filter_user_input($conn) {
+        $result = $conn->query("SHOW TABLES;");
+        $is_a_table = false;
+        while ($tablename = $result->fetch_array()) {
+            if ($tablename[0] === htmlspecialchars( $_GET['tablename'] )) {
+                $is_a_table = true;
+                break;
+            }
+        }
+        if ($is_a_table === false) {
+            echo 'No table of that name found.';
+            exit();
         }
     }
-    if ($is_a_table === false) {
-        echo 'No table of that name found.';
-        exit();
+
+    
+    // Function to prepare statement to display table
+    function prepare_display_table($conn) {
+        $query = "SELECT * FROM " . htmlspecialchars( $_GET['tablename'] ) . ";";
+        $query = $conn->prepare($query);
+        $query->execute();
+        $result = $query->get_result();
+
+        return $result;
     }
-
-
-    // Otherwise, prepare statement to display table
-    $query = "SELECT * FROM " . htmlspecialchars( $_GET['tablename'] ) . ";";
-    $query = $conn->prepare($query);
-    $query->execute();
-    $result = $query->get_result();
     
 
-    // Format webpage
-    format_result_as_table($result);    
+    // Run webpage
+    filter_user_input($conn);
+    $result = prepare_display_table($conn);
+    format_result_as_table($result);
 
-    
+
     // Close connection
     $conn->close();
 ?>

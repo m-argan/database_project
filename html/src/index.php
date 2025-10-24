@@ -9,6 +9,9 @@
 
      // Config
     $config = parse_ini_file('../../../mysql.ini');
+    if ($config === false) {
+        $config = parse_ini_file('../mysql.ini');
+    }
     $dbname = 'clc_tutoring';
     $conn = new mysqli(
         $config['mysqli.default_host'],
@@ -22,6 +25,28 @@
         echo "Error: " . $conn->connect_error . "\n";
         exit; // Quit this PHP script if the connection fails
     }
+
+    // Function for listing tables
+    function list_tables($conn) {
+        $dblist = "SHOW TABLES";
+        $result = $conn->query($dblist);
+        echo "<ul>";
+        while ($tablename = $result->fetch_array()) {
+            echo "<li> $tablename[0] </li>";
+        }
+        echo "</ul>";
+    }
+
+    // Function for displaying form
+    function display_form() { ?>
+    <h2>View a table:</h2>
+    <form action="display_table.php" method="GET">
+        <p>Table name: <input type="text" name="tablename" /></p>
+        <p><input type="submit" value="See Details"/></p>
+    </form>
+    <?php
+    }
+
 
 ?>
 
@@ -37,21 +62,11 @@
 
     <?php
         // List the tables of the database
-        $dblist = "SHOW TABLES";
-        $result = $conn->query($dblist);
-        echo "<ul>";
-        while ($tablename = $result->fetch_array()) {
-            echo "<li> $tablename[0] </li>";
-        }
-        echo "</ul>";
+        list_tables($conn);
     ?>
 
     <!--- Allow a user to specify a table to view --->
-    <h2>View a table:</h2>
-    <form action="display_table.php" method="GET">
-        <p>Table name: <input type="text" name="tablename" /></p>
-        <p><input type="submit" value="See Details"/></p>
-    </form>
+   <?php display_form(); ?>
 
 </body>
 </html>

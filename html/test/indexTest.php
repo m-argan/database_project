@@ -1,5 +1,7 @@
 <?php
 
+// Outdated draft -- need to refactor using expectOutputString()
+
 use PHPUnit\Framework\TestCase;
 
 class indexTest extends TestCase
