@@ -16,7 +16,7 @@ class TestCLCDatabase(unittest.TestCase):
 
     @classmethod
     def getDefaultPassword(cls):
-        return cls.config['default']['mysqli_default_pw']
+        return cls.config['default']['mysqli.default_pw']
 
 
     @classmethod
