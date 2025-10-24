@@ -24,7 +24,7 @@ to represent location of tutoring |
 | Field                 | Value                             |
 |-----------------------|-----------------------------------|
 | Data Type             | String                            |
-| Length                | 20                                |
+| Length                | 7                                 |
 | Decimal Places        | N/A                               |
 | Character Support     | [X] Letters (A-Z)                 |
 |                       | [ ] Numbers (0-9)                 |
