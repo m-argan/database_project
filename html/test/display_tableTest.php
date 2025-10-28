@@ -25,8 +25,10 @@ class display_tableTest extends TestCase
         }
         
         $result = $conn->query("SELECT * FROM classes");
-        $_GET = [];
+        // $_GET = [];
         $_GET['tablename'] = "classes";
+        // $_GET[]
+        // $GLOBALS[]
         $this->expectOutputString(format_result_as_table($result));
 
         while ($field = $result->fetch_field()) {

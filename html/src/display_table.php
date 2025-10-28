@@ -6,10 +6,11 @@
 
 
     // Config
-    $config = parse_ini_file('../../../mysql.ini');
-    if ($config === false) {
+    // $config = parse_ini_file('../../../mysql.ini');
+    // if ($config === false) {
         $config = parse_ini_file('../mysql.ini');
-    }    $dbname = 'clc_tutoring';
+    // }    
+    $dbname = 'clc_tutoring';
     $conn = new mysqli(
         $config['mysqli.default_host'],
         $config['mysqli.default_user'],
@@ -25,14 +26,17 @@
 
 
     // Function for formatting
-    function format_result_as_table(mysqli_result $result): void {  ?>
+    function format_result_as_table(mysqli_result $result): string {  
+        $output_string = "";
+        ?>
         <table style="width:100%">
             <thead>
                 <tr>
                     <?php
                         // Header rows
                         while ($field = $result->fetch_field()) {
-                            echo "<td><b>$field->name</b></td>";
+                            // echo "<td><b>$field->name</b></td>";
+                            $output_string .= "<td><b>$field->name</b></td>";
                         }
                     ?>
                 </tr>
@@ -41,16 +45,22 @@
                 <?php
                     // Data rows
                     while ($row = $result->fetch_row()) {
-                        echo "<tr>";
+                        // echo "<tr>";
+                        $output_string .= "<tr>";
                         for ($i = 0; $i < count($row); $i++) {
-                        echo "<td>$row[$i]</td>";
+                        // echo "<td>$row[$i]</td>";
+                        $output_string .= "<td>$row[$i]</td>";
                         }
-                        echo "</tr>";
+                        // echo "</tr>";
+                        $output_string .= "</tr>";
                     }
             ?>
             </tbody>
         </table>
     <?php 
+    echo $output_string;
+    return $output_string; 
+    // This needs a return value, given the way it is used in the test_format_result_as_table().
     }
 
 
@@ -60,6 +70,7 @@
         $is_a_table = false;
         while ($tablename = $result->fetch_array()) {
             if ($tablename[0] === htmlspecialchars( $_GET['tablename'] )) {
+            // if ($tablename[0] === htmlspecialchars( $user_selection )) {
                 $is_a_table = true;
                 break;
             }
@@ -83,6 +94,7 @@
     
 
     // Run webpage
+    $_GET['tablename'] = 'classes';
     filter_user_input($conn);
     $result = prepare_display_table($conn);
     format_result_as_table($result);
