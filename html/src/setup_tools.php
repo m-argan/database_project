@@ -11,9 +11,9 @@
     // Sets up configuration to log into database:
     function config() {
         // Find .ini file
-        $config = parse_ini_file('../../../mysql.ini');
+        $config = parse_ini_file('../../../mysqli.ini');
         if ($config === false) {    // If previous path did not work, use this path:
-            $config = parse_ini_file('../mysql.ini');
+            $config = parse_ini_file('../mysqli.ini');
         }
 
         // Make connection
