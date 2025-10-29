@@ -17,13 +17,14 @@ class TestCLCDatabase(unittest.TestCase):
     @classmethod
     def getDefaultPassword(cls):
         return cls.config['default']['mysqli.default_pw']
-
+    @classmethod
+    def getDefaultUser(cls):
+        return cls.config['default']['mysqli.default_user']
 
     @classmethod
     def runMariaDBTerminalCommandAsDefaultUser(cls, command: list):
-        DB_EXEC_COMMAND = ["mariadb", f"-p{cls.getDefaultPassword()}", "-e"]
+        DB_EXEC_COMMAND = ["mariadb",f"-u{cls.getDefaultUser()}", f"-p{cls.getDefaultPassword()}", "-e"]
         return subprocess.run(DB_EXEC_COMMAND + command, check=True)
-    
 
     @classmethod
     def performDelete(self,dir,field,index):
@@ -40,6 +41,7 @@ class TestCLCDatabase(unittest.TestCase):
         script_dir = os.path.dirname(os.path.abspath(__file__))
         parent_of_script_dir = os.path.dirname(script_dir)
         config_path = os.path.join(parent_of_script_dir, "mysqli.ini")
+        print(config_path)
 
         # read the config parser
         cls.config = configparser.ConfigParser()
