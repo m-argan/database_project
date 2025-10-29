@@ -19,9 +19,9 @@
         // Make connection
         $dbname = 'clc_tutoring';
         $conn = new mysqli(
-            $config['mysqli.default_host'],
-            $config['mysqli.default_user'],
-            $config['mysqli.default_pw'],
+            $config['default_host'],
+            $config['default_user'],
+            $config['default_pw'],
             $dbname);
 
         // Check for errors in connection
