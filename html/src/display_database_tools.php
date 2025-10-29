@@ -40,11 +40,10 @@
             <?php
                 // List the tables of the database
                 list_tables($conn);
+
+                // Allow a user to specify a table to view
+                display_form();
             ?>
-
-            <!--- Allow a user to specify a table to view --->
-        <?php display_form(); ?>
-
         </body>
         </html>
    <?php }

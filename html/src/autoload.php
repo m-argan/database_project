@@ -7,7 +7,8 @@ spl_autoload_register(
         static $classes = null;
         if ($classes === null) {
             $classes = array(
-                'display_tabletest' => '/../test/display_tableTest.php',
+                'display_database_toolstest' => '/../test/display_database_toolsTest.php',
+                'display_table_toolstest' => '/../test/display_table_toolsTest.php'
             );
         }
         $cn = strtolower($class);

@@ -1,12 +1,14 @@
 <?php
+    // Critical setup functions; error checking and connection configuration.
 
+    // Sets up PHP error checking -- currently called on most pages:
     function error_checking() {
         ini_set('display_errors', 1);
         ini_set('display_startup_errors', 1);
         error_reporting(E_ALL);
     }
 
-
+    // Sets up configuration to log into database:
     function config() {
         // Find .ini file
         $config = parse_ini_file('../../../mysql.ini');
@@ -30,5 +32,5 @@
             exit; // Quit this PHP script if the connection fails
         }
 
-        return $conn;
+        return $conn;   // Return connection for the sake of passing it to functions
     }

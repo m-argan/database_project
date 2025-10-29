@@ -5,7 +5,7 @@ include_once "html/src/display_table_tools.php";
 
 use PHPUnit\Framework\TestCase;
 
-class display_tableTest extends TestCase
+class display_table_toolsTest extends TestCase
 {
 
     // Test #1: format_result_as_table().
@@ -35,6 +35,7 @@ class display_tableTest extends TestCase
 
         $conn->close();
     }
+
 
     // Test #2: prepare_display_table().
     public function test_prepare_display_table() {
@@ -70,6 +71,7 @@ class display_tableTest extends TestCase
         $conn->close();
     }
 
+    
     // Test #4: filter_user_input() using bad input.
     public function test_bad_filter_user_input() {
         $conn = config();
