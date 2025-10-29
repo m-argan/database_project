@@ -3,7 +3,10 @@
 
 
     // Function for formatting table contents:
-    function format_result_as_table(mysqli_result $result): void {  ?>
+    function format_result_as_table(mysqli_result $result): void {  
+        $output_string = "";
+        ?>
+        
         <table style="width:100%">
             <thead>
                 <tr>
@@ -46,27 +49,27 @@
     // Function for whitelisting possibilities for valid tables:
     function filter_user_input($conn) {
         $result = $conn->query("SHOW TABLES;");
-        $is_a_table = false;
 
         // Check whether user-inputted string is a valid table name in the database
         while ($tablename = $result->fetch_array()) {
             if ($tablename[0] === htmlspecialchars( $_GET['tablename'] )) {
                 $is_a_table = true;
-                break;
+                return true;
             }
         }
+        
         // If value not found, display nothing and exit
-        if ($is_a_table === false) {
-            echo 'No table of that name found.';
-            exit();
-        }
+        echo 'No table of that name found.';
+        return false;
         
     }
 
 
      // Function for rendering the webpage; called in display_table.php:
      function render_display_table_page($conn) {
-        filter_user_input($conn);
+        $flag = filter_user_input($conn);
+        if ($flag == false) { exit(); }
+        
         $result = prepare_display_table($conn);
         format_result_as_table($result);
      }
