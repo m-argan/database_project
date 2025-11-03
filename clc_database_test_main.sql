@@ -5,4 +5,5 @@ CREATE DATABASE clc_tutoring;
 USE clc_tutoring;
 
 SOURCE clc_database_schema.sql;
+SOURCE clc_database_tools.sql;
 SOURCE clc_database_data.sql;
