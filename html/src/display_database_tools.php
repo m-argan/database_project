@@ -15,7 +15,6 @@
 
     }
 
-
     // Function for displaying form at the bottom of the page:
     function display_form() { ?>
     <h2>View a table:</h2>
