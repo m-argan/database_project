@@ -10,9 +10,10 @@
      // Config
     // $config = parse_ini_file('../../../mysql.ini');
     // if ($config === false) {
-        $config = parse_ini_file('../mysql.ini');
+        $config = parse_ini_file('../mysqli.ini');
     // }
-    $dbname = 'clc_tutoring';
+    // $dbname = 'clc_tutoring';
+    $dbname = 'clc_tutoring_test';
     $conn = new mysqli(
         $config['mysqli.default_host'],
         $config['mysqli.default_user'],
