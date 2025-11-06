@@ -22,6 +22,12 @@
         <p>Table name: <input type="text" name="tablename" /></p>
         <p><input type="submit" value="See Details"/></p>
     </form>
+    <!-- ADDED BY HANNAH -->
+     <h2>Add to table:</h2>
+    <form action="display_adding.php" method="GET">
+        <p>Table name: <input type="text" name="tablename" /></p>
+        <p><input type="submit" value="See Details"/></p>
+    </form>
     <?php
     }
 
