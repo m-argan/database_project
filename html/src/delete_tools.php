@@ -1,9 +1,9 @@
 <?php
     // Functions that facilitate the deletion of records on display_table.php.
+    // Note these functions will never run unless the user input has passed validity check first.
 
 
      // Function that queries database to soft delete a record from classes, slots, or tutors.
-     // Note this function will never run unless the user input has been checked for validity first.
     function soft_delete($row, $conn) {
         if (htmlspecialchars( $_GET['tablename'] ) == 'classes') {
             $del_stmt = file_get_contents("../../prepared_statements/soft_delete_classes.sql");
@@ -97,8 +97,8 @@
 
     // Function for deleting records based on checked checkboxes.
     function delete_records($result, $conn) {
-        $del_stmt = build_delete_statement($result, $conn); // Build DELETE statement using
-                                                            // function.
+        $del_stmt = build_delete_statement($result, $conn); // Build DELETE statement skeleton using
+                                                            // function that looks at table structure.
         $del_stmt = $conn->prepare($del_stmt);
 
         for ($i=0; $i < $result->num_rows; $i++) {      // Loop through records; check if $_POST
@@ -107,7 +107,7 @@
 
             if (array_key_exists($name, $_POST)) {
                 $field_str = build_field_str($del_stmt, $result);   // Build field string
-                $del_stmt->bind_param($field_str, ...$row); // Bind parameters using unpacking
+                $del_stmt->bind_param($field_str, ...$row);         // Bind parameters using unpacking
 
                 // Try-catch, since DELETE may fail for a number of reasons.
                 try {
