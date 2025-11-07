@@ -1,0 +1,1 @@
+CALL deny_classes(?, ?);

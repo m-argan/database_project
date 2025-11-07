@@ -5,6 +5,8 @@
     include_once "display_table_tools.php";
     include_once "alter_database.php";
 
+    session_start();
+
     error_checking();
     $conn = config();
     render_display_table_page($conn);
@@ -13,4 +15,6 @@
 
     // Close connection
     $conn->close();
+    
+    session_destroy();
 ?>
