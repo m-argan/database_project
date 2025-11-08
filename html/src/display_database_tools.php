@@ -32,7 +32,7 @@
    <h2>Change values in table:</h2>
    <form action="display_alter.php" method="GET">
    <p>Table name: <input type="text" name="tablename" /></p>
-   <p><input type="submit" value="See Details"/></p>
+   <p><input type="submit" name="submit_alter" value="See Details"/></p>
    </form>
     <?php
     }

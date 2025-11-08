@@ -3,7 +3,7 @@
     
     include_once "setup_tools.php";
     include_once "display_table_tools.php";
-    include_once "alter_database.php";
+    // include_once "alter_database.php";
 
     session_start();
 
