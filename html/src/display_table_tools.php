@@ -1,5 +1,6 @@
 <?php
     include "delete_tools.php";
+    include "alter_tools.php";
 
     // Function definitions for display_table page.
   
@@ -84,6 +85,7 @@
 
         <!-- submit button input -->
         <p><input type="submit" name="delbtn" value="Delete Selected Records" /></p>
+        <p><input type="submit" name="alter_btn" value="Alter Selected Records" /></p>
 
         </form>
     <?php 
@@ -136,6 +138,13 @@
         
         format_result_as_table_del($result);
         display_session_del_errors();
+
+        if (array_key_exists('alter_btn', $_POST)) {
+            alt($conn);
+
+            // header("Location: {$_SERVER['REQUEST_URI']}", true, 303);
+            // exit();
+        }
 
      }
     
