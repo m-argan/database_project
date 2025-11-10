@@ -13,7 +13,7 @@
 
 <?php
         include_once "setup_tools.php";
-        include_once "display_view_tools.php";
+        include_once "display_table_tools.php";
         error_checking();
         $conn = config();
 
