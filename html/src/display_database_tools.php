@@ -28,6 +28,15 @@
         <p>Table name: <input type="text" name="tablename" /></p>
         <p><input type="submit" value="See Details"/></p>
     </form>
+    <!-- ADDED BY STELLA -->
+        <table style="border-style: none">
+                <tr style="border-style: none">
+                        <td style="border-style: none"><a href="student_history_view.php">View Student</a>&nbsp;</td>
+                        <td style="border-style: none"><a href="student_schedule_view.php">View Student Schedule</a>&nbsp;</td>
+                        <td style="border-style: none"><a href="full_schedule_view.php">View Full Schedule</a>&nbsp;</td>
+                        <!-- <td style="border-style: none"></td> -->
+                </tr>
+        </table>
     <?php
     }
 
