@@ -5,6 +5,7 @@
                 <p>First name: <input type="text" name="firstname" /></p>
                 <p>Last name: <input type="text" name="lastname" /></p>
                 <p><input type="submit" value="See Details"/></p>
+				<input type="hidden" name="tablename" value="<?php echo htmlspecialchars($_GET['tablename']); ?>">
 	</form>
 
 <?php
@@ -17,13 +18,13 @@
 	{
 		$first = $_GET['firstname'];
 		$last = $_GET['lastname'];
-		$allstudents = false;
+		$allstudents = 0;
 	}
 	else
 	{
 		$first = '';
 		$last = '';
-		$allstudents = true;
+		$allstudents = 1;
 	}
 	$query = "CALL tutor_history_view('$first', '$last', '$allstudents')";
 	$result = $conn->query($query);
