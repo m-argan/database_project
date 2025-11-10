@@ -9,7 +9,6 @@
         $fields[] = $field;
     }
 
-    // If form submitted
     if (isset($_POST['submit'])) {
         $incomplete = false;
         foreach ($fields as $field) {
@@ -24,10 +23,10 @@
         } else {
             insert_into_table($conn, $table, $_POST);
             echo "<p style='color:green;'>Record added successfully.</p>";
+           
         }
     }
 
-    // Display the form
     ?>
     <form action="" method="POST">
         <?php foreach ($fields as $field): ?>
@@ -72,7 +71,8 @@ function insert_into_table($conn, $table, $data) {
             $check->execute();
             $check->store_result();
             if ($check->num_rows == 0) {
-                die("Error: Value '$val' for column '$col' does not exist in '{$ref['ref_table']}'");
+                throw new Exception("Value '$val' for column '$col' does not exist in '{$ref['ref_table']}'");
+                //die("Error: Value '$val' for column '$col' does not exist in '{$ref['ref_table']}'");
             }
             $check->close();
         }

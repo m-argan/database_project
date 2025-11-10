@@ -1,21 +1,36 @@
 <?php
 use PHPUnit\Framework\TestCase;
 
-require_once 'setup_tools.php'; 
-require_once 'display_adding_tools.php';
+require_once 'html/src/setup_tools.php'; 
+include_once 'html/src/display_adding_tools.php';
+include_once 'html/src/display_table_tools.php';
+#include_once 'html/scr/display_table.php';
 
-class DatabaseFunctionsTest extends TestCase
+class add_toolsTest extends TestCase
 {
-    private $conn;
+    // private $conn;
+    // protected function setUp(): void {
+    //     $this->conn = config();
+    // }
 
-    protected function setUp(): void {
-        $this->conn = config();
-    }
+    // protected function tearDown(): void {
+    //     if ($this->conn) {
+    //         $this->conn->close();
+    //     }
+    // }
+    protected function setUp(): void
+{
+    $this->conn = config();
+    $this->conn->begin_transaction(); // Start a transaction
+}
 
-    protected function tearDown(): void
-    {
+protected function tearDown(): void
+{
+    if ($this->conn) {
+        $this->conn->rollback(); // Undo any inserts, updates, deletes
         $this->conn->close();
     }
+}
 
     /** @test */
     public function testGetAutoIncrementKeys()
@@ -28,22 +43,22 @@ class DatabaseFunctionsTest extends TestCase
     public function testInsertIntoTableValidForeignKey()
     {
         $data = [
-            "subject_code" => "CHE",
-            "class_number" => 110,
+            "subject_code" => "CSC",
+            "class_number" => 118,
             "class_name" => "Intro to Chemistry"
         ];
 
         insert_into_table($this->conn, "classes", $data);
 
-        $result = $this->conn->query("SELECT * FROM classes WHERE subject_code='CHE' AND class_number = '110'");
+        $result = $this->conn->query("SELECT * FROM classes WHERE subject_code='CSC' AND class_number = '118'");
         $this->assertEquals(1, $result->num_rows);
     }
 
     /** @test */
     public function testInsertIntoTableInvalidForeignKey()
     {
+        $this->expectException(Exception::class);
         $this->expectExceptionMessage("does not exist");
-
         $data = [
             "tutor_id" => "123456",
             "subject_code" => "CSC" 
@@ -83,7 +98,7 @@ class DatabaseFunctionsTest extends TestCase
     public function testDisplayAddingFormsSubmissionSuccess()
     {
         $_GET['tablename'] = "buildings";
-        $_POST = ["submit" => "Add record", "building_name" => "JVAC"];
+        $_POST = ["submit" => "Add record", "building_name" => "ABCD"];
 
         ob_start();
         display_adding_forms($this->conn);
@@ -91,7 +106,7 @@ class DatabaseFunctionsTest extends TestCase
 
         $this->assertStringContainsString("Record added successfully", $output);
 
-        $result = $this->conn->query("SELECT * FROM buildings WHERE building_name = 'JVAC'");
+        $result = $this->conn->query("SELECT * FROM buildings WHERE building_name = 'ABCD'");
         $this->assertEquals(1, $result->num_rows);
     }
 }
