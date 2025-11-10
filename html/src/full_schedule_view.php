@@ -2,7 +2,7 @@
 <!-- Database or PHP needs a way to tell the current semester for this page to work, not yet implemented -->
 
 <h2>Select a Subject:</h2>
-        <form action="display_table.php" method="GET">
+        <form action="full_schedule_view.php" method="GET">
                 <p>Subject code(e.g. HIS, MAT): <input type="text" name="subject" /></p>
         </form>
 <h2>Select a Class:</h2>
