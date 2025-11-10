@@ -103,6 +103,7 @@ function perform_alter($conn)
             $update_types .= 's';
         }
     }
+    //t
 
     // If empty (no changes) do nothing
     if (empty($updates)) {
