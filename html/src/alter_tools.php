@@ -175,7 +175,6 @@ function check_boxes($result, $conn)
     {
         return -2;
     }
-    else
     return $index;
 }
 
