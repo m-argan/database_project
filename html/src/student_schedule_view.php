@@ -9,6 +9,7 @@
         <form action="display_table.php" method="GET">
                 <p>Subject code: <input type="text" name="subjectcode" /></p>
                 <p><input type="submit" value="See Details"/></p>
+				<input type="hidden" name="tablename" value="<?php echo htmlspecialchars($_GET['tablename']); ?>">
         </form>
 
 <?php
@@ -32,12 +33,12 @@
 	if (isset($_GET['subjectcode']))
         {
                 $subject = $_GET['subjectcode'];
-                $allsubjects = false;
+                $allsubjects = 0;
         }
         else
         {
                 $subject = '';
-                $allsubjects = true;
+                $allsubjects = 1;
         }
         $query = "CALL tutor_schedule_view('$first', '$last', '$subject', '$allstudents', '$allsubjects')";
         $result = $conn->query($query);
