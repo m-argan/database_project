@@ -44,8 +44,8 @@
         <table style="width:100%">
             <thead>
                 <tr>    
-                    <!-- Delete row -->    
-                    <td><b>Delete?</b></td>
+                    <!-- Update row -->    
+                    <td><b>Update?</b></td>
                     <?php
                         // Header rows
                         while ($field = $result->fetch_field()) {
@@ -140,6 +140,7 @@
         display_session_del_errors();
 
         if (array_key_exists('alter_btn', $_POST)) {
+            // $table = htmlspecialchars($_GET['tablename']);
             alt($conn);
 
             // header("Location: {$_SERVER['REQUEST_URI']}", true, 303);
