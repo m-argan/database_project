@@ -103,7 +103,6 @@ function perform_alter($conn)
             $update_types .= 's';
         }
     }
-    //t
 
     // If empty (no changes) do nothing
     if (empty($updates)) {
@@ -160,21 +159,23 @@ function get_result($conn)
 function check_boxes($result, $conn)
 {
     $count = 0;
-    $index = 0;
-    for ($i=0; $i < $result->num_rows; $i++) {    
-        $row = $result->fetch_row();                
-        $name = "checkbox" . "$i";                  
+    for ($i=0; $i < $result->num_rows; $i++) {     
+        $row = $result->fetch_row();              
+        $name = "checkbox" . "$i";                 
         if (array_key_exists($name, $_POST)) {
             $count++;
             if($count > 1)
             {
                 return -1;
-                // display_alter_forms($conn);
             }
             else{$index = $i;}
         }
-        else{return -2;}
     }
+    if($count === 0)
+    {
+        return -2;
+    }
+    else
     return $index;
 }
 
