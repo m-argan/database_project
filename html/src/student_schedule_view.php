@@ -1,7 +1,7 @@
 <!-- Incomplete - encountering issues with display_table_tools.php. Stored procedure should work otherwise -->
 
 <h2>Select a Student:</h2>
-        <form action="display_table.php" method="GET">
+        <form action="student_schedule_view.php" method="GET">
                 <p>First name: <input type="text" name="firstname" /></p>
                 <p>Last name: <input type="text" name="lastname" /></p>
 	</form>
@@ -9,6 +9,7 @@
         <form action="display_table.php" method="GET">
                 <p>Subject code: <input type="text" name="subjectcode" /></p>
                 <p><input type="submit" value="See Details"/></p>
+				<input type="hidden" name="tablename" value="<?php echo htmlspecialchars($_GET['tablename']); ?>">
         </form>
 
 <?php
@@ -32,12 +33,12 @@
 	if (isset($_GET['subjectcode']))
         {
                 $subject = $_GET['subjectcode'];
-                $allsubjects = false;
+                $allsubjects = 0;
         }
         else
         {
                 $subject = '';
-                $allsubjects = true;
+                $allsubjects = 1;
         }
         $query = "CALL tutor_schedule_view('$first', '$last', '$subject', '$allstudents', '$allsubjects')";
         $result = $conn->query($query);
