@@ -16,12 +16,17 @@ function select_from_db($result, $index, $conn)
     echo $result->field_count . " field(s) in results.<br>";
 
     foreach ($row as $field_name => $value):
-        echo htmlspecialchars($field_name) . ": ";
-        ?>
-            <!-- Turns the values of each field into text boxes which are autofilled with existing db data -->
-           <input type="text" name="<?php echo htmlspecialchars($field_name); ?>" value="<?php echo htmlspecialchars($value) ?>"/><br>
+        // Prevent "deleted_when" from being edited
+        if(htmlspecialchars($field_name) != 'deleted_when')
+        {
+            echo htmlspecialchars($field_name) . ": ";
+            ?>
+                <!-- Turns the values of each field into text boxes which are autofilled with existing db data -->
+            <input type="text" name="<?php echo htmlspecialchars($field_name); ?>" value="<?php echo htmlspecialchars($value) ?>"/><br>
 
-    <?php endforeach; 
+            <?php 
+        }
+    endforeach; 
     
     $pk_cols = get_primary_keys($conn, $_GET['tablename']);
     foreach ($pk_cols as $pk) {
@@ -60,13 +65,13 @@ function get_primary_keys($conn, $table) {
     return $keys;
 }
 
-function perform_alter($conn)
+// had to add $doExit for the tests to work
+function perform_alter($conn, $doExit = true)
 {
     // Gets tablename from the form
     $table = $_POST['tablename'];
     // Gets primary key list from helper function
     $pk_cols = get_primary_keys($conn, $table);
-
     $where_parts = [];
     $where_params = [];
     $where_types = '';
@@ -77,7 +82,6 @@ function perform_alter($conn)
         $where_params[] = $_POST["orig_$pk"];
         $where_types .= 's';
     }
-
     // Forms select statement, binds parameters to the statement
     $sql = "SELECT * FROM ". $table. " WHERE " . implode(" AND ", $where_parts);
     $stmt = $conn->prepare($sql);
@@ -106,8 +110,11 @@ function perform_alter($conn)
 
     // If empty (no changes) do nothing
     if (empty($updates)) {
-        header("Location: display_table.php?tablename=" . urlencode($table));
-        exit;
+        if ($doExit) {
+            header("Location: display_table.php?tablename=" . urlencode($table));
+            exit;
+        }
+        return true;
     }
 
     // Constructs update statement
@@ -121,23 +128,23 @@ function perform_alter($conn)
     try {
         $stmt->execute();
     } catch (mysqli_sql_exception $error) {
-        // $_SESSION['pk_error_msg'] = "Cannot alter primary keys";
+        print("set error message");
+        $_SESSION['pk_error_msg'] = "Cannot alter primary keys";
         echo "Cannot alter primary keys";
     }
 
     // Redirects to make updates display on webpage
-    header("Location: display_table.php?tablename=" . urlencode($table));
-    exit;
+    if ($doExit) {
+        header("Location: display_table.php?tablename=" . urlencode($table));
+        exit;
+    }
+    return true;
 }
 
 
 // Helper function to get all results after a table is selected
 function get_result($conn)
 {
-    if (isset($_POST['tablename'])) {
-        $_GET['tablename'] = $_POST['tablename'];
-    }
-
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "Table: " . htmlspecialchars($_GET['tablename'] ). "<br>";
  
@@ -152,6 +159,15 @@ function get_result($conn)
              $result = $stmt->get_result();
     return $result;
     }
+}
+
+function display_session_errors(){
+
+    if (array_key_exists('pk_error_msg', $_SESSION) && $_SESSION['pk_error_msg'] == true) {
+        echo "<p style='color:red;'>This value cannot be edited!.</p>";
+        unset($_SESSION['pk_error_msg']);
+    }
+
 }
 
 // Function to determine which checkbox was selected (initially was going to use index but switched to pk)
