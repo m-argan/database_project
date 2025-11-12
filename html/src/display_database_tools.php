@@ -1,6 +1,8 @@
 <?php
-    // Function definitions for display_database, AKA (currently) index.php.
 
+    include_once "setup_tools.php";
+    
+    // Function definitions for display_database, AKA (currently) index.php.
 
     // Function for listing tables of database:
     function list_tables($conn) {
@@ -41,7 +43,7 @@
     }
 
 
-    // Function for rendering the page:
+    // Function that helps render the page:
     function render_display_database_page($conn) { ?>
         <!DOCTYPE html>
         <html>
@@ -61,4 +63,13 @@
         </body>
         </html>
    <?php }
+
+
+    // Entrypoint function for display_database (index.php):
+    function display_database_entrypoint() {
+        error_checking();
+        $conn = config();
+        render_display_database_page($conn);
+        $conn->close();
+    }
 ?>

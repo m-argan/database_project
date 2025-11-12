@@ -7,6 +7,9 @@ spl_autoload_register(
         static $classes = null;
         if ($classes === null) {
             $classes = array(
+                'add_toolstest' => '/../test/add_toolsTest.php',
+                'alter_toolstest' => '/../test/alter_toolsTest.php',
+                'delete_toolstest' => '/../test/delete_toolsTest.php',
                 'display_database_toolstest' => '/../test/display_database_toolsTest.php',
                 'display_table_toolstest' => '/../test/display_table_toolsTest.php'
             );
