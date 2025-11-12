@@ -79,8 +79,7 @@ function get_fields($conn)
         } else {
             insert_into_table($conn, $table, $_POST);
             echo "<p style='color:green;'>Record added successfully.</p>";
-           header("Location: {$_SERVER['REQUEST_URI']}", true, 303);
-        exit(); 
+           
         }
   //  }
  }
