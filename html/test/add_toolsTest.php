@@ -1,9 +1,9 @@
 <?php
 use PHPUnit\Framework\TestCase;
 
-require_once 'html/src/setup_tools.php'; 
-include_once 'html/src/display_adding_tools.php';
-include_once 'html/src/display_table_tools.php';
+require_once __DIR__ . '/../src/setup_tools.php'; 
+require_once __DIR__ . '/../src/display_adding_tools.php';
+require_once __DIR__ . '/../src/display_table_tools.php';
 #include_once 'html/scr/display_table.php';
 
 class add_toolsTest extends TestCase
@@ -35,7 +35,19 @@ protected function tearDown(): void
     /** @test */
     public function testGetAutoIncrementKeys()
     {
-        $keys = get_aut_inc_keys($this->conn, "slots");
+        // First, get the fields from the slots table
+        $query = "SELECT * FROM slots LIMIT 1";
+        $result = $this->conn->prepare($query);
+        $result->execute();
+        $result = $result->get_result();
+        
+        $fields = [];
+        while ($field = $result->fetch_field()) {
+            $fields[] = $field;
+        }
+        
+        // Now call get_aut_inc_keys with all three required arguments
+        $keys = get_aut_inc_keys($this->conn, "slots", $fields);
         $this->assertContains("slot_id", $keys);
     }
 
@@ -101,7 +113,14 @@ protected function tearDown(): void
         $_POST = ["submit" => "Add record", "building_name" => "ABCD"];
 
         ob_start();
-        display_adding_forms($this->conn);
+        // !! EDIT BY COPILOT !!
+        try {
+            display_adding_forms($this->conn);
+        } catch (\Exception $e) {
+            ob_end_clean();
+            throw $e;
+        }
+        // END EDIT
         $output = ob_get_clean();
 
         $this->assertStringContainsString("Record added successfully", $output);

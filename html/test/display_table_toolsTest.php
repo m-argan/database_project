@@ -1,7 +1,7 @@
 <?php
 
-require_once "html/src/setup_tools.php";
-include_once "html/src/display_table_tools.php";
+require_once __DIR__ . '/../src/setup_tools.php';
+require_once __DIR__ . '/../src/display_table_tools.php';
 
 use PHPUnit\Framework\TestCase;
 

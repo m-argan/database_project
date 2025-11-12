@@ -4,14 +4,14 @@
         <form action="student_schedule_view.php" method="GET">
                 <p>First name: <input type="text" name="firstname" /></p>
                 <p>Last name: <input type="text" name="lastname" /></p>
-        </form>
+
 <h2>Select a Subject or Class:</h2>
-        <form action="student_schedule_view.php" method="GET">
+
                 <p>Subject code: <input type="text" name="subjectcode" /></p>
                 <p>Class code: <input type="number" name"classnumber" /></p>
-        </form>
+
 <h2>Select a Term:</h2>
-        <form action="student_schedule_view.php" method="GET">
+
                 <p>Term(e.g. SP, FA): <input type="text" name="term" /></p>
                 <p>Year(e.g. 2021): <input type="number" name="tyear" /></p>
                 <p><input type="submit" value="See Details"/></p>
@@ -23,7 +23,7 @@
         error_checking();
         $conn = config();
 
-        if (isset($_GET['firstname']) && isset($_GET['lastname']))
+        if (isset($_GET['firstname']) && isset($_GET['lastname']) && !empty($_GET['firstname']) && !empty($_GET['lastname']))
         {
                 $first = htmlspecialchars($_GET['firstname']);
                 $last = htmlspecialchars($_GET['lastname']);
@@ -35,11 +35,11 @@
                 $last = NULL;
                 $allstudents = 1;
         }
-        if (isset($_GET['subjectcode']))
+        if (isset($_GET['subjectcode']) && !empty($_GET['subjectcode']))
         {
                 $subject = htmlspecialchars($_GET['subjectcode']);
                 $allsubjects = 0;
-                if (isset($_GET['classnumber']))
+                if (isset($_GET['classnumber']) && !empty($_GET['classnumber']))
                 {
                         $classnumber = htmlspecialchars($_GET['classnumber']);
                         $allclasses = 0;
@@ -57,7 +57,7 @@
                 $allsubjects = 1;
                 $allclasses = 1;
         }
-        if (isset($_GET['term']) && isset($_GET['tyear']))
+        if (isset($_GET['term']) && isset($_GET['tyear']) && !empty($_GET['term']) && !empty($_GET['tyear']))
         {
                 $term = htmlspecialchars($_GET['term']);
                 $tyear = htmlspecialchars($_GET['tyear']);

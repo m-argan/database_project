@@ -1,7 +1,8 @@
 <?php
     include "delete_tools.php";
     include "alter_tools.php";
-
+    include "display_adding_tools.php";
+   # include "display_adding.php";
     // Function definitions for display_table page.
   
 
@@ -86,6 +87,7 @@
         <!-- submit button input -->
         <p><input type="submit" name="delbtn" value="Delete Selected Records" /></p>
         <p><input type="submit" name="alter_btn" value="Alter Selected Records" /></p>
+        <p><input type="submit" name="add_btn" value="Add Records" /></p>
 
         </form>
     <?php 
@@ -128,6 +130,7 @@
         if ($flag == false) { exit(); }     // Exit if invalid input; could be dangerous.
 
         $result = prepare_display_table($conn);
+        
 
         if (array_key_exists('delbtn', $_POST)) {
             delete_records($result, $conn);
@@ -146,6 +149,17 @@
             // header("Location: {$_SERVER['REQUEST_URI']}", true, 303);
             // exit();
         }
+        if(array_key_exists('add_btn', $_POST))
+        {
+            display_adding_forms($conn);
+            
+        }
+        if(array_key_exists('submit', $_POST))
+        {
+            input_new_data($conn);
+        }
+    
+        
 
      }
     

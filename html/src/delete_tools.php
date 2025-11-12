@@ -5,25 +5,30 @@
 
      // Function that queries database to soft delete a record from classes, slots, or tutors.
     function soft_delete($row, $conn) {
+        // Use __DIR__ to construct a reliable path from current file location
+        $base_path = dirname(dirname(__DIR__)) . '/prepared_statements/';
+        
         if (htmlspecialchars( $_GET['tablename'] ) == 'classes') {
-            $del_stmt = file_get_contents("../../prepared_statements/soft_delete_classes.sql");
+            $del_stmt = file_get_contents($base_path . "soft_delete_classes.sql");
             $del_stmt = $conn->prepare($del_stmt);
             $del_stmt->bind_param('ss', $row[1], $row[2]);
         } 
         
         else if (htmlspecialchars( $_GET['tablename'] ) == 'slots') {
-            $del_stmt = file_get_contents("../../prepared_statements/soft_delete_slots.sql");
+            $del_stmt = file_get_contents($base_path . "soft_delete_slots.sql");
             $del_stmt = $conn->prepare($del_stmt);
             $del_stmt->bind_param('i', $row[1]);
         } 
         
         else if (htmlspecialchars( $_GET['tablename'] ) == 'tutors') {
-            $del_stmt = file_get_contents("../../prepared_statements/soft_delete_tutors.sql");
+            $del_stmt = file_get_contents($base_path . "soft_delete_tutors.sql");
             $del_stmt = $conn->prepare($del_stmt);
             $del_stmt->bind_param('s', $row[1]);
         }
 
-        $del_stmt->execute();
+        if (isset($del_stmt) && $del_stmt !== false) {
+            $del_stmt->execute();
+        }
 
     }
     

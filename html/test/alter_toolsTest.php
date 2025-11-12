@@ -1,9 +1,9 @@
 <?php
 
-include "html/src/setup_tools.php";
-include_once "html/src/display_table_tools.php";
-include_once "html/src/alter_tools.php";
-include_once "html/src/delete_tools.php";
+require_once __DIR__ . '/../src/setup_tools.php';
+require_once __DIR__ . '/../src/display_table_tools.php';
+require_once __DIR__ . '/../src/alter_tools.php';
+require_once __DIR__ . '/../src/delete_tools.php';
 
 use PHPUnit\Framework\TestCase;
 
