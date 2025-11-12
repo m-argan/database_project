@@ -13,11 +13,11 @@
         error_checking();
         $conn = config();
 
-        if (isset($_GET['subject']))
+        if (isset($_GET['subject']) && !empty($_GET['subject']))
         {
                 $subject = htmlspecialchars($_GET['subject']);
                 $allsubjects = 0;
-                if (isset($_GET['class']))
+                if (isset($_GET['class']) && !empty($_GET['class']))
                 {
                         $class = (int)htmlspecialchars($_GET['class']);
                         $allclasses = 0;
