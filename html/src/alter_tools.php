@@ -200,10 +200,10 @@ function alt($conn)
     $res = check_boxes($result, $conn);
     if($res>= 0)
     {
+        $result->data_seek($res);
+        $row = $result->fetch_assoc();
         if($row['deleted_when'] == '0000-00-00 00:00:00')
         {
-            $result->data_seek($res);
-            $row = $result->fetch_assoc();
             select_from_db($result, $res, $conn, $row);
         }
         else
