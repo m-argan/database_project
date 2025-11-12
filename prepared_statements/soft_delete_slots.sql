@@ -1,1 +1,1 @@
-CALL deny_slots(?, ?);
+CALL deny_slots(?);
