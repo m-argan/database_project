@@ -28,32 +28,32 @@ DELIMITER ;
 
 
 
--- DENY trigger for Slots. Activates whenever a record from Slots is deleted. 
-DROP TRIGGER IF EXISTS deny_slots;
-DELIMITER //
-CREATE TRIGGER deny_slots
-BEFORE DELETE ON slots
-FOR EACH ROW
-BEGIN
-    /* Kill deletion attempt */
-    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Delete failed. Must soft delete.';
-END;
-//
-DELIMITER ;
+-- -- DENY trigger for Slots. Activates whenever a record from Slots is deleted. 
+-- DROP TRIGGER IF EXISTS deny_slots;
+-- DELIMITER //
+-- CREATE TRIGGER deny_slots
+-- BEFORE DELETE ON slots
+-- FOR EACH ROW
+-- BEGIN
+--     /* Kill deletion attempt */
+--     SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Delete failed. Must soft delete.';
+-- END;
+-- //
+-- DELIMITER ;
 
--- DENY procedure for Slots.
-DROP PROCEDURE IF EXISTS deny_slots;
-DELIMITER //
-CREATE PROCEDURE deny_slots(
-    IN locate_slot INT
-)
-BEGIN
-    UPDATE slots
-    SET deleted_when = CURRENT_TIME()
-    WHERE slot_id = locate_slot;
-END;
-//
-DELIMITER ;
+-- -- DENY procedure for Slots.
+-- DROP PROCEDURE IF EXISTS deny_slots;
+-- DELIMITER //
+-- CREATE PROCEDURE deny_slots(
+--     IN locate_slot INT
+-- )
+-- BEGIN
+--     UPDATE slots
+--     SET deleted_when = CURRENT_TIME()
+--     WHERE slot_id = locate_slot;
+-- END;
+-- //
+-- DELIMITER ;
 
 
 
