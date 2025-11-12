@@ -98,6 +98,10 @@ function perform_alter($conn, $doExit = true)
     foreach ($_POST as $field => $newValue) {
         if (str_starts_with($field, "orig_") || $field === 'tablename' || $field === 'submit_btn') continue;
 
+        // Only process fields that exist in the database row
+        // !! EDIT BY COPILOT !!
+        if (!array_key_exists($field, $oldRow)) continue;
+
         if ($oldRow[$field] !== $newValue) {
             $updates[] = "$field = ?";
             $update_params[] = $newValue;
