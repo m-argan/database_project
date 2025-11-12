@@ -1,7 +1,7 @@
 <?php //Code below written by user then run through chatgpt to make more efficient.
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
-include_once "display_table_tools.php";
+require_once __DIR__ . "/display_table_tools.php";
 
 function display_adding_forms($conn) { 
    
@@ -11,7 +11,6 @@ function display_adding_forms($conn) {
 
     
     $aut_inc_array = get_aut_inc_keys($conn, $table, $fields);
-<<<<<<< HEAD
     if (isset($_POST['submit'])) {
         $incomplete = false;
         foreach ($fields as $field) {
@@ -36,10 +35,6 @@ function display_adding_forms($conn) {
     }
 
     ?>
-=======
-    
-   ?>
->>>>>>> a0186ea328ea98c549f880ce21f74c421938610e
     <form action="" method="POST">
         <?php foreach ($fields as $field): ?>
             <?php if (!in_array($field->name, $aut_inc_array)): ?>

@@ -1,5 +1,5 @@
 <?php
-include_once "display_table_tools.php";
+require_once __DIR__ . "/display_table_tools.php";
 
 function select_from_db($result, $index, $conn, $row)
 {
@@ -98,15 +98,10 @@ function perform_alter($conn, $doExit = true)
     foreach ($_POST as $field => $newValue) {
         if (str_starts_with($field, "orig_") || $field === 'tablename' || $field === 'submit_btn') continue;
 
-<<<<<<< HEAD
         // Only process fields that exist in the database row
         // !! EDIT BY COPILOT !!
         if (!array_key_exists($field, $oldRow)) continue;
 
-=======
-        if (!array_key_exists($field, $oldRow)) continue;
-        
->>>>>>> b092227d6102d18f8b77a1b9c211244458f5cb45
         if ($oldRow[$field] !== $newValue) {
             $updates[] = "$field = ?";
             $update_params[] = $newValue;

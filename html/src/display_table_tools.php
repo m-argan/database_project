@@ -1,7 +1,7 @@
 <?php
-    include "delete_tools.php";
-    include "alter_tools.php";
-    include "display_adding_tools.php";
+    require_once __DIR__ . "/delete_tools.php";
+    require_once __DIR__ . "/alter_tools.php";
+    require_once __DIR__ . "/display_adding_tools.php";
    # include "display_adding.php";
     // Function definitions for display_table page.
   

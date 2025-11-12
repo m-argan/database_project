@@ -1,8 +1,8 @@
 <?php
     // "Main" page for display_table; calls the functions to render the page.
     
-    include_once "setup_tools.php";
-    include_once "display_table_tools.php";
+    require_once __DIR__ . "/setup_tools.php";
+    require_once __DIR__ . "/display_table_tools.php";
     // include_once "alter_database.php";
 
     session_start();

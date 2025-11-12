@@ -18,8 +18,8 @@
         </form>
 
 <?php
-        include_once "setup_tools.php";
-        include_once "display_table_tools.php";
+        require_once __DIR__ . "/setup_tools.php";
+        require_once __DIR__ . "/display_table_tools.php";
         error_checking();
         $conn = config();
 

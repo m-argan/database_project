@@ -1,8 +1,8 @@
 <?php
-include_once "setup_tools.php";
-include_once "display_database_tools.php";
-include_once "display_table_tools.php";
-include_once "alter_tools.php";
+require_once __DIR__ . "/setup_tools.php";
+require_once __DIR__ . "/display_database_tools.php";
+require_once __DIR__ . "/display_table_tools.php";
+require_once __DIR__ . "/alter_tools.php";
 
 error_checking();
 $conn = config();
