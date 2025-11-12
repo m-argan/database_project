@@ -1,34 +1,18 @@
 <?php //Code below written by user then run through chatgpt to make more efficient.
- function display_adding_forms($conn) { 
-    $table = $_GET['tablename'] ?? '';
-    $result = prepare_display_table($conn);
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+include_once "display_table_tools.php";
+
+function display_adding_forms($conn) { 
+   
     
+  $table = $_GET['tablename'] ?? '';
+    $fields = get_fields($conn);
 
-    $fields = [];
-    while ($field = $result->fetch_field()) {
-        $fields[] = $field;
-    }
+    
     $aut_inc_array = get_aut_inc_keys($conn, $table, $fields);
-    if (isset($_POST['submit'])) {
-        $incomplete = false;
-        foreach ($fields as $field) {
-            if (!in_array($field->name, $aut_inc_array) && empty($_POST[$field->name])) {
-                $incomplete = true;
-                break;
-            }
-        }
-
-        if ($incomplete) {
-            echo "<p style='color:red;'>You did not fill in all fields.</p>";
-        } else {
-            insert_into_table($conn, $table, $_POST);
-            echo "<p style='color:green;'>Record added successfully.</p>";
-           header("Location: {$_SERVER['REQUEST_URI']}", true, 303);
-        exit(); 
-        }
-    }
-
-    ?>
+    
+   ?>
     <form action="" method="POST">
         <?php foreach ($fields as $field): ?>
             <?php if (!in_array($field->name, $aut_inc_array)): ?>
@@ -38,11 +22,46 @@
                 </p>
             <?php endif; ?>
         <?php endforeach; ?>
-        <p><input type="submit" name="submit" value="Add record" /></p>
+        <p><input type="submit" name="submit" value="submit" /></p>
     </form>
     <?php
 }
 
+function get_fields($conn)
+{
+    $result = prepare_display_table($conn);
+    $table = $_GET['tablename'] ?? '';
+    $fields = [];
+    while ($field = $result->fetch_field()) {
+        $fields[] = $field;
+    }
+    return $fields;
+}
+ function input_new_data($conn)
+ {
+    $table = $_GET['tablename'] ?? '';
+    //if (isset($_POST['submit'])) {
+    
+    $fields = get_fields($conn);
+    $aut_inc_array = get_aut_inc_keys($conn, $table, $fields);
+        $incomplete = false;
+        foreach ($fields as $field) {
+            if (!in_array($field->name, $aut_inc_array) && empty($_POST[$field->name])) {
+                $incomplete = true;
+                break;
+            }
+        }
+       
+        if ($incomplete) {
+            echo "<p style='color:red;'>You did not fill in all fields.</p>";
+        } else {
+            insert_into_table($conn, $table, $_POST);
+            echo "<p style='color:green;'>Record added successfully.</p>";
+           header("Location: {$_SERVER['REQUEST_URI']}", true, 303);
+        exit(); 
+        }
+  //  }
+ }
 function insert_into_table($conn, $table, $data) {
     unset($data['submit']); 
 
