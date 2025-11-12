@@ -1,7 +1,7 @@
 <?php
 include_once "display_table_tools.php";
 
-function select_from_db($result, $index, $conn)
+function select_from_db($result, $index, $conn, $row)
 {
     ?>
    <form method="POST" action="display_alter.php">
@@ -10,10 +10,7 @@ function select_from_db($result, $index, $conn)
 
    <?php
 
-    $result->data_seek($index);
-    $row = $result->fetch_assoc();
-
-    echo $result->field_count . " field(s) in results.<br>";
+    // echo $result->field_count . " field(s) in results.<br>";
 
     foreach ($row as $field_name => $value):
         // Prevent "deleted_when" from being edited
@@ -128,13 +125,16 @@ function perform_alter($conn, $doExit = true)
     try {
         $stmt->execute();
     } catch (mysqli_sql_exception $error) {
-        print("set error message");
         $_SESSION['pk_error_msg'] = "Cannot alter primary keys";
-        echo "Cannot alter primary keys";
+        
     }
-
+    
     // Redirects to make updates display on webpage
-    if ($doExit) {
+    if(isset($_SESSION['pk_error_msg']))
+    {
+        display_session_errors();
+    }
+    else if ($doExit) {
         header("Location: display_table.php?tablename=" . urlencode($table));
         exit;
     }
@@ -146,7 +146,7 @@ function perform_alter($conn, $doExit = true)
 function get_result($conn)
 {
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        echo "Table: " . htmlspecialchars($_GET['tablename'] ). "<br>";
+        // echo "Table: " . htmlspecialchars($_GET['tablename'] ). "<br>";
  
         $query = "SELECT * FROM ".htmlspecialchars($_GET['tablename']).";";
              $stmt = $conn->prepare($query);
@@ -200,7 +200,16 @@ function alt($conn)
     $res = check_boxes($result, $conn);
     if($res>= 0)
     {
-        select_from_db($result, $res, $conn);
+        if($row['deleted_when'] == '0000-00-00 00:00:00')
+        {
+            $result->data_seek($res);
+            $row = $result->fetch_assoc();
+            select_from_db($result, $res, $conn, $row);
+        }
+        else
+        {
+            echo "Cannot alter entry which has already been deleted";
+        }
     }
     else if($res === -2)
     {

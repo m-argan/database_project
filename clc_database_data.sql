@@ -35,6 +35,7 @@ INSERT INTO year_terms(term_id, term_code, term_year) VALUES
 INSERT INTO classes(subject_code, class_number, class_name) VALUES
 ("MAT", 330, "Example Math Class"),
 ("CSC", 332, "Example CSC Class"),
+("CSC", 101, "Example CSC Class 2"),
 ("ARS", 250, "Example Art Class"),
 ("ENS", 110, "Example ENS Class");
 

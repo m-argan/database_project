@@ -10,8 +10,8 @@ $conn = config();
 
 if (isset($_POST['submit_btn'])) {
     perform_alter($conn);
+    display_session_errors();
 } else {
-    // display_session_errors();
     $result = get_result($conn);
     alt($conn);
 }
