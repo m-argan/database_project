@@ -98,10 +98,15 @@ function perform_alter($conn, $doExit = true)
     foreach ($_POST as $field => $newValue) {
         if (str_starts_with($field, "orig_") || $field === 'tablename' || $field === 'submit_btn') continue;
 
+<<<<<<< HEAD
         // Only process fields that exist in the database row
         // !! EDIT BY COPILOT !!
         if (!array_key_exists($field, $oldRow)) continue;
 
+=======
+        if (!array_key_exists($field, $oldRow)) continue;
+        
+>>>>>>> b092227d6102d18f8b77a1b9c211244458f5cb45
         if ($oldRow[$field] !== $newValue) {
             $updates[] = "$field = ?";
             $update_params[] = $newValue;
@@ -206,13 +211,20 @@ function alt($conn)
     {
         $result->data_seek($res);
         $row = $result->fetch_assoc();
-        if($row['deleted_when'] == '0000-00-00 00:00:00')
+        if(array_key_exists('deleted_when', $row))
         {
-            select_from_db($result, $res, $conn, $row);
+            if($row['deleted_when'] == '0000-00-00 00:00:00')
+            {
+                select_from_db($result, $res, $conn, $row);
+            }
+            else
+            {
+                echo "Cannot alter entry which has already been deleted";
+            }
         }
         else
         {
-            echo "Cannot alter entry which has already been deleted";
+            select_from_db($result, $res, $conn, $row);
         }
     }
     else if($res === -2)
