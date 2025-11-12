@@ -118,7 +118,7 @@
                         soft_delete($row, $conn);
                     }
                     // Foreign key constraint failure
-                    else if ($error->getMessage() === 'Cannot delete or update a parent row: a foreign key constraint fails') {
+                    else if (str_contains($error->getMessage(), 'Cannot delete or update a parent row: a foreign key constraint fails')) {
                         $_SESSION['fk_delete'] = true;  // Log into $_SESSION so this error
                                                         // is retained across states and can display.
                     }
