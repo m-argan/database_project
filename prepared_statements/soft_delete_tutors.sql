@@ -1,1 +1,1 @@
-CALL deny_tutors(?, ?);
+CALL deny_tutors(?);
