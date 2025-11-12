@@ -1,15 +1,20 @@
-<!-- Incomplete - encountering issues with display_table_tools.php. Stored procedure should work otherwise -->
+<!-- Incomplete - errors occur when all fields aren't filled in on form -->
 
 <h2>Select a Student:</h2>
         <form action="student_schedule_view.php" method="GET">
                 <p>First name: <input type="text" name="firstname" /></p>
                 <p>Last name: <input type="text" name="lastname" /></p>
-	</form>
-<h2>Select a Subject:</h2>
-        <form action="display_table.php" method="GET">
+        </form>
+<h2>Select a Subject or Class:</h2>
+        <form action="student_schedule_view.php" method="GET">
                 <p>Subject code: <input type="text" name="subjectcode" /></p>
+                <p>Class code: <input type="number" name"classnumber" /></p>
+        </form>
+<h2>Select a Term:</h2>
+        <form action="student_schedule_view.php" method="GET">
+                <p>Term(e.g. SP, FA): <input type="text" name="term" /></p>
+                <p>Year(e.g. 2021): <input type="number" name="tyear" /></p>
                 <p><input type="submit" value="See Details"/></p>
-				<input type="hidden" name="tablename" value="<?php echo htmlspecialchars($_GET['tablename']); ?>">
         </form>
 
 <?php
@@ -20,27 +25,51 @@
 
         if (isset($_GET['firstname']) && isset($_GET['lastname']))
         {
-                $first = $_GET['firstname'];
-                $last = $_GET['lastname'];
-                $allstudents = false;
+                $first = htmlspecialchars($_GET['firstname']);
+                $last = htmlspecialchars($_GET['lastname']);
+                $allstudents = 0;
         }
         else
         {
-                $first = '';
-                $last = '';
-	  	$allstudents = true;
-	}
-	if (isset($_GET['subjectcode']))
+                $first = NULL;
+                $last = NULL;
+                $allstudents = 1;
+        }
+        if (isset($_GET['subjectcode']))
         {
-                $subject = $_GET['subjectcode'];
+                $subject = htmlspecialchars($_GET['subjectcode']);
                 $allsubjects = 0;
+                if (isset($_GET['classnumber']))
+                {
+                        $classnumber = htmlspecialchars($_GET['classnumber']);
+                        $allclasses = 0;
+                }
+                else
+                {
+                        $classnumber = 0;
+                        $allclasses = 1;
+                }
         }
         else
         {
-                $subject = '';
+                $subject = NULL;
+                $classnumber = 0;
                 $allsubjects = 1;
+                $allclasses = 1;
         }
-        $query = "CALL tutor_schedule_view('$first', '$last', '$subject', '$allstudents', '$allsubjects')";
+        if (isset($_GET['term']) && isset($_GET['tyear']))
+        {
+                $term = htmlspecialchars($_GET['term']);
+                $tyear = htmlspecialchars($_GET['tyear']);
+                $allterms = 0;
+        }
+        else
+        {
+                $term = NULL;
+                $tyear = 0;
+                $allterms = 1;
+        }
+        $query = "CALL tutor_schedule_view(1, 0, '$first', '$last', '$subject', '$classnumber', '$term', '$tyear', '$allstudents', '$allsubjects', '$allclasses', '$allterms')";
         $result = $conn->query($query);
         format_result_as_table($result);
         //Note: this does not handle wrong input
