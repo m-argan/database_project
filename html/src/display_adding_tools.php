@@ -23,8 +23,12 @@
         } else {
             insert_into_table($conn, $table, $_POST);
             echo "<p style='color:green;'>Record added successfully.</p>";
-           header("Location: {$_SERVER['REQUEST_URI']}", true, 303);
-        exit(); 
+            // Only redirect in web context (when headers haven't been sent and not in test mode)
+            // !! EDIT BY COPILOT !!
+            if (!headers_sent() && php_sapi_name() !== 'cli') {
+                header("Location: {$_SERVER['REQUEST_URI']}", true, 303);
+                exit();
+            }
         }
     }
 

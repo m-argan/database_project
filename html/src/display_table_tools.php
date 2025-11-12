@@ -44,8 +44,8 @@
         <table style="width:100%">
             <thead>
                 <tr>    
-                    <!-- Update row -->    
-                    <td><b>Update?</b></td>
+                    <!-- Delete row -->    
+                    <td><b>Delete?</b></td>
                     <?php
                         // Header rows
                         while ($field = $result->fetch_field()) {
