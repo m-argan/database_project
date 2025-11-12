@@ -2,13 +2,13 @@
  function display_adding_forms($conn) { 
     $table = $_GET['tablename'] ?? '';
     $result = prepare_display_table($conn);
-    $aut_inc_array = get_aut_inc_keys($conn, $table);
+    
 
     $fields = [];
     while ($field = $result->fetch_field()) {
         $fields[] = $field;
     }
-
+    $aut_inc_array = get_aut_inc_keys($conn, $table, $fields);
     if (isset($_POST['submit'])) {
         $incomplete = false;
         foreach ($fields as $field) {
@@ -92,7 +92,7 @@ function insert_into_table($conn, $table, $data) {
     $stmt->close();
 }
 
- function get_aut_inc_keys($conn, $table_name)
+ function get_aut_inc_keys($conn, $table_name, $fields)
     {
     $sql = "SELECT COLUMN_NAME
             FROM INFORMATION_SCHEMA.COLUMNS
@@ -113,6 +113,17 @@ function insert_into_table($conn, $table, $data) {
     while ($row = $result->fetch_assoc()) {
         $auto_inc_columns[] = $row['COLUMN_NAME'];
     }
+    foreach($fields as $field)
+    {
+        
+        if($field->name == "deleted_when")
+        {
+            
+            $auto_inc_columns[] = $field->name;
+            
+        }
+    }
+    
 
     $stmt->close();
 
