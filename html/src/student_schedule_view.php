@@ -8,7 +8,7 @@
 <h2>Select a Subject or Class:</h2>
 
                 <p>Subject code: <input type="text" name="subjectcode" /></p>
-                <p>Class code: <input type="number" name"classnumber" /></p>
+                <p>Class code: <input type="number" name="classnumber" /></p>
 
 <h2>Select a Term:</h2>
 
