@@ -1,7 +1,7 @@
 <?php //Code below written by user then run through chatgpt to make more efficient.
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
-require_once __DIR__ . "/display_table_tools.php";
+include_once "display_table_tools.php";
 
 function display_adding_forms($conn) { 
    
@@ -11,30 +11,8 @@ function display_adding_forms($conn) {
 
     
     $aut_inc_array = get_aut_inc_keys($conn, $table, $fields);
-    if (isset($_POST['submit'])) {
-        $incomplete = false;
-        foreach ($fields as $field) {
-            if (!in_array($field->name, $aut_inc_array) && empty($_POST[$field->name])) {
-                $incomplete = true;
-                break;
-            }
-        }
-
-        if ($incomplete) {
-            echo "<p style='color:red;'>You did not fill in all fields.</p>";
-        } else {
-            insert_into_table($conn, $table, $_POST);
-            echo "<p style='color:green;'>Record added successfully.</p>";
-            // Only redirect in web context (when headers haven't been sent and not in test mode)
-            // !! EDIT BY COPILOT !!
-            if (!headers_sent() && php_sapi_name() !== 'cli') {
-                header("Location: {$_SERVER['REQUEST_URI']}", true, 303);
-                exit();
-            }
-        }
-    }
-
-    ?>
+    
+   ?>
     <form action="" method="POST">
         <?php foreach ($fields as $field): ?>
             <?php if (!in_array($field->name, $aut_inc_array)): ?>
@@ -79,7 +57,8 @@ function get_fields($conn)
         } else {
             insert_into_table($conn, $table, $_POST);
             echo "<p style='color:green;'>Record added successfully.</p>";
-           
+        //    header("Location: {$_SERVER['REQUEST_URI']}", true, 303);
+        // exit(); 
         }
   //  }
  }
