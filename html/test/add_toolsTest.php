@@ -100,7 +100,7 @@ protected function tearDown(): void
         $_POST = ["submit" => "Add record"]; 
 
         ob_start();
-        display_adding_forms($this->conn);
+        input_new_data($this->conn);
         $output = ob_get_clean();
 
         $this->assertStringContainsString("You did not fill in all fields", $output);
@@ -113,14 +113,12 @@ protected function tearDown(): void
         $_POST = ["submit" => "Add record", "building_name" => "ABCD"];
 
         ob_start();
-        // !! EDIT BY COPILOT !!
         try {
-            display_adding_forms($this->conn);
+            input_new_data($this->conn);
         } catch (\Exception $e) {
             ob_end_clean();
             throw $e;
         }
-        // END EDIT
         $output = ob_get_clean();
 
         $this->assertStringContainsString("Record added successfully", $output);
