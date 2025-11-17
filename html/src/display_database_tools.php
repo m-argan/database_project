@@ -11,7 +11,8 @@
         while ($tablename = $result->fetch_array()) {
             echo "<li> $tablename[0] </li>";
             // echo "hi";
-            echo ?><a href=""><?php echo $tablename[0];?></a><?php
+            echo '<a href="">' . $tablename[0] . '</a>';
+
         }
         echo "</ul>";
 
