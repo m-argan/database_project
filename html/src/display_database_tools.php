@@ -10,8 +10,8 @@
         echo "<ul>";
         while ($tablename = $result->fetch_array()) {
             echo "<li> $tablename[0] </li>";
-            echo "hi";
-            echo ?><a href="">table</a>;<?php
+            // echo "hi";
+            // echo ?><a href="">table</a>;<?php
         }
         echo "</ul>";
 
