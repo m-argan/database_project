@@ -3,7 +3,7 @@
 
 
     // Function for listing tables of database:
-    function list_tables($conn) 
+    function list_tables($conn) {
         $dblist = "SHOW TABLES";
         $result = $conn->query($dblist);
 
