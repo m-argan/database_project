@@ -11,8 +11,8 @@
         while ($tablename = $result->fetch_array()) {
             //echo "<li> $tablename[0] </li>";
             $url = "http://34.61.211.5/tutor_db/src/display_table.php?tablename=".$tablename[0];
-            echo $url;
-            echo '<li><a href="'.$url.'">' . $tablename[0] . '</a></li>';
+            // echo $url;
+            echo '<br/><a href="'.$url.'">' . $tablename[0] . '</a><br>';
 
         }
         echo "</ul>";
