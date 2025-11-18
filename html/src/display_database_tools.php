@@ -21,11 +21,11 @@
 
     // Function for displaying form at the bottom of the page:
     function display_form() { ?>
-    <h2>View a table:</h2>
-    <form action="display_table.php" method="GET">
-        <p>Table name: <input type="text" name="tablename" /></p>
-        <p><input type="submit" value="See Details"/></p>
-    </form>
+    <!-- <h2>View a table:</h2> -->
+    <!-- <form action="display_table.php" method="GET"> -->
+        <!-- <p>Table name: <input type="text" name="tablename" /></p> -->
+        <!-- <p><input type="submit" value="See Details"/></p> -->
+    <!-- </form> -->
     <!-- ADDED BY HANNAH -->
      <!-- <h2>Add to table:</h2>
     <form action="display_adding.php" method="GET">
