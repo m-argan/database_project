@@ -10,7 +10,7 @@
         echo "<ul>";
         while ($tablename = $result->fetch_array()) {
             //echo "<li> $tablename[0] </li>";
-            echo '<li><a href="http://34.61.211.5/tutor_db/src/display_table.php?tablename=tutors">' . $tablename[0] . '</a></li>';
+            echo '<li><a href="">' . $tablename[0] . '</a></li>';
 
         }
         echo "</ul>";
