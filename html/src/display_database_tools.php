@@ -10,7 +10,7 @@
         echo "<ul>";
         while ($tablename = $result->fetch_array()) {
             //echo "<li> $tablename[0] </li>";
-            $url = "http://34.61.211.5/tutor_db/src/display_table.php?tablename".$tablename[0];
+            $url = "http://34.61.211.5/tutor_db/src/display_table.php?tablename=".$tablename[0];
             echo $url;
             echo '<li><a href="http://34.61.211.5/tutor_db/src/display_table.php?tablename=tutors">' . $tablename[0] . '</a></li>';
 
