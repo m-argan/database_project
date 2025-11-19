@@ -43,7 +43,8 @@ INSERT INTO places(building_name, place_room_number) VALUES
 ("Olin", 111),
 ("Young", 111),
 ("Crounse", 111),
-("Grant", 101);
+("Grant", 101),
+("Crounse",101);
 
 INSERT INTO tutors(tutor_id, tutor_first_name, tutor_last_name, tutor_email) VALUES
 (380932, "Hannah", "Morrison", "hannah.morrison@centre.edu"),
@@ -80,7 +81,7 @@ INSERT INTO tutor_availibilities(tutor_id, time_block_id) VALUES
 (000001,2);
 
 INSERT INTO slots(time_block_id, building_name, place_room_number,subject_code,class_number,tutor_id) VALUES
-(1,"Crounse", 111,"MAT", "330", 380932),
+(1,"Crounse", 101,"MAT", "330", 380932),
 (2,"Crounse", 111,"MAT", "330", 380932),
 (3,"Crounse", 111,"MAT", "330", 380932),
 (1,"Olin", 111,"CSC", "332", 380012),

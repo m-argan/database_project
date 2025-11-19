@@ -154,17 +154,18 @@ DELIMITER ;
 
 
 DELIMITER //
+
 CREATE TRIGGER tutor_qualifications
 BEFORE INSERT ON tutor_agreed_classes
 FOR EACH ROW
 BEGIN
     DECLARE qualified INT DEFAULT 0;
 
-    SELECT COUNT(tutor_qualified_subjects.subject_code)
+    SELECT COUNT(*)
     INTO qualified
-        FROM tutor_qualified_subjects
-        WHERE tutor_qualified_subjects.subject_code = NEW.subject_code
-        AND tutor_qualified_subjects.tutor_id = NEW.tutor_id;
+    FROM tutor_qualified_subjects
+    WHERE tutor_id = NEW.tutor_id
+      AND TRIM(subject_code) = TRIM(NEW.subject_code);
 
     IF qualified = 0 THEN
         SIGNAL SQLSTATE '45000'
@@ -172,7 +173,9 @@ BEGIN
     END IF;
 
 END //
+
 DELIMITER ;
+
 
 DELIMITER //
 

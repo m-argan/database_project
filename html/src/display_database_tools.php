@@ -1,3 +1,4 @@
+
 <?php
     // Function definitions for display_database, AKA (currently) index.php.
 
