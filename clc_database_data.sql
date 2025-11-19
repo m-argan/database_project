@@ -56,17 +56,19 @@ INSERT INTO time_blocks(time_block_start, time_block_end, week_day_name,term_cod
 ("7:30", "8:30", "Su", "SP", 2025),
 ("7:30", "8:30", "Su", "SP", 2024);
 
+INSERT INTO tutor_qualified_subjects(tutor_id, subject_code) VALUES
+(380932, "MAT"),
+(380012, "CSC"),
+(000001, "ARS"),
+(000001, "ENS");
+
 INSERT INTO tutor_agreed_classes(tutor_id,subject_code, class_number) VALUES
 (380932, "MAT", 330),
 (380012, "CSC", 332),
 (000001, "ARS", 250),
 (000001, "ENS", 110);
 
-INSERT INTO tutor_qualified_subjects(tutor_id, subject_code) VALUES
-(380932, "MAT"),
-(380012, "CSC"),
-(000001, "ARS"),
-(000001, "ENS");
+
 
 INSERT INTO tutor_availibilities(tutor_id, time_block_id) VALUES
 (380932,1),

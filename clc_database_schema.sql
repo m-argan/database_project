@@ -87,6 +87,7 @@ CREATE TABLE time_blocks
     FOREIGN KEY       (week_day_name) references week_days(week_day_name) ON DELETE RESTRICT,
     PRIMARY KEY       (time_block_id)
 );
+
 CREATE TABLE tutor_availibilities(
     tutor_id        INT NOT NULL,
     time_block_id         INT unsigned NOT NULL,
@@ -94,6 +95,7 @@ CREATE TABLE tutor_availibilities(
     FOREIGN KEY     (tutor_id) REFERENCES tutors(tutor_id), /* ON DELETE TRIGGER DENY */
     FOREIGN KEY     (time_block_id) REFERENCES time_blocks(time_block_id) ON DELETE RESTRICT
 );
+
 CREATE TABLE slots
 (
     deleted_when      TIMESTAMP DEFAULT 0,
@@ -111,3 +113,144 @@ CREATE TABLE slots
     PRIMARY KEY (slot_id),
     CONSTRAINT correct_room_num CHECK (place_room_number BETWEEN 0 AND 600)
 );
+
+DELIMITER //
+
+CREATE TRIGGER prevent_slot_overlap
+BEFORE INSERT ON slots
+FOR EACH ROW
+BEGIN
+    DECLARE overlap_count INT DEFAULT 0;
+
+    SELECT COUNT(s.slot_id)
+    INTO overlap_count
+    FROM slots AS s
+    JOIN time_blocks AS tb_existing
+        ON s.time_block_id = tb_existing.time_block_id
+    JOIN time_blocks AS tb_new
+        ON tb_new.time_block_id = NEW.time_block_id
+    WHERE
+        s.deleted_when = 0
+        AND s.building_name = NEW.building_name
+        AND s.place_room_number = NEW.place_room_number
+
+        AND tb_existing.week_day_name = tb_new.week_day_name
+        AND tb_existing.term_code = tb_new.term_code
+        AND tb_existing.year_term_year = tb_new.year_term_year
+
+        AND STR_TO_DATE(tb_new.time_block_start, '%H:%i')
+              < STR_TO_DATE(tb_existing.time_block_end, '%H:%i')
+        AND STR_TO_DATE(tb_new.time_block_end, '%H:%i')
+              > STR_TO_DATE(tb_existing.time_block_start, '%H:%i');
+
+    IF overlap_count > 0 THEN
+        SIGNAL SQLSTATE '45000'
+            SET MESSAGE_TEXT = 'Time slot overlaps an existing slot in this room.';
+    END IF;
+
+END //
+
+DELIMITER ;
+
+
+DELIMITER //
+CREATE TRIGGER tutor_qualifications
+BEFORE INSERT ON tutor_agreed_classes
+FOR EACH ROW
+BEGIN
+    DECLARE qualified INT DEFAULT 0;
+
+    SELECT COUNT(tutor_qualified_subjects.subject_code)
+    INTO qualified
+        FROM tutor_qualified_subjects
+        WHERE tutor_qualified_subjects.subject_code = NEW.subject_code
+        AND tutor_qualified_subjects.tutor_id = NEW.tutor_id;
+
+    IF qualified = 0 THEN
+        SIGNAL SQLSTATE '45000'
+            SET MESSAGE_TEXT = 'Tutor is unqualified.';
+    END IF;
+
+END //
+DELIMITER ;
+
+DELIMITER //
+
+CREATE TRIGGER prevent_tutor_time_overlap
+BEFORE INSERT ON slots
+FOR EACH ROW
+BEGIN
+    DECLARE overlap_count INT DEFAULT 0;
+
+    SELECT COUNT(s.slot_id)
+    INTO overlap_count
+    FROM slots AS s
+    JOIN time_blocks AS tb_existing
+        ON s.time_block_id = tb_existing.time_block_id
+    JOIN time_blocks AS tb_new
+        ON tb_new.time_block_id = NEW.time_block_id
+    WHERE
+        s.deleted_when = 0
+        AND s.tutor_id = NEW.tutor_id
+
+        -- same weekday / term / year
+        AND tb_existing.week_day_name = tb_new.week_day_name
+        AND tb_existing.term_code = tb_new.term_code
+        AND tb_existing.year_term_year = tb_new.year_term_year
+
+        -- time overlap condition
+        AND STR_TO_DATE(tb_new.time_block_start, '%H:%i')
+              < STR_TO_DATE(tb_existing.time_block_end, '%H:%i')
+        AND STR_TO_DATE(tb_new.time_block_end, '%H:%i')
+              > STR_TO_DATE(tb_existing.time_block_start, '%H:%i');
+
+    IF overlap_count > 0 THEN
+        SIGNAL SQLSTATE '45000'
+            SET MESSAGE_TEXT = 'Tutor already has a conflicting time slot.';
+    END IF;
+
+END //
+
+DELIMITER ;
+
+DELIMITER //
+
+CREATE TRIGGER prevent_tutor_time_overlap_update
+BEFORE UPDATE ON slots
+FOR EACH ROW
+BEGIN
+    DECLARE overlap_count INT DEFAULT 0;
+
+    SELECT COUNT(s.slot_id)
+    INTO overlap_count
+    FROM slots AS s
+    JOIN time_blocks AS tb_existing
+        ON s.time_block_id = tb_existing.time_block_id
+    JOIN time_blocks AS tb_new
+        ON tb_new.time_block_id = NEW.time_block_id
+    WHERE
+        s.deleted_when = 0
+        
+        -- Same tutor (ignore the current row being updated)
+        AND s.tutor_id = NEW.tutor_id
+        AND s.slot_id <> OLD.slot_id
+
+        -- Same weekday / term / year
+        AND tb_existing.week_day_name = tb_new.week_day_name
+        AND tb_existing.term_code = tb_new.term_code
+        AND tb_existing.year_term_year = tb_new.year_term_year
+
+        -- Time overlap logic
+        AND STR_TO_DATE(tb_new.time_block_start, '%H:%i')
+              < STR_TO_DATE(tb_existing.time_block_end, '%H:%i')
+        AND STR_TO_DATE(tb_new.time_block_end, '%H:%i')
+              > STR_TO_DATE(tb_existing.time_block_start, '%H:%i');
+
+    IF overlap_count > 0 THEN
+        SIGNAL SQLSTATE '45000'
+            SET MESSAGE_TEXT = 'Tutor update creates a time conflict.';
+    END IF;
+
+END //
+
+DELIMITER ;
