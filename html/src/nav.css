@@ -1,5 +1,6 @@
 /* Style sheet for navigation sidebar and header */
-
+/* As of writing, this style sheet relies on display_database_tools.php for HTML structure,
+   specifically the render_display_database_page() funciton. */
 
 html, body {
     height: 100%;
@@ -69,7 +70,6 @@ body {
 
 /* --- BEGIN SIDEBAR --- */
 
-
 /* NOTE: Known bug where links will stretch outside of sidenav on smaller screens. May need to
 refactor how the HTML is structured to fix this. */
 .sidenav {
@@ -99,8 +99,6 @@ refactor how the HTML is structured to fix this. */
 }
 
 /* --- END SIDEBAR --- */
-
-
 
 
 /* --- BEGIN FOOTER --- */
