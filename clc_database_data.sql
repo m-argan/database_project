@@ -23,6 +23,7 @@ INSERT INTO subjects(subject_code, subject_name) VALUES
 ("MAT", "Mathematics"),
 ("ENS", "Environmental Science"),
 ("ARS", "Studio Art"),
+("DSC", "Data Science"),
 ("CSC", "Computer Science");
 
 INSERT INTO year_terms(term_code, year_term_year) VALUES
