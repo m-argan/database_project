@@ -35,9 +35,9 @@
     <!-- ADDED BY STELLA -->
         <table style="border-style: none">
                 <tr style="border-style: none">
-                        <td style="border-style: none"><a href="student_history_view.php">View Student</a>&nbsp;</td>
-                        <td style="border-style: none"><a href="student_schedule_view.php">View Student Schedule</a>&nbsp;</td>
-                        <td style="border-style: none"><a href="full_schedule_view.php">View Full Schedule</a>&nbsp;</td>
+                        <td style="border-style: none"><a href="student_history_view.php">View Student</a></td>
+                        <td style="border-style: none"><a href="student_schedule_view.php">View Student Schedule</a></td>
+                        <td style="border-style: none"><a href="full_schedule_view.php">View Full Schedule</a></td>
                         <!-- <td style="border-style: none"></td> -->
                 </tr>
         </table>
@@ -50,20 +50,34 @@
         <!DOCTYPE html>
         <html>
         <head>
+            <link rel="stylesheet" href="nav.css">
             <title>CLC Database</title>
         </head>
         <body>
-            <h1>CLC Database</h1>
+          <div class="header">
 
+            <div class="headertitle">
+                <h1>CLC Database</h1>
+            </div>
+
+            <div class="topnav">
             <?php
                 // displays the views
                 display_form();
+            ?></div>
+            </div>
 
+            <div class="sidenav"><?php
                 // List the tables of the database
                 list_tables($conn);
-
-            ?>
+            ?></div>
         </body>
+
+        <footer>
+            <br>
+            <p>CSC 362: Database Systems Fall 2025</p>
+            <p>Developed by Hannah Morrison, Stella Green, Madeleine Arganbright, Jenna Nicodemus</p>
+        </footer>
         </html>
    <?php }
 ?>
