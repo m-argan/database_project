@@ -67,15 +67,16 @@
                 display_form();
             ?></div>
             </div>
-
+        <div class="main_content">
             <div class="sidenav"><?php
                 // List the tables of the database
                 list_tables($conn);
             ?></div>
 
             <div class="main">
-                <h1>Welcome!</h1>
+                <h1>Welcome to the Tutoring Database!</h1>
             </div>
+        </div>
         </body>
 
         <footer>
