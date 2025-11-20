@@ -73,7 +73,7 @@ body {
 /* NOTE: Known bug where links will stretch outside of sidenav on smaller screens. May need to
 refactor how the HTML is structured to fix this. */
 .sidenav {
-    display: flex;
+    display: block;
     justify-content: center;
     flex-wrap: wrap;
     height: 100%;
@@ -100,7 +100,7 @@ refactor how the HTML is structured to fix this. */
 
 /* --- END SIDEBAR --- */
 .main {
-  margin-right: 160px; /* Same as the width of the sidenav */
+  margin-left: 160px; /* Same as the width of the sidenav */
   font-size: 28px; /* Increased text to enable scrolling */
   padding: 0px 10px;
 }
