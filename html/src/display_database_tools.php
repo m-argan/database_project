@@ -66,16 +66,16 @@
                 // displays the views
                 display_form();
             ?></div>
-            <div class="main">
-                <h1>Welcome!</h1>
-            </div>
-
             </div>
 
             <div class="sidenav"><?php
                 // List the tables of the database
                 list_tables($conn);
             ?></div>
+
+            <div class="main">
+                <h1>Welcome!</h1>
+            </div>
         </body>
 
         <footer>
