@@ -71,7 +71,7 @@
         <body>
         <div class="main_content">
             <div class="main">
-                <?php echo Welcome to the Tutoring Database!?>
+                <?php echo Welcome to the Tutoring Database!;?>
             </div>
             <div class="sidenav"><?php
                 // List the tables of the database
