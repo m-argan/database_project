@@ -67,6 +67,10 @@
                 // displays the views
                 display_form();
             ?></div>
+            <div class="main">
+            <h2>Welcome to the Tutoring Database!</h2>
+            </p>
+
             </div>
 
             <div class="sidenav"><?php
@@ -74,9 +78,6 @@
                 list_tables($conn);
             ?></div>
 
-            <div class="main">
-            <h2>Welcome to the Tutoring Database!</h2>
-            </p>
         </body>
 
         <footer>
