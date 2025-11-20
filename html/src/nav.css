@@ -12,6 +12,7 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh; /* ensures footer is pushed down */
+    margin: 0;
 }
 
 /* --- HEADER --- */
@@ -35,6 +36,8 @@ body {
 .page-content {
     display: flex;       /* side-by-side layout */
     flex: 1;             /* fill remaining vertical space */
+    padding-bottom: 0;
+    box-sizing: border-box;
     min-height: 300px;   /* ensures main area has height */
 }
 
@@ -78,4 +81,5 @@ footer {
     color: white;
     padding: 10px;
     text-align: center;
+    flex-shrink: 0;
 }
