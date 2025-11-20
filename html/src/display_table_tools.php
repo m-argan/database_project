@@ -139,42 +139,77 @@
 
      // Function for rendering the webpage; called in display_table.php:
      function render_display_table_page($conn) {
-        render_display_database_page($conn);
-        $flag = filter_user_input($conn);
-        if ($flag == false) { exit(); }     // Exit if invalid input; could be dangerous.
+        ?>
+        <!DOCTYPE html>
+    <html>
+    <head>
+        <link rel="stylesheet" href="nav.css">
+        <title>CLC Database</title>
+    </head>
+    <body>
 
-        $result = prepare_display_table($conn);
+    <div class="header">
+        <div class="headertitle">
+            <h1>CLC Database</h1>
+        </div>
+        <div class="topnav">
+            <?php display_form(); ?>
+        </div>
+    </div>
 
-        if (array_key_exists('delbtn', $_POST)) {
-            delete_records($result, $conn);
+    <div class="page_content">
+        <div class="sidenav">
+            <?php list_tables($conn); ?>
+        </div>
 
-            header("Location: {$_SERVER['REQUEST_URI']}", true, 303);
-            exit();
-        }
-        
-        format_result_as_table_del($result);
-        display_session_del_errors();
+        <div class="main">
+            <?php
+            $flag = filter_user_input($conn);
+            if ($flag == false) { exit(); }     // Exit if invalid input; could be dangerous.
 
-        if (array_key_exists('alter_btn', $_POST)) {
-            // $table = htmlspecialchars($_GET['tablename']);
-            alt($conn);
+            $result = prepare_display_table($conn);
 
-            // header("Location: {$_SERVER['REQUEST_URI']}", true, 303);
-            // exit();
-        }
-        if(array_key_exists('add_btn', $_POST))
-        {
-            display_adding_forms($conn);
+            if (array_key_exists('delbtn', $_POST)) {
+                delete_records($result, $conn);
+
+                header("Location: {$_SERVER['REQUEST_URI']}", true, 303);
+                exit();
+            }
             
-        }
-        if(array_key_exists('submit', $_POST))
-        {
-            input_new_data($conn);
-            header("Location: {$_SERVER['REQUEST_URI']}", true, 303);
-        exit(); 
-        }
+            format_result_as_table_del($result);
+            display_session_del_errors();
+
+            if (array_key_exists('alter_btn', $_POST)) {
+                // $table = htmlspecialchars($_GET['tablename']);
+                alt($conn);
+
+                // header("Location: {$_SERVER['REQUEST_URI']}", true, 303);
+                // exit();
+            }
+            if(array_key_exists('add_btn', $_POST))
+            {
+                display_adding_forms($conn);
+                
+            }
+            if(array_key_exists('submit', $_POST))
+            {
+                input_new_data($conn);
+                header("Location: {$_SERVER['REQUEST_URI']}", true, 303);
+            exit(); 
+            }
+        ?>
+    </div>
+    </div>
     
-        
+        <footer>
+        <br>
+        <p>CSC 362: Database Systems Fall 2025</p>
+        <p>Developed by Hannah Morrison, Stella Green, Madeleine Arganbright, Jenna Nicodemus</p>
+    </footer>
+
+    </body>
+    </html>
+    <?php
 
      }
     
