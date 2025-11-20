@@ -81,7 +81,7 @@
             <div class="main">
                 <?php
                 // List the tables of the database
-                render_display_table_pag($conn);
+                render_display_table_page($conn);
             ?>
             </div>
         </body>
