@@ -48,8 +48,7 @@
 
 
     // Function for rendering the page:
-    function render_display_database_page($conn) { 
-        echo "DEBUG: START<br>";?>
+    function render_display_database_page($conn) { ?>
         <!DOCTYPE html>
         <html>
         <head>
@@ -70,21 +69,21 @@
             ?></div>
             </div>
 
-            <div class="content">
-                <div class="sidenav">
-                    <?php list_tables($conn); ?>
-                </div>
+            <div class="sidenav"><?php
+                // List the tables of the database
+                list_tables($conn);
+            ?></div>
 
-                <div class="main">
-                    <h2>Welcome to the Tutoring Database!</h2>
-                </div>
-            </div>
-            <footer>
+            <div class="main">
+            <h2>Welcome to the Tutoring Database!</h2>
+            </p>
+        </body>
+
+        <footer>
             <br>
             <p>CSC 362: Database Systems Fall 2025</p>
             <p>Developed by Hannah Morrison, Stella Green, Madeleine Arganbright, Jenna Nicodemus</p>
         </footer>
-        </body>
         </html>
    <?php }
 ?>
