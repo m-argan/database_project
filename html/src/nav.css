@@ -12,6 +12,10 @@
   box-sizing: border-box;
 }
 
+.page-content {
+    display: flex; /* side-by-side layout */
+}
+
 /* The navigation menu links */
 .sidenav a {
   padding: 6px 8px 6px 16px;
@@ -24,10 +28,6 @@
 /* When you mouse over the navigation links, change their color */
 .sidenav a:hover {
   color: #f1f1f1;
-}
-
-.page-content {
-    display: flex; /* side-by-side layout */
 }
 
 /* Style page content */
