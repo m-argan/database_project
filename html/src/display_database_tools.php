@@ -67,8 +67,7 @@
                 display_form();
             ?></div>
             </div>
-        </body>
-        <body>
+            
             <div class="main">
                 <?php echo "Welcome to the Tutoring Database!";?>
             </div>
