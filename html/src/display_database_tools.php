@@ -75,7 +75,14 @@
             ?>
             </div>
             <div class="main">
-                <h2>welcome</h2>
+            <?php
+            if (isset($_GET['tablename'])) {
+                format_result_as_table_del($result, $conn);
+            } else {
+                echo "<h2>Welcome to the Tutoring Database!</h2>";
+                echo "<p>Select a table from the sidebar to view or edit it.</p>";
+            }
+            ?>
             </div>
         </div>
         </body>
