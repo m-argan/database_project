@@ -49,8 +49,7 @@
 
     // Function for rendering the page:
     function render_display_database_page($conn) { 
-        echo "DEBUG: START<br>";
-        ?>
+        echo "DEBUG: START<br>";?>
         <!DOCTYPE html>
         <html>
         <head>
@@ -67,15 +66,13 @@
             <div class="topnav">
             <?php
                 // displays the views
-                // display_form();
+                display_form();
             ?></div>
             </div>
 
             <div class="content">
                 <div class="sidenav">
-                    <?php 
-                    // list_tables($conn); 
-                    ?>
+                    <?php list_tables($conn); ?>
                 </div>
 
                 <div class="main">
