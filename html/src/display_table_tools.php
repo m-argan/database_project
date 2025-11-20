@@ -12,28 +12,31 @@
         ?>
         
         <table style="width:100%">
-            <thead>
-                <tr>
+            <div class="main">
+                <thead>
+                    <link rel="stylesheet" href="nav.css">
+                    <tr>
+                        <?php
+                            // Header rows
+                            while ($field = $result->fetch_field()) {
+                                echo "<td><b>$field->name</b></td>";
+                            }
+                        ?>
+                    </tr>
+                </thead>
+                <tbody>
                     <?php
-                        // Header rows
-                        while ($field = $result->fetch_field()) {
-                            echo "<td><b>$field->name</b></td>";
+                        // Data rows
+                        while ($row = $result->fetch_row()) {
+                            echo "<tr>";
+                            for ($i = 0; $i < count($row); $i++) {
+                            echo "<td>$row[$i]</td>";
+                            }
+                            echo "</tr>";
                         }
-                    ?>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                    // Data rows
-                    while ($row = $result->fetch_row()) {
-                        echo "<tr>";
-                        for ($i = 0; $i < count($row); $i++) {
-                        echo "<td>$row[$i]</td>";
-                        }
-                        echo "</tr>";
-                    }
-            ?>
-            </tbody>
+                ?>
+                </tbody>
+            </div>
         </table>
     <?php 
     }
