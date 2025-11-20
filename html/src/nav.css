@@ -27,8 +27,9 @@
 
 /* Style page content */
 .main {
-  margin-left: 200px; /* Same as the width of the sidebar */
-  padding: 6px 10px;
+  margin-left: 160px; /* Same as the width of the sidenav */
+  font-size: 28px; /* Increased text to enable scrolling */
+  padding: 0px 10px;
 }
 
 /* --- END SIDEBAR --- */
