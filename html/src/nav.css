@@ -71,12 +71,13 @@ body {
 /* Create a flex row container for sidebar + main */
 .page-content {
     display: flex;
-    flex: 1;             /* fill remaining vertical space */
+    flex: 300px;             /* fill remaining vertical space */
 }
 
 /* --- SIDEBAR --- */
 
 .sidenav {
+    display: block;
     width: 20%;          /* FIXED WIDTH */
     background-image: linear-gradient(to bottom, #FFCC00, #bca33d);
     padding: 10px;
