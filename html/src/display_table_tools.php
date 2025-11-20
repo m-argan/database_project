@@ -47,6 +47,7 @@
         <link rel="stylesheet" href="nav.css">
         <div class="page_content">
             <div class="sidenav">
+                <?php list_tables($conn); ?>
             <!-- sidebar links / list_tables -->
             </div>
 
