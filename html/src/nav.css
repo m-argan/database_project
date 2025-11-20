@@ -75,6 +75,7 @@ refactor how the HTML is structured to fix this. */
 .sidenav {
     display: flex;
     justify-content: center;
+    position: fixed;
     flex-wrap: wrap;
     height: 100%;
     width: 20%;
