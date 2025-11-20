@@ -11,7 +11,7 @@
     function format_result_as_table(mysqli_result $result): void {  
         ?>
         <link rel="stylesheet" href="nav.css">
-        <div class="main">
+        <div class="page_content">
             <table style="width:100%">
                 <thead>
                     <tr>
