@@ -100,6 +100,12 @@ refactor how the HTML is structured to fix this. */
 
 /* --- END SIDEBAR --- */
 
+/* --- BEGIN MAIN --- */
+.main {
+    flex: 1;
+    padding-left: 20px;
+}
+/* --- END MAIN --- */
 
 /* --- BEGIN FOOTER --- */
 
