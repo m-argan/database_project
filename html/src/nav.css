@@ -19,10 +19,6 @@ body {
 
 /* --- BEGIN HEADER --- */
 
-.header {
-    background: #363333;
-}
-
 .headertitle {
     width: 100%;
     background-color: #363333;
@@ -39,7 +35,6 @@ body {
 }
 
 .topnav {
-    min-height: 40px;
     width: 100%;
     position: relative;
     background-color: #FFCC00;
@@ -77,10 +72,6 @@ body {
 
 /* NOTE: Known bug where links will stretch outside of sidenav on smaller screens. May need to
 refactor how the HTML is structured to fix this. */
-.content {
-    display: flex;
-}
-
 .sidenav {
     display: flex;
     justify-content: center;
@@ -105,11 +96,6 @@ refactor how the HTML is structured to fix this. */
 .sidenav a:hover {
     color: white;
     transform: scale(1.1);
-}
-
-.main {
-    flex: 1;
-    padding: 20px;
 }
 
 /* --- END SIDEBAR --- */
