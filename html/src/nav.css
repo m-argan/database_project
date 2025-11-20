@@ -99,7 +99,10 @@ refactor how the HTML is structured to fix this. */
 }
 
 /* --- END SIDEBAR --- */
-
+.main {
+    flex: 1;
+    padding: 20px;
+}
 
 /* --- BEGIN FOOTER --- */
 
