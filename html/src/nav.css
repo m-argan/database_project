@@ -2,6 +2,7 @@
 .page_content {
     display: flex; /* side-by-side layout */
     flex-direction: row;
+    align-items:flex-start;
 }
 
 .sidenav {
