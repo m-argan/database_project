@@ -44,55 +44,58 @@
     // Function for formatting table contents -- WITH DELETE CHECKBOXES
     function format_result_as_table_del(mysqli_result $result): void {  
         ?>
-        <form method="POST">
-        <table style="width:100%">
-            <thead>
-                <tr>    
-                    <!-- Delete row -->    
-                    <td><b>Alter?</b></td>
-                    <?php
-                        // Header rows
-                        while ($field = $result->fetch_field()) {
-                            echo "<td><b>$field->name</b></td>";
-                        }
-                    ?>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                    // Data rows
-                    $i = 0;
-                    while ($row = $result->fetch_row()) { 
-                        //Begin row
-                        echo "<tr>";
-
-                        // Checkbox
-                        $name = "checkbox" . "$i"; ?>
-                        <td><input type="checkbox" name="<?= $name ?>" value="<?= $i ?>"
-                        
-                        /></td>
-
+        <link rel="stylesheet" href="nav.css">
+        <div class="page_content">
+            <form method="POST">
+            <table style="width:100%">
+                <thead>
+                    <tr>    
+                        <!-- Delete row -->    
+                        <td><b>Alter?</b></td>
                         <?php
-                        // Data in row
-                        for ($j = 0; $j < count($row); $j++) {
-                            echo "<td>$row[$j]</td>";
+                            // Header rows
+                            while ($field = $result->fetch_field()) {
+                                echo "<td><b>$field->name</b></td>";
+                            }
+                        ?>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                        // Data rows
+                        $i = 0;
+                        while ($row = $result->fetch_row()) { 
+                            //Begin row
+                            echo "<tr>";
+
+                            // Checkbox
+                            $name = "checkbox" . "$i"; ?>
+                            <td><input type="checkbox" name="<?= $name ?>" value="<?= $i ?>"
+                            
+                            /></td>
+
+                            <?php
+                            // Data in row
+                            for ($j = 0; $j < count($row); $j++) {
+                                echo "<td>$row[$j]</td>";
+                            }
+                            
+                            echo "</tr>";
+                            // End row
+
+                            $i++;
                         }
-                        
-                        echo "</tr>";
-                        // End row
+                ?>
+                </tbody>
+            </table>
 
-                        $i++;
-                    }
-            ?>
-            </tbody>
-        </table>
+            <!-- submit button input -->
+            <p><input type="submit" name="delbtn" value="Delete Selected Records" /></p>
+            <p><input type="submit" name="alter_btn" value="Alter Selected Records" /></p>
+            <p><input type="submit" name="add_btn" value="Add Records" /></p>
 
-        <!-- submit button input -->
-        <p><input type="submit" name="delbtn" value="Delete Selected Records" /></p>
-        <p><input type="submit" name="alter_btn" value="Alter Selected Records" /></p>
-        <p><input type="submit" name="add_btn" value="Add Records" /></p>
-
-        </form>
+            </form>
+        </div>
     <?php 
     }
 
