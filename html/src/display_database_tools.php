@@ -76,13 +76,14 @@
             <div class="main">
                 <h2>welcome</h2>
             </div>
-        </body>
 
-        <footer>
+            <footer>
             <br>
             <p>CSC 362: Database Systems Fall 2025</p>
             <p>Developed by Hannah Morrison, Stella Green, Madeleine Arganbright, Jenna Nicodemus</p>
         </footer>
+        </body>
+
         </html>
    <?php }
 ?>
