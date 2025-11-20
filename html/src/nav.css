@@ -28,7 +28,7 @@
 /* Style page content */
 .main {
   flex: 1;             /* Take remaining horizontal space */
-    padding: 1px;
+    padding: 20px;
     box-sizing: border-box;
     font-size: 28px;
 }
