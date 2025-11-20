@@ -27,7 +27,7 @@
 
 /* Style page content */
 .main {
-  flex: 1;             /* Take remaining horizontal space */
+    flex: 1 1 auto; 
     padding: 20px;
     box-sizing: border-box;
     font-size: 28px;
