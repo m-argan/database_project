@@ -1,6 +1,6 @@
 <?php
     // Function definitions for display_database, AKA (currently) index.php.
-
+    require_once __DIR__ . "/display_table_tools.php";
 
     // Function for listing tables of database:
     function list_tables($conn) {
