@@ -45,6 +45,7 @@
         <form method="POST">
         <table style="width:100%">
             <thead>
+                <link rel="stylesheet" href="nav.css">
                 <tr>    
                     <!-- Delete row -->    
                     <td><b>Alter?</b></td>

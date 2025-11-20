@@ -72,12 +72,12 @@
                 // List the tables of the database
                 list_tables($conn);
             ?>
+            </div>
             <!-- </div>
             <div class="main">
                 <h2>welcome</h2>
             </div> -->
 
-            </div>
             <div class="main">
                 <?php
                 // List the tables of the database
