@@ -100,7 +100,7 @@ refactor how the HTML is structured to fix this. */
 
 /* --- END SIDEBAR --- */
 .main {
-  margin-left: 160px; /* Same as the width of the sidenav */
+  margin-right: 160px; /* Same as the width of the sidenav */
   font-size: 28px; /* Increased text to enable scrolling */
   padding: 0px 10px;
 }
