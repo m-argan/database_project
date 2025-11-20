@@ -67,14 +67,13 @@
                 // display_form();
             ?></div>
             </div>
-            
+            <div class="main">
+                <h2>welcome</h2>
+            </div>
             <div class="sidenav"><?php
                 // List the tables of the database
                 list_tables($conn);
             ?>
-            </div>
-            <div class="main">
-                <h2>welcome</h2>
             </div>
 
             <footer>
