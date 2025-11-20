@@ -69,14 +69,16 @@
             ?></div>
             </div>
 
-            <div class="sidenav"><?php
-                // List the tables of the database
-                list_tables($conn);
-            ?></div>
+            <div class="page-content">
+    <div class="sidenav">
+        <?php list_tables($conn); ?>
+    </div>
 
-            <div class="main">
-            <h2>Welcome to the Tutoring Database!</h2>
-            </p>
+    <div class="main">
+        <h2>Welcome to the Tutoring Database!</h2>
+    </div>
+</div>
+
         </body>
 
         <footer>
