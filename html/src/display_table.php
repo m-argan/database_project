@@ -9,6 +9,7 @@
 
     error_checking();
     $conn = config();
+    render_display_database_page($conn);
     render_display_table_page($conn);
     # this was just to test alter_db
     #alter_db($conn,"tutors","tutor_first_name", "Madeleine", "tutor_id", 380932);

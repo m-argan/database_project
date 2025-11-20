@@ -5,7 +5,6 @@
 
     // Function for listing tables of database:
     function list_tables($conn) {
-        // render_display_database_page($conn)
         $dblist = "SHOW TABLES";
         $result = $conn->query($dblist);
 
