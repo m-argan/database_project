@@ -10,7 +10,7 @@
     // Function for formatting table contents:
     function format_result_as_table(mysqli_result $result): void {  
         ?>
-        
+        <link rel="stylesheet" href="nav.css">
         <table style="width:100%">
             <div class="main">
                 <thead>
