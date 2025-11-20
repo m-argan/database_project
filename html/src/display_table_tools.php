@@ -139,7 +139,7 @@
 
      // Function for rendering the webpage; called in display_table.php:
      function render_display_table_page($conn) {
-        render_display_database_page($conn);
+        // render_display_database_page($conn);
         $flag = filter_user_input($conn);
         if ($flag == false) { exit(); }     // Exit if invalid input; could be dangerous.
 
