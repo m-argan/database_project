@@ -72,7 +72,7 @@ body {
 
 /* NOTE: Known bug where links will stretch outside of sidenav on smaller screens. May need to
 refactor how the HTML is structured to fix this. */
-.sidenav {
+.main_content .sidenav {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
@@ -81,11 +81,11 @@ refactor how the HTML is structured to fix this. */
     background-image: linear-gradient(to bottom, #FFCC00, #bca33d);
 }
 
-.sidenav ul {
+.main_content .sidenav ul {
     width: 100%;
 }
 
-.sidenav ul a {
+.main_content .sidenav ul a {
     display: inline-block;
     color: black;
     text-decoration: none;
@@ -93,13 +93,13 @@ refactor how the HTML is structured to fix this. */
     transition: 0.3s ease;
 }
 
-.sidenav a:hover {
+.main_content .sidenav a:hover {
     color: white;
     transform: scale(1.1);
 }
 
 /* --- END SIDEBAR --- */
-.main {
+.main .main_content{
     flex: 1;
     padding: 20px;
 }
