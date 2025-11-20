@@ -35,8 +35,8 @@
                         }
                 ?>
                 </tbody>
-            </div>
-        </table>
+            </table>
+        </div>
     <?php 
     }
 
