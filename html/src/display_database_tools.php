@@ -69,7 +69,6 @@
             </div>
         </body>
         <body>
-        <div class="main_content">
             <div class="main">
                 <?php echo "Welcome to the Tutoring Database!";?>
             </div>
@@ -78,7 +77,6 @@
                 list_tables($conn);
             ?>
             </div>
-        </div>
         </body>
 
         <footer>
