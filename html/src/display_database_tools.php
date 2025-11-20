@@ -73,34 +73,11 @@
                 // List the tables of the database
                 list_tables($conn);
             ?></div>
+
+            <div class="main">
+            <h2>Welcome to the Tutoring Database!</h2>
+            </p>
         </body>
-
-                <!-- ffd -->
-         <style>
-        .container {
-            width: 300px;
-            height: 300px;
-            background-color: rgb(231, 231, 210);
-            text-align: right;
-        }
-
-        .item {
-            width: 100px;
-            height: 100px;
-            background-color: green;
-            display: inline-block;
-            margin: 10px;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <div class="item"></div>
-        <div class="item"></div>
-        <div class="item"></div>
-    </div>
-</body>
-<!-- fdfd -->
 
         <footer>
             <br>
