@@ -67,7 +67,7 @@
                 // displays the views
                 display_form();
             ?></div>
-            <!-- </div> -->
+            </div>
 
             <div class="sidenav"><?php
                 // List the tables of the database
