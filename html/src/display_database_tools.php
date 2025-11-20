@@ -68,6 +68,7 @@
             ?></div>
             </div>
              -->
+        <div class="page_content">
             <div class="sidenav"><?php
                 // List the tables of the database
                 list_tables($conn);
@@ -76,6 +77,7 @@
             <div class="main">
                 <h2>welcome</h2>
             </div>
+        </div>
         </body>
 
         <!-- <footer>
