@@ -70,14 +70,14 @@
             </div>
 
             <div class="content">
-    <div class="sidenav">
-        <?php list_tables($conn); ?>
-    </div>
+                <div class="sidenav">
+                    <?php list_tables($conn); ?>
+                </div>
 
-    <div class="main">
-        <h2>Welcome to the Tutoring Database!</h2>
-    </div>
-</div>
+                <div class="main">
+                    <h2>Welcome to the Tutoring Database!</h2>
+                </div>
+            </div>
 
         </body>
 
