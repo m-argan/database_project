@@ -48,7 +48,7 @@
         <div class="page_content">
             <div class="sidenav">
             <!-- sidebar links / list_tables -->
-             <?php echo "<p>&nbsp;</p>";?>
+             <?php echo "hi";?>
             </div>
 
             <div class="main">
