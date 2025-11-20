@@ -73,11 +73,6 @@
                 list_tables($conn);
             ?>
             </div>
-            <!-- </div>
-            <div class="main">
-                <h2>welcome</h2>
-            </div> -->
-
             <div class="main">
                 <h2>welcome</h2>
             </div>
@@ -91,4 +86,3 @@
         </html>
    <?php }
 ?>
-

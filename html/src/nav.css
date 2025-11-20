@@ -9,7 +9,6 @@
   background-color: #111; /* Black */
   overflow-x: hidden; /* Disable horizontal scroll */
   padding-top: 20px;
-  padding-left: 160x;
 }
 
 /* The navigation menu links */
@@ -28,9 +27,8 @@
 
 /* Style page content */
 .main {
-  margin-left: 160px; /* Same as the width of the sidenav */
-  font-size: 28px; /* Increased text to enable scrolling */
-  padding: 160x;
+  margin-left: 200px; /* Same as the width of the sidebar */
+  padding: 6px 10px;
 }
 
 /* --- END SIDEBAR --- */
