@@ -46,6 +46,11 @@
         ?>
         <link rel="stylesheet" href="nav.css">
         <div class="page_content">
+            <div class="sidenav">
+            <!-- sidebar links / list_tables -->
+            </div>
+
+            <div class="main">
             <form method="POST">
             <table style="width:100%">
                 <thead>
@@ -95,6 +100,7 @@
             <p><input type="submit" name="add_btn" value="Add Records" /></p>
 
             </form>
+            </div>
         </div>
     <?php 
     }
