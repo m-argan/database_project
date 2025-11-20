@@ -1,5 +1,5 @@
 /* The sidebar menu */
-.page-content {
+.page_content {
     display: flex; /* side-by-side layout */
     flex-direction: row;
 }
