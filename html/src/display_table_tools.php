@@ -44,7 +44,7 @@
     // Function for formatting table contents -- WITH DELETE CHECKBOXES
     function format_result_as_table_del(mysqli_result $result): void {  
         ?>
-        <link rel="stylesheet" href="nav.css">
+        <!-- <link rel="stylesheet" href="nav.css"> -->
         <div class="page_content">
             <div class="sidenav">
             <!-- sidebar links / list_tables -->

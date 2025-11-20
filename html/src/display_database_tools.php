@@ -74,9 +74,9 @@
                 list_tables($conn);
             ?>
             </div>
-            <!-- <div class="main">
+            <div class="main">
                 <h2>Welcome</h2>
-            </div> -->
+            </div>
         </div>
         </body>
 
