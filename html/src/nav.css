@@ -2,13 +2,14 @@
 .sidenav {
   height: 100%; /* Full-height: remove this if you want "auto" height */
   width: 160px; /* Set the width of the sidebar */
-  position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+  /* position: fixed; Fixed Sidebar (stay in place on scroll) */
   z-index: 1; /* Stay on top */
   top: 0; /* Stay at the top */
   left: 0;
   background-color: #111; /* Black */
   overflow-x: hidden; /* Disable horizontal scroll */
   padding-top: 20px;
+  box-sizing: border-box;
 }
 
 /* The navigation menu links */
@@ -31,9 +32,10 @@
 
 /* Style page content */
 .main {
-  flex: 30; /* Same as the width of the sidenav */
+  flex: 1; /* Same as the width of the sidenav */
   font-size: 28px; /* Increased text to enable scrolling */
   padding: 0px 10px;
+  box-sizing: border-box;
 }
 
 /* --- END SIDEBAR --- */
