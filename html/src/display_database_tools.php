@@ -67,13 +67,15 @@
             <div class="topnav">
             <?php
                 // displays the views
-                display_form();
+                // display_form();
             ?></div>
             </div>
 
             <div class="content">
                 <div class="sidenav">
-                    <?php list_tables($conn); ?>
+                    <?php 
+                    // list_tables($conn); 
+                    ?>
                 </div>
 
                 <div class="main">
