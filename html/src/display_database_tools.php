@@ -48,7 +48,9 @@
 
 
     // Function for rendering the page:
-    function render_display_database_page($conn) { ?>
+    function render_display_database_page($conn) { 
+        echo "DEBUG: START<br>";
+        ?>
         <!DOCTYPE html>
         <html>
         <head>
