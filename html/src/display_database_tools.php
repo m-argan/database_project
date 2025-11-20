@@ -70,7 +70,7 @@
              -->
             <div class="sidenav"><?php
                 // List the tables of the database
-                list_tables($conn);
+                // list_tables($conn);
             ?>
             </div>
             <div class="main">
