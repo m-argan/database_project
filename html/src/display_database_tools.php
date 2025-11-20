@@ -70,13 +70,13 @@
         </body>
         <body>
         <div class="main_content">
+            <div class="main">
+                <?php echo "Welcome to the Tutoring Database!";?>
+            </div>
             <div class="sidenav"><?php
                 // List the tables of the database
                 list_tables($conn);
             ?>
-            </div>
-            <div class="main">
-                <?php echo "Welcome to the Tutoring Database!";?>
             </div>
         </div>
         </body>
