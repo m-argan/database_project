@@ -68,7 +68,7 @@ function render_display_database_page($conn) { ?>
         </div>
     </div>
 
-    <!-- SIDEBAR + MAIN CONTENT -->
+    <!-- SIDEBAR + MAIN -->
     <div class="page-content">
         <div class="sidenav">
             <?php list_tables($conn); ?>
@@ -76,12 +76,12 @@ function render_display_database_page($conn) { ?>
 
         <div class="main">
             <h2>Welcome to the Tutoring Database!</h2>
+            <p>This is the main content area next to the sidebar.</p>
         </div>
     </div>
 
     <!-- FOOTER -->
     <footer>
-        <br>
         <p>CSC 362: Database Systems Fall 2025</p>
         <p>Developed by Hannah Morrison, Stella Green, Madeleine Arganbright, Jenna Nicodemus</p>
     </footer>
@@ -89,4 +89,5 @@ function render_display_database_page($conn) { ?>
 </body>
 </html>
 <?php } ?>
+
 
