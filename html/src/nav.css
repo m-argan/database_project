@@ -27,10 +27,10 @@
 
 /* Style page content */
 .main {
-  flex: 1; /* Same as the width of the sidenav */
-  font-size: 28px; /* Increased text to enable scrolling */
-  padding: 0px 10px;
-  box-sizing: border-box;
+  flex: 1;             /* Take remaining horizontal space */
+    padding: 20px;
+    box-sizing: border-box;
+    font-size: 28px;
 }
 
 /* --- END SIDEBAR --- */
