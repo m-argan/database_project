@@ -34,6 +34,25 @@
     font-size: 28px;
 }
 
+/* Table styling */
+.main table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;      /* space between header and table */
+}
+
+.main table th,
+.main table td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: left;
+}
+
+.main form input[type="submit"] {
+    margin-top: 10px;
+    margin-right: 10px;
+}
+
 /* --- END SIDEBAR --- */
 
 
