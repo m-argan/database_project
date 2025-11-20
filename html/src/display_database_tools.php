@@ -66,6 +66,10 @@
                 // displays the views
                 display_form();
             ?></div>
+            <div class="main">
+                <h1>Welcome!</h1>
+            </div>
+
             </div>
 
             <div class="sidenav"><?php
