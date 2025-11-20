@@ -55,7 +55,7 @@
             <title>CLC Database</title>
         </head>
         <body>
-          <div class="header">
+          <!-- <div class="header">
 
             <div class="headertitle">
                 <h1>CLC Database</h1>
@@ -67,23 +67,27 @@
                 // display_form();
             ?></div>
             </div>
-            
+             -->
             <div class="sidenav"><?php
                 // List the tables of the database
                 list_tables($conn);
             ?>
             </div>
+            <!-- </div>
+            <div class="main">
+                <h2>welcome</h2>
+            </div> -->
+
             <div class="main">
                 <h2>welcome</h2>
             </div>
+        </body>
 
-            <footer>
+        <!-- <footer>
             <br>
             <p>CSC 362: Database Systems Fall 2025</p>
             <p>Developed by Hannah Morrison, Stella Green, Madeleine Arganbright, Jenna Nicodemus</p>
-        </footer>
-        </body>
-
+        </footer> -->
         </html>
    <?php }
 ?>
