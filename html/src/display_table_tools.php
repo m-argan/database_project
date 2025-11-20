@@ -47,7 +47,7 @@
             <thead>
                 <tr>    
                     <!-- Delete row -->    
-                    <td><b>Delete?</b></td>
+                    <td><b>Alter?</b></td>
                     <?php
                         // Header rows
                         while ($field = $result->fetch_field()) {
@@ -132,7 +132,6 @@
         if ($flag == false) { exit(); }     // Exit if invalid input; could be dangerous.
 
         $result = prepare_display_table($conn);
-        
 
         if (array_key_exists('delbtn', $_POST)) {
             delete_records($result, $conn);
