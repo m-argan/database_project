@@ -1,14 +1,14 @@
 /* The sidebar menu */
+.page-content {
+    display: flex; /* side-by-side layout */
+    flex-direction: row;
+}
+
 .sidenav {
   width: 200px;        /* fixed width */
     padding: 10px;
     background-color: #FFCC00;
     box-sizing: border-box;
-}
-
-.page-content {
-    display: flex; /* side-by-side layout */
-    flex-direction: row;
 }
 
 /* The navigation menu links */
