@@ -132,7 +132,8 @@
         if ($flag == false) { exit(); }     // Exit if invalid input; could be dangerous.
 
         $result = prepare_display_table($conn);
-        
+        format_result_as_table_del($result);
+        display_session_del_errors();
 
         if (array_key_exists('delbtn', $_POST)) {
             delete_records($result, $conn);
@@ -140,9 +141,6 @@
             header("Location: {$_SERVER['REQUEST_URI']}", true, 303);
             exit();
         }
-        
-        format_result_as_table_del($result);
-        display_session_del_errors();
 
         if (array_key_exists('alter_btn', $_POST)) {
             // $table = htmlspecialchars($_GET['tablename']);
