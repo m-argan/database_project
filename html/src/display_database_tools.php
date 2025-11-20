@@ -67,6 +67,8 @@
                 display_form();
             ?></div>
             </div>
+        </body>
+        <body>
         <div class="main_content">
             <div class="main">
                 <h1>Welcome to the Tutoring Database!</h1>
