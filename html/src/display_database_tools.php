@@ -69,10 +69,16 @@
             ?></div>
             </div>
 
-                    <!-- ffd -->
+            <div class="sidenav"><?php
+                // List the tables of the database
+                list_tables($conn);
+            ?></div>
+        </body>
+
+                <!-- ffd -->
          <style>
         .container {
-            width: 500px;
+            width: 300px;
             height: 300px;
             background-color: rgb(231, 231, 210);
             text-align: right;
@@ -95,12 +101,6 @@
     </div>
 </body>
 <!-- fdfd -->
-
-            <div class="sidenav"><?php
-                // List the tables of the database
-                list_tables($conn);
-            ?></div>
-        </body>
 
         <footer>
             <br>
