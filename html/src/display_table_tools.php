@@ -14,7 +14,6 @@
         <table style="width:100%">
             <div class="main">
                 <thead>
-                    <link rel="stylesheet" href="nav.css">
                     <tr>
                         <?php
                             // Header rows
