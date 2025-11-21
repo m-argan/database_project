@@ -163,7 +163,7 @@
 
      }
 
-     
+    // Function for rendering the webpage altogether; called in display_table.php.
     function render_display_table_page($conn) { ?>
         <!DOCTYPE html>
         <html>
@@ -173,10 +173,18 @@
         </head>
         <body> 
             <?php
-            render_header_sidebar_footer($conn); ?>
+            render_header();
+            ?>
+
             <div class="page-content"><?php
+                render_sidebar($conn);
                 render_display_table($conn);
             ?></div>
+
+            <?php
+            render_footer();
+            ?>
+            
         </body>
         </html>
 <?php
