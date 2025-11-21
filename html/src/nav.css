@@ -101,10 +101,15 @@ refactor how the HTML is structured to fix this. */
 /* --- END SIDEBAR --- */
 
 
-/* --- BEGIN PAGE CONTENT --- */
+/* --- BEGIN MAIN / PAGE CONTENT --- */
+/* main lumps both the header and page-content of the page together */
 
-.page-content {
+.main {
     display: flex;
+}
+
+.main .page-content {
+    width: 100%;
 }
 
 

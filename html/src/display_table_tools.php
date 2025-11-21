@@ -176,15 +176,17 @@
             render_header();
             ?>
 
-            <div class="page-content"><?php
-                render_sidebar($conn);
+            <div class="main"><?php
+                render_sidebar($conn); ?>
+                <div class="page-content"><?php
                 render_display_table($conn);
             ?></div>
+            </div>
 
             <?php
             render_footer();
             ?>
-            
+
         </body>
         </html>
 <?php
