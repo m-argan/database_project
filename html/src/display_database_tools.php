@@ -91,7 +91,7 @@
             <div class="main"><?php
                 render_sidebar($conn); ?>
                 <div class="page-content">
-                    <title>Welcome!</title>
+                    <p>Welcome!</p>
                 </div>
             </div>
 
