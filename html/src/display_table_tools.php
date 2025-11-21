@@ -124,10 +124,9 @@
         
     }
 
-
-     // Function for rendering the webpage; called in display_table.php:
-     function render_display_table_page($conn) {
-        render_display_database_page($conn);
+     // Function for rendering the table display:
+     function render_display_table($conn) {
+    
         $flag = filter_user_input($conn);
         if ($flag == false) { exit(); }     // Exit if invalid input; could be dangerous.
 
@@ -160,9 +159,26 @@
             input_new_data($conn);
             header("Location: {$_SERVER['REQUEST_URI']}", true, 303);
         exit(); 
-        }
-    
-        
+        }        
 
      }
+
+     
+    function render_display_table_page($conn) { ?>
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <link rel="stylesheet" href="nav.css">
+            <title>CLC Database</title>
+        </head>
+        <body> 
+            <?php
+            render_header_sidebar_footer($conn); ?>
+            <div class="page-content"><?php
+                render_display_table($conn);
+            ?></div>
+        </body>
+        </html>
+<?php
+    }
     

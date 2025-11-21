@@ -66,11 +66,6 @@ body {
 
 /* --- END HEADER --- */
 
-.main {
-  margin-left: 160px; /* Same as the width of the sidenav */
-  font-size: 28px; /* Increased text to enable scrolling */
-  padding: 0px 10px;
-}
 
 /* --- BEGIN SIDEBAR --- */
 
@@ -79,7 +74,7 @@ refactor how the HTML is structured to fix this. */
 .sidenav {
     display: flex;
     justify-content: center;
-    position: fixed;
+    position: relative;
     flex-wrap: wrap;
     height: 100%;
     width: 20%;
@@ -106,9 +101,18 @@ refactor how the HTML is structured to fix this. */
 /* --- END SIDEBAR --- */
 
 
+/* --- BEGIN PAGE CONTENT --- */
+
+.page-content {
+    display: flex;
+}
+
+
+
 /* --- BEGIN FOOTER --- */
 
 footer {
+    order: 999;     /* Make it appear last in page */
     height:100%;
     padding: 10px;
     background-color:#bca33d;

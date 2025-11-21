@@ -46,12 +46,41 @@
     }
 
 
-    // Function for rendering the page:
+    function render_header_sidebar_footer($conn) { ?>
+        <div class="header">
+            <div class="headertitle">
+                <h1>CLC Database</h1>
+            </div>
+
+            <div class="topnav">
+                <?php
+                // displays the views
+                 display_form();
+            ?></div>
+        </div>
+
+        <div class="sidenav"><?php
+            // List the tables of the database
+            list_tables($conn);
+        ?>
+        </div>
+
+        <footer>
+            <br>
+            <p>CSC 362: Database Systems Fall 2025</p>
+            <p>Developed by Hannah Morrison, Stella Green, Madeleine Arganbright, Jenna Nicodemus</p>
+        </footer>
+
+<?php    }
+
+
+    // Function for rendering the page (OLD!!!):
+/*
     function render_display_database_page($conn) { ?>
         <!DOCTYPE html>
         <html>
         <head>
-            <link rel="stylesheet" href="nav.css">
+          <link rel="stylesheet" href="nav.css">
             <title>CLC Database</title>
         </head>
         <body>
@@ -64,12 +93,10 @@
             <div class="topnav">
                 <?php
                 // displays the views
-                // display_form();
+                 display_form();
             ?></div>
-            </div>
-            <div class="main">
-                <h2>welcome</h2>
-            </div>
+          </div>
+
             <div class="sidenav"><?php
                 // List the tables of the database
                 list_tables($conn);
@@ -85,5 +112,6 @@
 
         </html>
    <?php }
+*/
 ?>
 
