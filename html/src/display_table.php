@@ -10,7 +10,7 @@
 
     error_checking();
     $conn = config();
-    render_display_table_page($conn);
+    render_display_table_page($conn, False);
 
     // Close connection
     $conn->close();

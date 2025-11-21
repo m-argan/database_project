@@ -164,7 +164,7 @@
      }
 
     // Function for rendering the webpage altogether; called in display_table.php.
-    function render_display_table_page($conn) { ?>
+    function render_display_table_page($conn, $is_init) { ?>
         <!DOCTYPE html>
         <html>
         <head>
@@ -179,7 +179,11 @@
             <div class="main"><?php
                 render_sidebar($conn); ?>
                 <div class="page-content"><?php
-                render_display_table($conn);
+                if($is_init):
+                    <p>Welcome to the Tutoring Database!</p>
+                    <p>Select a table name or view to get started</p>
+                else:
+                    render_display_table($conn);
             ?></div>
             </div>
 

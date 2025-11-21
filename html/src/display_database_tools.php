@@ -77,31 +77,8 @@
     function render_homepage($conn)
     {
         ?>
-        <!DOCTYPE html>
-        <html>
-        <head>
-          <link rel="stylesheet" href="nav.css">
-            <title>CLC Database</title>
-        </head>
-        <body> 
-            <?php
-            render_header();
-            ?>
-
-            <div class="main"><?php
-                render_sidebar($conn); ?>
-                <div class="page-content">
-                    <p>Welcome to the Tutoring Database!</p>
-                    <p>Select a table name or view to get started</p>
-                </div>
-            </div>
-
-            <?php
-            render_footer();
-            ?>
-
-        </body>
-        </html>
+        <?php
+                render_display_table_page($conn, True); ?>
 <?php
     }
 
