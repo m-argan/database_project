@@ -1,6 +1,6 @@
 <?php
     // Function definitions for display_database, AKA (currently) index.php.
-
+    require_once __DIR__ . "/display_table_tools.php";
 
     // Function for listing tables of database:
     function list_tables($conn) {
@@ -74,6 +74,35 @@
     </footer>
   <?php }
 
+    function render_homepage($conn)
+    {
+        ?>
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <link rel="stylesheet" href="nav.css">
+            <title>CLC Database</title>
+        </head>
+        <body> 
+            <?php
+            render_header();
+            ?>
+
+            <div class="main"><?php
+                render_sidebar($conn); ?>
+                <div class="page-content">
+                    <title>Welcome!</title>
+                </div>
+            </div>
+
+            <?php
+            render_footer();
+            ?>
+
+        </body>
+        </html>
+<?php
+    }
 
     function render_header_sidebar_footer($conn) { ?>
         <div class="header">
