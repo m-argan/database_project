@@ -179,9 +179,9 @@
             <div class="main"><?php
                 render_sidebar($conn); ?>
                 <div class="page-content"><?php
-                if($is_init == True){
+                if($is_init == True){?>
                     <p>Welcome to the Tutoring Database!</p>
-                    <p>Select a table name or view to get started</p>
+                    <p>Select a table name or view to get started</p><?php
                 }
                 else{
                     render_display_table($conn);

@@ -76,10 +76,7 @@
 
     function render_homepage($conn)
     {
-        ?>
-        <?php
-                render_display_table_page($conn, True); ?>
-<?php
+        render_display_table_page($conn, True); 
     }
 
     function render_header_sidebar_footer($conn) { ?>
