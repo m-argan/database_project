@@ -91,7 +91,8 @@
             <div class="main"><?php
                 render_sidebar($conn); ?>
                 <div class="page-content">
-                    <p>Welcome!</p>
+                    <p>Welcome to the Tutoring Database!</p>
+                    <p>Select a table name or view to get started!</p>
                 </div>
             </div>
 
