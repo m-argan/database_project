@@ -164,6 +164,8 @@
      }
 
     // Function for rendering the webpage altogether; called in display_table.php.
+    // if $is_init is true, landing page content is displayed. Otherwise, table content
+    // is displayed
     function render_display_table_page($conn, $is_init) { ?>
         <!DOCTYPE html>
         <html>
