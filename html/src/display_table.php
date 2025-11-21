@@ -10,6 +10,7 @@
 
     error_checking();
     $conn = config();
+    echo "hi";
     render_display_table_page($conn);
 
     // Close connection
