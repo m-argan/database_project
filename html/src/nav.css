@@ -77,7 +77,7 @@ refactor how the HTML is structured to fix this. */
     position: relative;
     flex-wrap: wrap;
     height: 100%;
-    width: 20%;
+    padding-right: 10px;
     background-image: linear-gradient(to bottom, #FFCC00, #bca33d);
 }
 
@@ -110,7 +110,17 @@ refactor how the HTML is structured to fix this. */
 
 .main .page-content {
     width: 100%;
+    padding: 20px;
 }
+
+.main {
+
+        thead {
+            font-size: 1.2em;
+            
+        }
+
+    }
 
 
 
