@@ -6,6 +6,7 @@
     
     error_checking();
     $conn = config();
+    render_homepage($conn);
     render_header_sidebar_footer($conn); // Need a homepage
     $conn->close();
 ?>
