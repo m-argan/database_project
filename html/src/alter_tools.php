@@ -112,7 +112,8 @@ function perform_alter($conn, $doExit = true)
     // If empty (no changes) do nothing
     if (empty($updates)) {
         if ($doExit) {
-            header("Location: display_table.php?tablename=" . urlencode($table));
+           //
+ header("Location: display_table.php?tablename=" . urlencode($table));
             exit;
         }
         return true;
