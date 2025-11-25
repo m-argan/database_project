@@ -39,7 +39,7 @@
         $year = 2025;
         $query = "CALL tutor_schedule_view(false, true, NULL, NULL, '$subject', '$class', '$semester', '$year', true, '$allsubjects', '$allclasses', false)";
         $result = $conn->query($query);
-        format_result_as_table($result);
+        view_edits($conn, $result, 3);
 
         $conn->close();
 ?>
