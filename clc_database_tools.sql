@@ -222,7 +222,45 @@ END //
 
 DELIMITER ;
 
+DROP PROCEDURE IF EXISTS tutor_agreement_form_view;
+
+DELIMITER //
+CREATE PROCEDURE tutor_agreement_form_view(
+    IN first_name VARCHAR(30),
+    IN last_name VARCHAR(30),
+    IN all_students BOOLEAN
+)
+BEGIN
+    SET @query =
+    'SELECT CONCAT(tutors.tutor_first_name, " ", tutors.tutor_last_name) AS `Name`,
+    tutors.tutor_id AS `Student ID`,
+    GROUP_CONCAT(DISTINCT CONCAT(tutor_agreed_classes.subject_code, " ", tutor_agreed_classes.class_number)) AS `Tutor Agreed Classes`,
+    GROUP_CONCAT(DISTINCT tutor_qualified_subjects.subject_code) AS `Tutor Qualified Subjects`
+    FROM tutors
+    LEFT JOIN tutor_agreed_classes ON (tutors.tutor_id = tutor_agreed_classes.tutor_id)
+    LEFT JOIN tutor_qualified_subjects ON (tutors.tutor_id = tutor_qualified_subjects.tutor_id)';
+
+    IF all_students = FALSE THEN
+        SET @query = CONCAT(@query, ' WHERE tutors.tutor_first_name = ? AND tutors.tutor_last_name = ?');
+    END IF;
+
+    SET @query = CONCAT(@query, ' GROUP BY tutors.tutor_id;');
+
+    PREPARE stmt FROM @query;
+
+    IF all_students = FALSE THEN
+        EXECUTE stmt USING first_name, last_name;
+    ELSE
+        EXECUTE stmt;
+    END IF;
+
+    DEALLOCATE PREPARE stmt;
+END //
+
+DELIMITER ;
+
 --Grant permissions
+GRANT EXECUTE ON PROCEDURE tutor_agreement_form_view TO 'webuser'@'localhost';
 GRANT EXECUTE ON PROCEDURE tutor_schedule_view TO 'webuser'@'localhost';
 GRANT EXECUTE ON PROCEDURE tutor_history_view TO 'webuser'@'localhost';
 GRANT EXECUTE ON PROCEDURE clc_tutoring.deny_classes TO 'webuser'@'localhost';
