@@ -25,8 +25,7 @@
         }
         $query = "CALL tutor_history_view('$first', '$last', '$allstudents')";
         $result = $conn->query($query);
-        format_result_as_table($result);
-        //Note: this does not handle wrong input
+        view_edits($conn, $result, 2);
 
         $conn->close();
 ?>
