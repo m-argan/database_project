@@ -71,8 +71,7 @@
         }
         $query = "CALL tutor_schedule_view(1, 0, '$first', '$last', '$subject', '$classnumber', '$term', '$tyear', '$allstudents', '$allsubjects', '$allclasses', '$allterms')";
         $result = $conn->query($query);
-        format_result_as_table($result);
-        //Note: this does not handle wrong input
+        view_edits($conn, $result, 1);
 
         $conn->close();
 ?>
