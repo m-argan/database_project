@@ -123,57 +123,129 @@
         return false;
         
     }
+function render_display_table($conn) {
+    $flag = filter_user_input($conn);
+    if (!$flag) { exit(); }
 
-     // Function for rendering the table display:
-     function render_display_table($conn) {
-    
-        $flag = filter_user_input($conn);
-        if ($flag == false) { exit(); }     // Exit if invalid input; could be dangerous.
-
+    if (isset($_POST['delbtn'])) {
         $result = prepare_display_table($conn);
+        delete_records($result, $conn);
 
-        if (array_key_exists('delbtn', $_POST)) {
-            delete_records($result, $conn);
+        header("Location: {$_SERVER['REQUEST_URI']}", true, 303);
+        exit();
+    }
 
+    if (isset($_POST['submit']) || isset($_POST['yes']) || isset($_POST['no'])) {
+        $inserted = input_new_data($conn);
+
+        if ($inserted || isset($_POST['no'])) {
+            // Redirect after insert or cancel (PRG)
             header("Location: {$_SERVER['REQUEST_URI']}", true, 303);
             exit();
         }
         
-        format_result_as_table_del($result);
-        display_session_del_errors();
+    }
 
-        if (array_key_exists('alter_btn', $_POST)) {
-            // $table = htmlspecialchars($_GET['tablename']);
-            alt($conn);
+    $result = prepare_display_table($conn);
 
+    if (isset($_POST['alter_btn'])) {
+        alt($conn);
+        // Redirect after alter (PRG)
+       // header("Location: {$_SERVER['REQUEST_URI']}", true, 303);
+        exit();
+    }
+
+    format_result_as_table_del($result);
+    display_session_del_errors();
+
+    if (isset($_POST['add_btn'])) {
+        display_adding_forms($conn);
+    }
+}
+
+     // Function for rendering the table display:
+    //  function render_display_table($conn) {
+    
+    //     $flag = filter_user_input($conn);
+    //     if ($flag == false) { exit(); }     // Exit if invalid input; could be dangerous.
+
+    //     $result = prepare_display_table($conn);
+
+    //     if (array_key_exists('delbtn', $_POST)) {
+    //         delete_records($result, $conn);
+
+    //         header("Location: {$_SERVER['REQUEST_URI']}", true, 303);
+    //         exit();
+    //     }
+        
+    //     format_result_as_table_del($result);
+    //     display_session_del_errors();
+
+    //     if (array_key_exists('alter_btn', $_POST)) {
+    //         // $table = htmlspecialchars($_GET['tablename']);
+    //         alt($conn);
+
+    //         // header("Location: {$_SERVER['REQUEST_URI']}", true, 303);
+    //         // exit();
+    //     }
+    //     if(array_key_exists('add_btn', $_POST))
+    //     {
+    //         display_adding_forms($conn);
+            
+    //     }
+    //     if(array_key_exists('submit', $_POST))
+    //     {
+            
+    //         input_new_data($conn);
+            
+    //        // header("Location: {$_SERVER['REQUEST_URI']}", true, 303);
+    //     exit(); 
+    //     }   
+        
+    //     // if(array_key_exists('yes', $_POST))
+    //     // {
+    //     //     if($incomplete == false)
+    //     //     {
+    //     //         yes_set($conn);}
+    //     //     // header("Location: {$_SERVER['REQUEST_URI']}", true, 303);
+    //     //  exit(); 
+    //     // }  
+
+    //  }
+
+     function view_edits($conn, $result, $view)
+    {
+            format_result_as_table_del($result);
+
+        /*if (array_key_exists('delbtn', $_POST)) {
+            delete_records_view($result, $conn, $view);
+
+            header("Location: {$_SERVER['REQUEST_URI']}", true, 303);
+            exit();
+            }*/
+
+            //display_session_del_errors();
+
+        if (array_key_exists('alter_btn', $_POST))
+        {
+                // $table = htmlspecialchars($_GET['tablename']);
+                alt_views($conn, $result, $view);
+        }
             // header("Location: {$_SERVER['REQUEST_URI']}", true, 303);
             // exit();
-        }
+
         if(array_key_exists('add_btn', $_POST))
         {
-            display_adding_forms($conn);
-            
+            display_adding_forms_view($conn, $view);
+
         }
-
-        if(array_key_exists('submit', $_POST))
+        /*if(array_key_exists('submit', $_POST))
         {
-            
             input_new_data($conn);
-            
-           // header("Location: {$_SERVER['REQUEST_URI']}", true, 303);
-        exit(); 
-        }   
-        
-        // if(array_key_exists('yes', $_POST))
-        // {
-        //     if($incomplete == false)
-        //     {
-        //         yes_set($conn);}
-        //     // header("Location: {$_SERVER['REQUEST_URI']}", true, 303);
-        //  exit(); 
-        // }  
-
-     }
+            header("Location: {$_SERVER['REQUEST_URI']}", true, 303);
+            exit();
+        }*/
+    }
 
     // Function for rendering the webpage altogether; called in display_table.php.
     // if $is_init is true, landing page content is displayed. Otherwise, table content
@@ -212,3 +284,52 @@
 <?php
     }
     
+function display_adding_forms_view($conn, $view)
+{
+        if ($view == 1 || $view == 2 || $view == 3)
+        {
+                echo "Please add new slots through the slot table. This ensures that all values are filled out";
+        }
+        else
+        {
+?>
+<form method="POST" action="display_add_view.php">
+<p>Student ID: <input type="number" name="tutorid" /></p>
+                <p>New Agreed Subject Code: <input type="text" name="agreed_subject" /></p>
+                <p>New Agreed Class Code: <input type="number" name="agreed_class" /></p>
+<p><input type="submit" name="submit_btn" value="submit"></p>
+                <?php
+        }
+}
+
+function perform_add_view($conn)
+{
+        // Get user input and sanitize.
+    $tutorid = htmlspecialchars($_POST['tutorid']);
+    $agreed_subject = htmlspecialchars($_POST['agreed_subject']);
+    $agreed_class = htmlspecialchars($_POST['agreed_class']);
+
+    // Check if the subject and class exist in the 'classes' table.
+    $check_stmt = $conn->prepare("SELECT COUNT(*) FROM classes WHERE subject_code = ? AND class_number = ?");
+    $check_stmt->bind_param("si", $agreed_subject, $agreed_class);
+    $check_stmt->execute();
+    $result = $check_stmt->get_result();
+    $row = $result->fetch_assoc();
+
+    if ($row['COUNT(*)'] == 0) {
+        // The class does not exist, so insert it into the parent table first.
+        $add_class_stmt = $conn->prepare("INSERT INTO classes (subject_code, class_number, class_name) VALUES (?, ?, '')");
+        $add_class_stmt->bind_param("si", $agreed_subject, $agreed_class);
+        $add_class_stmt->execute();
+        $add_class_stmt->close();
+    }
+    $check_stmt->close();
+
+    // Now, insert the record into the 'tutor_agreed_classes' child table.
+    $add_stmt = $conn->prepare("INSERT INTO tutor_agreed_classes (tutor_id, subject_code, class_number) VALUES (?, ?, ?)");
+    $add_stmt->bind_param("isi", $tutorid, $agreed_subject, $agreed_class);
+    $add_stmt->execute();
+    $add_stmt->close();
+}
+
+?>
