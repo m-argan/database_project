@@ -175,6 +175,39 @@
 
      }
 
+    function view_edits($conn, $result, $view)
+    {
+            format_result_as_table_del($result);
+
+        /*if (array_key_exists('delbtn', $_POST)) {
+            delete_records_view($result, $conn, $view);
+
+            header("Location: {$_SERVER['REQUEST_URI']}", true, 303);
+            exit();
+            }*/
+
+            //display_session_del_errors();
+
+        if (array_key_exists('alter_btn', $_POST))
+        {
+                // $table = htmlspecialchars($_GET['tablename']);
+                alt_views($conn, $result, $view);
+        }
+            // header("Location: {$_SERVER['REQUEST_URI']}", true, 303);
+            // exit();
+
+        if(array_key_exists('add_btn', $_POST))
+        {
+            display_adding_forms_view($conn, $view);
+
+        }
+        /*if(array_key_exists('submit', $_POST))
+        {
+            input_new_data($conn);
+            header("Location: {$_SERVER['REQUEST_URI']}", true, 303);
+            exit();
+        }*/
+    }
     // Function for rendering the webpage altogether; called in display_table.php.
     // if $is_init is true, landing page content is displayed. Otherwise, table content
     // is displayed
