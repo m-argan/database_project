@@ -1,0 +1,31 @@
+<h2>View a Student:</h2>
+        <form action="student_agreement_view.php" method="GET">
+                <p>First name: <input type="text" name="firstname" /></p>
+                <p>Last name: <input type="text" name="lastname" /></p>
+                <p><input type="submit" value="See Details"/></p>
+        </form>
+
+<?php
+        require_once __DIR__ . "/setup_tools.php";
+        require_once __DIR__ . "/display_table_tools.php";
+        error_checking();
+        $conn = config();
+
+        if (isset($_GET['firstname']) && isset($_GET['lastname']))
+        {
+                $first = htmlspecialchars($_GET['firstname']);
+                $last = htmlspecialchars($_GET['lastname']);
+                $allstudents = 0;
+        }
+        else
+        {
+                $first = NULL;
+                $last = NULL;
+                $allstudents = 1;
+        }
+        $query = "CALL tutor_agreement_form_view('$first', '$last', '$allstudents')";
+        $result = $conn->query($query);
+        view_edits($conn, $result, 4);
+
+        $conn->close();
+?>
