@@ -236,7 +236,12 @@ def testRoomNumSmall(self):
 def testRoomNumLarge(self):
     add_large_room_num_query = "INSERT INTO slots(building_name, subject_code,class_number,room_number) VALUES (Olin, MAT, 123,6014)"
     self.cur.execute(add_large_room_num_query)
-    
+
+# @unittest.expectedFailure
+# def testTesting(self):
+#     query = "INSERT INTO slots(time_block_id,building_name, subject_code,class_number,room_number) VALUES (1,Olin, MAT, 123,6014)"
+#     self.cur.execute(query)
+
     # query return tests
 
     # tables exist tests

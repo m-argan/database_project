@@ -6,8 +6,10 @@
     // require_once __DIR__ . "/display_database_tools.php";
     // include_once "alter_database.php";
 
+   // session_start();
+    if (session_status() === PHP_SESSION_NONE) {
     session_start();
-
+}
     error_checking();
     $conn = config();
     render_display_table_page($conn, False);

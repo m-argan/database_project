@@ -1,4 +1,7 @@
 <?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 require_once __DIR__ . "/display_table_tools.php";
 
 function select_from_db($result, $index, $conn, $row)
