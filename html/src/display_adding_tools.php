@@ -37,34 +37,147 @@ function get_fields($conn)
     }
     return $fields;
 }
- function input_new_data($conn)
- {
-    $table = $_GET['tablename'] ?? '';
-    //if (isset($_POST['submit'])) {
+//  function input_new_data($conn)
+//  {
+//     $table = $_GET['tablename'] ?? '';
+//     //if (isset($_POST['submit'])) {
     
+//     $fields = get_fields($conn);
+//     $aut_inc_array = get_aut_inc_keys($conn, $table, $fields);
+//         $incomplete = false;
+//         foreach ($fields as $field) {
+//             if (!in_array($field->name, $aut_inc_array) && empty($_POST[$field->name])) {
+//                 $incomplete = true;
+//                 break;
+//             }
+//         }
+       
+//         if ($incomplete) {
+//             echo "<p style='color:red;'>You did not fill in all fields.</p>";
+//         } else {
+//             test_time_blocks($conn, $table, $_POST);
+//             if (isset($_POST['no'])) {
+//                 echo "<p>Insert cancelled.</p>";
+//                 return;  // do NOT insert
+//             }
+
+//             elseif(isset($_POST['yes']))
+//             {
+//                 insert_into_table($conn, $table, $_POST);
+//             }
+//         //    header("Location: {$_SERVER['REQUEST_URI']}", true, 303);
+//         // exit(); 
+//         }
+//         echo $incomplete;
+//         return $incomplete;
+//   //  }
+//  }
+// function yes_set($conn)
+// {$table = $_GET['tablename'] ?? '';
+//     insert_into_table($conn, $table, $_POST);
+//     echo "<p style='color:green;'>Record added successfully.</p>";
+// }
+//  function test_time_blocks($conn, $table, $data)
+//  {
+// if ($table === 'time_blocks') {
+    
+//     if (isset($data['time_block_start']) && isset($data['time_block_end'])) {
+
+//         // --- Convert times here (12-hour → 24-hour) ---
+//         $start_str = convert_12h_to_24h($data['time_block_start']);
+//         $end_str   = convert_12h_to_24h($data['time_block_end']);
+
+//         $start = strtotime($start_str);
+//         $end   = strtotime($end_str);
+
+//         $min   = strtotime("07:30");
+//         $max   = strtotime("21:00");
+
+//         // IF user clicked NO → stop and show message
+//         if (isset($_POST['no'])) {
+//             echo "<p>Insert cancelled.</p>";
+//             return;   // ← STOP here, never insert
+//         }
+
+//         // If NOT confirmed AND time is outside
+//         if (!isset($_POST['yes']) && ($start < $min || $end > $max)) {
+//             are_you_sure_time($conn, $data);
+//             return;  // STOP the insert until user decides
+//         }
+
+//         // Store converted 24-hour times
+//         $data['time_block_start'] = $start_str;
+//         $data['time_block_end']   = $end_str;
+//     }
+// }
+//  }
+
+function input_new_data($conn) {
+    $table = $_GET['tablename'] ?? '';
     $fields = get_fields($conn);
     $aut_inc_array = get_aut_inc_keys($conn, $table, $fields);
-        $incomplete = false;
-        foreach ($fields as $field) {
-            if (!in_array($field->name, $aut_inc_array) && empty($_POST[$field->name])) {
-                $incomplete = true;
-                break;
-            }
+
+    // Check required fields
+    $incomplete = false;
+    foreach ($fields as $field) {
+        if (!in_array($field->name, $aut_inc_array) && empty($_POST[$field->name])) {
+            $incomplete = true;
+            break;
         }
-       
-        if ($incomplete) {
-            echo "<p style='color:red;'>You did not fill in all fields.</p>";
-        } else {
-            insert_into_table($conn, $table, $_POST);
-            echo "<p style='color:green;'>Record added successfully.</p>";
-        //    header("Location: {$_SERVER['REQUEST_URI']}", true, 303);
-        // exit(); 
+    }
+
+    if ($incomplete) {
+        echo "<p style='color:red;'>You did not fill in all fields.</p>";
+        return false;
+    }
+
+    // Handle NO (cancel insert)
+    if (isset($_POST['no'])) {
+        echo "<p style='color:red;'>Insert cancelled.</p>";
+        return false;
+    }
+
+    //  Handle time_blocks special case
+    $can_insert = true;
+    if ($table === 'time_blocks') {
+        $can_insert = test_time_blocks($_POST); // returns false if confirmation needed
+        if (!$can_insert) return false; // stop insert until user clicks YES
+    }
+
+    // Insert if allowed
+    if ($can_insert || isset($_POST['yes'])) {
+        insert_into_table($conn, $table, $_POST);
+        echo "<p style='color:green;'>Record added successfully.</p>";
+       exit();
+    }
+}
+
+function test_time_blocks($data) {
+    if (!isset($data['time_block_start'], $data['time_block_end'])) return true;
+
+    $start = strtotime(convert_12h_to_24h($data['time_block_start']));
+    $end   = strtotime(convert_12h_to_24h($data['time_block_end']));
+    $min   = strtotime("07:30");
+    $max   = strtotime("21:00");
+
+    // Out-of-hours
+    if ($start < $min || $end > $max) {
+        if (!isset($_POST['yes'])) {
+            are_you_sure_time($data);
+            return false; // stop insert until confirmation
         }
-  //  }
- }
+    }
+
+    // Store converted 24-hour times in POST for DB insert
+    $_POST['time_block_start'] = date("H:i", $start);
+    $_POST['time_block_end']   = date("H:i", $end);
+
+    return true; // OK to insert
+}
 function insert_into_table($conn, $table, $data) {
     unset($data['submit']); 
-
+    unset($data['submit'], $data['yes'], $data['no'], $data['tablename']);
+    
     $columns = array_keys($data);
 
      $foreign_keys = [];
@@ -100,7 +213,7 @@ function insert_into_table($conn, $table, $data) {
 
     $placeholders = implode(', ', array_fill(0, count($columns), '?'));
     $col_list = implode(', ', array_map(fn($c) => "`$c`", $columns));
-
+    
     $sql = "INSERT INTO `$table` ($col_list) VALUES ($placeholders)";
     $stmt = $conn->prepare($sql);
     $types = str_repeat('s', count($columns));
@@ -148,5 +261,35 @@ function insert_into_table($conn, $table, $data) {
 
     return $auto_inc_columns;
     }
+
+
+
+function are_you_sure_time($data)
+{
+    echo "<p>Time is outside normal hours. Are you sure?</p>";
+    echo '<form method="POST">';
+    foreach ($data as $k => $v) {
+        echo '<input type="hidden" name="'.htmlspecialchars($k).'" value="'.htmlspecialchars($v).'">';
+    }
+    echo '<input type="submit" name="yes" value="Yes">';
+    echo '<input type="submit" name="no" value="No">';
+    echo '</form>';
+}
+
+
+    function convert_12h_to_24h($t) {
+    // Normalize formatting: remove spaces, uppercase AM/PM
+    $t = trim($t);
+    $t = preg_replace('/\s+/', ' ', $t); // collapse extra spaces
+
+    // Try to parse using strtotime (works well for 12-hour formats)
+    $parsed = strtotime($t);
+
+    if ($parsed === false) {
+        throw new Exception("Invalid time format: '$t'");
+    }
+
+    return date("H:i", $parsed);   // convert to 24h HH:MM
+}
 
 ?>

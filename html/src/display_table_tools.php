@@ -154,12 +154,24 @@
             display_adding_forms($conn);
             
         }
+
         if(array_key_exists('submit', $_POST))
         {
+            
             input_new_data($conn);
-            header("Location: {$_SERVER['REQUEST_URI']}", true, 303);
+            
+           // header("Location: {$_SERVER['REQUEST_URI']}", true, 303);
         exit(); 
-        }        
+        }   
+        
+        // if(array_key_exists('yes', $_POST))
+        // {
+        //     if($incomplete == false)
+        //     {
+        //         yes_set($conn);}
+        //     // header("Location: {$_SERVER['REQUEST_URI']}", true, 303);
+        //  exit(); 
+        // }  
 
      }
 
