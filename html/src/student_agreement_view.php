@@ -1,5 +1,5 @@
-<h2>Select a Student:</h2>
-        <form action="student_history_view.php" method="GET">
+<h2>View a Student:</h2>
+        <form action="student_agreement_view.php" method="GET">
                 <p>First name: <input type="text" name="firstname" /></p>
                 <p>Last name: <input type="text" name="lastname" /></p>
                 <p><input type="submit" value="See Details"/></p>
@@ -23,9 +23,9 @@
                 $last = NULL;
                 $allstudents = 1;
         }
-        $query = "CALL tutor_history_view('$first', '$last', '$allstudents')";
+        $query = "CALL tutor_agreement_form_view('$first', '$last', '$allstudents')";
         $result = $conn->query($query);
-        view_edits($conn, $result, 2);
+        view_edits($conn, $result, 4);
 
         $conn->close();
 ?>

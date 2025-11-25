@@ -205,4 +205,53 @@ function convert_12h_to_24h($t) {
     if ($parsed === false) throw new Exception("Invalid time format: '$t'");
     return date("H:i", $parsed);
 }
+
+function display_adding_forms_view($conn, $view)
+{
+        if ($view == 1 || $view == 2 || $view == 3)
+        {
+                echo "Please add new slots through the slot table. This ensures that all values are filled out";
+        }
+        else
+        {
+?>
+<form method="POST" action="display_add_view.php">
+<p>Student ID: <input type="number" name="tutorid" /></p>
+                <p>New Agreed Subject Code: <input type="text" name="agreed_subject" /></p>
+                <p>New Agreed Class Code: <input type="number" name="agreed_class" /></p>
+<p><input type="submit" name="submit_btn" value="submit"></p>
+                <?php
+        }
+}
+
+function perform_add_view($conn)
+{
+        // Get user input and sanitize.
+    $tutorid = htmlspecialchars($_POST['tutorid']);
+    $agreed_subject = htmlspecialchars($_POST['agreed_subject']);
+    $agreed_class = htmlspecialchars($_POST['agreed_class']);
+
+    // Check if the subject and class exist in the 'classes' table.
+    $check_stmt = $conn->prepare("SELECT COUNT(*) FROM classes WHERE subject_code = ? AND class_number = ?");
+    $check_stmt->bind_param("si", $agreed_subject, $agreed_class);
+    $check_stmt->execute();
+    $result = $check_stmt->get_result();
+    $row = $result->fetch_assoc();
+
+    if ($row['COUNT(*)'] == 0) {
+        // The class does not exist, so insert it into the parent table first.
+        $add_class_stmt = $conn->prepare("INSERT INTO classes (subject_code, class_number, class_name) VALUES (?, ?, '')");
+        $add_class_stmt->bind_param("si", $agreed_subject, $agreed_class);
+        $add_class_stmt->execute();
+        $add_class_stmt->close();
+    }
+    $check_stmt->close();
+
+    // Now, insert the record into the 'tutor_agreed_classes' child table.
+    $add_stmt = $conn->prepare("INSERT INTO tutor_agreed_classes (tutor_id, subject_code, class_number) VALUES (?, ?, ?)");
+    $add_stmt->bind_param("isi", $tutorid, $agreed_subject, $agreed_class);
+    $add_stmt->execute();
+    $add_stmt->close();
+}
+
 ?>

@@ -39,6 +39,7 @@
                         <td style="border-style: none"><a href="student_history_view.php">View Student</a></td>
                         <td style="border-style: none"><a href="student_schedule_view.php">View Student Schedule</a></td>
                         <td style="border-style: none"><a href="full_schedule_view.php">View Full Schedule</a></td>
+                        <td style="border-style: none"><a href="student_agreement_view.php">View Student Agreement Forms</a></td>
                         <!-- <td style="border-style: none"></td> -->
                 </tr>
         </table>
