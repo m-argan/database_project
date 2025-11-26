@@ -123,123 +123,123 @@ class TestCLCDatabase(unittest.TestCase):
         (num_expected,) = self.cur.fetchone()
         self.assertEqual(num_expected, num_in_test_data)
 
-    def testWeekDaysCount(self):
-            num_in_test_data = 7
-            count_query = "SELECT COUNT(week_day_name) FROM week_days;"
-            self.cur.execute(count_query)
-            (num_expected,) = self.cur.fetchone()
-            self.assertEqual(num_expected, num_in_test_data)
+def testWeekDaysCount(self):
+        num_in_test_data = 7
+        count_query = "SELECT COUNT(week_day_name) FROM week_days;"
+        self.cur.execute(count_query)
+        (num_expected,) = self.cur.fetchone()
+        self.assertEqual(num_expected, num_in_test_data)
 
-    def testSubjectsCount(self):
-            num_in_test_data = 4
-            count_query = "SELECT COUNT(subject_code) FROM subjects;"
-            self.cur.execute(count_query)
-            (num_expected,) = self.cur.fetchone()
-            self.assertEqual(num_expected, num_in_test_data)
+def testSubjectsCount(self):
+        num_in_test_data = 4
+        count_query = "SELECT COUNT(subject_code) FROM subjects;"
+        self.cur.execute(count_query)
+        (num_expected,) = self.cur.fetchone()
+        self.assertEqual(num_expected, num_in_test_data)
 
-    def testYearTermsCount(self):
-            num_in_test_data = 5
-            count_query = "SELECT COUNT(term_id) FROM year_terms;"
-            self.cur.execute(count_query)
-            (num_expected,) = self.cur.fetchone()
-            self.assertEqual(num_expected, num_in_test_data) 
+def testYearTermsCount(self):
+        num_in_test_data = 5
+        count_query = "SELECT COUNT(term_id) FROM year_terms;"
+        self.cur.execute(count_query)
+        (num_expected,) = self.cur.fetchone()
+        self.assertEqual(num_expected, num_in_test_data) 
 
-    def testClassesCount(self):
-            num_in_test_data = 4
-            count_query = "SELECT COUNT(subject_code) FROM classes;"
-            self.cur.execute(count_query)
-            (num_expected,) = self.cur.fetchone()
-            self.assertEqual(num_expected, num_in_test_data) 
+def testClassesCount(self):
+        num_in_test_data = 4
+        count_query = "SELECT COUNT(subject_code) FROM classes;"
+        self.cur.execute(count_query)
+        (num_expected,) = self.cur.fetchone()
+        self.assertEqual(num_expected, num_in_test_data) 
 
-    def testTutorsCount(self):
-            num_in_test_data = 1
-            count_query = "SELECT COUNT(tutor_id) FROM tutors;"
-            self.cur.execute(count_query)
-            (num_expected,) = self.cur.fetchone()
-            self.assertEqual(num_expected, num_in_test_data) 
+def testTutorsCount(self):
+        num_in_test_data = 1
+        count_query = "SELECT COUNT(tutor_id) FROM tutors;"
+        self.cur.execute(count_query)
+        (num_expected,) = self.cur.fetchone()
+        self.assertEqual(num_expected, num_in_test_data) 
 
-    def testSlotsCount(self):
-            num_in_test_data = 1
-            count_query = "SELECT COUNT(building_name) FROM slots;"
-            self.cur.execute(count_query)
-            (num_expected,) = self.cur.fetchone()
-            self.assertEqual(num_expected, num_in_test_data) 
+def testSlotsCount(self):
+        num_in_test_data = 1
+        count_query = "SELECT COUNT(building_name) FROM slots;"
+        self.cur.execute(count_query)
+        (num_expected,) = self.cur.fetchone()
+        self.assertEqual(num_expected, num_in_test_data) 
 
-    def testTimeBlocksCount(self):
-            num_in_test_data = 1
-            count_query = "SELECT COUNT(time_id) FROM time_blocks;"
-            self.cur.execute(count_query)
-            (num_expected,) = self.cur.fetchone()
-            self.assertEqual(num_expected, num_in_test_data)
+def testTimeBlocksCount(self):
+        num_in_test_data = 1
+        count_query = "SELECT COUNT(time_id) FROM time_blocks;"
+        self.cur.execute(count_query)
+        (num_expected,) = self.cur.fetchone()
+        self.assertEqual(num_expected, num_in_test_data)
 
-    def testTutorAgreedClassesCount(self):
-            num_in_test_data = 1
-            count_query = "SELECT COUNT(tutor_id) FROM tutor_agreed_classes;"
-            self.cur.execute(count_query)
-            (num_expected,) = self.cur.fetchone()
-            self.assertEqual(num_expected, num_in_test_data) 
+def testTutorAgreedClassesCount(self):
+        num_in_test_data = 1
+        count_query = "SELECT COUNT(tutor_id) FROM tutor_agreed_classes;"
+        self.cur.execute(count_query)
+        (num_expected,) = self.cur.fetchone()
+        self.assertEqual(num_expected, num_in_test_data) 
 
-    def testTutorQualifiedSubjectsCount(self):
-            num_in_test_data = 1
-            count_query = "SELECT COUNT(tutor_id) FROM tutor_qualified_subjects;"
-            self.cur.execute(count_query)
-            (num_expected,) = self.cur.fetchone()
-            self.assertEqual(num_expected, num_in_test_data) 
+def testTutorQualifiedSubjectsCount(self):
+        num_in_test_data = 1
+        count_query = "SELECT COUNT(tutor_id) FROM tutor_qualified_subjects;"
+        self.cur.execute(count_query)
+        (num_expected,) = self.cur.fetchone()
+        self.assertEqual(num_expected, num_in_test_data) 
 
-    def testSlotTermsCount(self):
-            num_in_test_data = 1
-            count_query = "SELECT COUNT(term_id) FROM slot_terms;"
-            self.cur.execute(count_query)
-            (num_expected,) = self.cur.fetchone()
-            self.assertEqual(num_expected, num_in_test_data) 
+def testSlotTermsCount(self):
+        num_in_test_data = 1
+        count_query = "SELECT COUNT(term_id) FROM slot_terms;"
+        self.cur.execute(count_query)
+        (num_expected,) = self.cur.fetchone()
+        self.assertEqual(num_expected, num_in_test_data) 
 
-    def testSlotTimesCount(self):
-            num_in_test_data = 1
-            count_query = "SELECT COUNT(slot_id) FROM slot_times;"
-            self.cur.execute(count_query)
-            (num_expected,) = self.cur.fetchone()
-            self.assertEqual(num_expected, num_in_test_data) 
+def testSlotTimesCount(self):
+        num_in_test_data = 1
+        count_query = "SELECT COUNT(slot_id) FROM slot_times;"
+        self.cur.execute(count_query)
+        (num_expected,) = self.cur.fetchone()
+        self.assertEqual(num_expected, num_in_test_data) 
 
-    def testSlotTutorsCount(self):
-            num_in_test_data = 1
-            count_query = "SELECT COUNT(slot_id) FROM slot_tutors;"
-            self.cur.execute(count_query)
-            (num_expected,) = self.cur.fetchone()
-            self.assertEqual(num_expected, num_in_test_data) 
+def testSlotTutorsCount(self):
+        num_in_test_data = 1
+        count_query = "SELECT COUNT(slot_id) FROM slot_tutors;"
+        self.cur.execute(count_query)
+        (num_expected,) = self.cur.fetchone()
+        self.assertEqual(num_expected, num_in_test_data) 
 
-    def testTutorAvailibilitiesCount(self):
-            num_in_test_data = 1
-            count_query = "SELECT COUNT(tutor_id) FROM tutor_availibities;"
-            self.cur.execute(count_query)
-            (num_expected,) = self.cur.fetchone()
-            self.assertEqual(num_expected, num_in_test_data) 
+def testTutorAvailibilitiesCount(self):
+        num_in_test_data = 1
+        count_query = "SELECT COUNT(tutor_id) FROM tutor_availibities;"
+        self.cur.execute(count_query)
+        (num_expected,) = self.cur.fetchone()
+        self.assertEqual(num_expected, num_in_test_data) 
 
-    @unittest.expectedFailure
-    def testClassNumConstraintLarge(self):
-        add_class_query_too_large = "INSERT INTO classes(subject_code, class_number,class_name) VALUES (MAT, 555, Example Math Class)"
-        #add_class_query_too_small = "INSERT INTO classes(subject_code, class_number,class_name) VALUES (MAT, 12, Example Math Class)"
-        self.cur.execute(add_class_query_too_large)
-        #self.cur.execute(add_class_query_too_small)
+@unittest.expectedFailure
+def testClassNumConstraintLarge(self):
+    add_class_query_too_large = "INSERT INTO classes(subject_code, class_number,class_name) VALUES (MAT, 555, Example Math Class)"
+    #add_class_query_too_small = "INSERT INTO classes(subject_code, class_number,class_name) VALUES (MAT, 12, Example Math Class)"
+    self.cur.execute(add_class_query_too_large)
+    #self.cur.execute(add_class_query_too_small)
 
-    @unittest.expectedFailure
-    def testClassNumConstraintSmall(self):
-        #add_class_query_too_large = "INSERT INTO classes(subject_code, class_number,class_name) VALUES (MAT, 555, Example Math Class)"
-        add_class_query_too_small = "INSERT INTO classes(subject_code, class_number,class_name) VALUES (MAT, 12, Example Math Class)"
-        #self.cur.execute(add_class_query_too_large)
-        self.cur.execute(add_class_query_too_small)
+@unittest.expectedFailure
+def testClassNumConstraintSmall(self):
+    #add_class_query_too_large = "INSERT INTO classes(subject_code, class_number,class_name) VALUES (MAT, 555, Example Math Class)"
+    add_class_query_too_small = "INSERT INTO classes(subject_code, class_number,class_name) VALUES (MAT, 12, Example Math Class)"
+    #self.cur.execute(add_class_query_too_large)
+    self.cur.execute(add_class_query_too_small)
 
-    @unittest.expectedFailure
-    def testRoomNumSmall(self):
-        add_small_room_num_query = "INSERT INTO slots(building_name, subject_code,class_number,room_number) VALUES (Olin, MAT, 123,-1)"
-        self.cur.execute(add_small_room_num_query)
+@unittest.expectedFailure
+def testRoomNumSmall(self):
+    add_small_room_num_query = "INSERT INTO slots(building_name, subject_code,class_number,room_number) VALUES (Olin, MAT, 123,-1)"
+    self.cur.execute(add_small_room_num_query)
 
-    @unittest.expectedFailure
-    def testRoomNumLarge(self):
-        add_large_room_num_query = "INSERT INTO slots(building_name, subject_code,class_number,room_number) VALUES (Olin, MAT, 123,6014)"
-        self.cur.execute(add_large_room_num_query)
+@unittest.expectedFailure
+def testRoomNumLarge(self):
+    add_large_room_num_query = "INSERT INTO slots(building_name, subject_code,class_number,room_number) VALUES (Olin, MAT, 123,6014)"
+    self.cur.execute(add_large_room_num_query)
 
 
-        # ----- END ACTUAL TEST METHODS -------------------------------------------
+    # ----- END ACTUAL TEST METHODS -------------------------------------------
 
-    if __name__ == "__main__":
-        unittest.main()
+if __name__ == "__main__":
+    unittest.main()
