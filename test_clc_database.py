@@ -78,20 +78,16 @@ class TestCLCDatabase(unittest.TestCase):
     # NOTE: Test module name should start with "test".
     
     # deletion rule tests
-    @unittest.expectedFailure
-    def testDeleteTimeBlock(self):
-        # can't delete time block
-        self.performDelete("time_blocks","time_id",1)
 
     @unittest.expectedFailure
     def testDeleteSubjectCode(self):
         # can't delete subject code
         self.performDelete("classes","subject_code",0)
-
+    
     @unittest.expectedFailure
-    def testDeleteWeekDayName(self):
-        # can't delete week day
-        self.performDelete("week_days","week_day_name",0)
+    def testDeleteSubjectCodes(self):
+        # can't delete subject code
+        self.performDelete("subjects","subject_code","MAT")
 
     @unittest.expectedFailure
     def testDeleteTerms(self):
@@ -99,14 +95,19 @@ class TestCLCDatabase(unittest.TestCase):
         self.performDelete("terms","term_code","FA")
 
     @unittest.expectedFailure
-    def testDeleteYearID(self):
-        # can't delete subject code
-        self.performDelete("year_term","term_id",1)
+    def testDeleteTimeBlock(self):
+        # can't delete time block
+        self.performDelete("time_blocks","time_id",1)
 
     @unittest.expectedFailure
-    def testDeleteSubjectCodes(self):
-        # can't delete subject code
-        self.performDelete("subjects","subject_code","MAT")
+    def testDeleteWeekDayName(self):
+        # can't delete week day
+        self.performDelete("week_days","week_day_name",0)
+
+    @unittest.expectedFailure
+    def testDeleteYearID(self):
+        # can't delete year id
+        self.performDelete("year_term","term_id",1)
 
     def testTermsCount(self):
         num_in_test_data = 4
@@ -143,7 +144,7 @@ def testYearTermsCount(self):
         (num_expected,) = self.cur.fetchone()
         self.assertEqual(num_expected, num_in_test_data) 
 
-def testYearClassesCount(self):
+def testClassesCount(self):
         num_in_test_data = 4
         count_query = "SELECT COUNT(subject_code) FROM classes;"
         self.cur.execute(count_query)
@@ -236,17 +237,6 @@ def testRoomNumSmall(self):
 def testRoomNumLarge(self):
     add_large_room_num_query = "INSERT INTO slots(building_name, subject_code,class_number,room_number) VALUES (Olin, MAT, 123,6014)"
     self.cur.execute(add_large_room_num_query)
-
-# @unittest.expectedFailure
-# def testTesting(self):
-#     query = "INSERT INTO slots(time_block_id,building_name, subject_code,class_number,room_number) VALUES (1,Olin, MAT, 123,6014)"
-#     self.cur.execute(query)
-
-    # query return tests
-
-    # tables exist tests
-
-    # constraints / CHECKS are followed
 
 
     # ----- END ACTUAL TEST METHODS -------------------------------------------
