@@ -11,7 +11,7 @@ import os.path      # for constructing file paths
 
 class TestCLCDatabase(unittest.TestCase):
     
-    TEST_DB_NAME = "clc_tutoring"
+    TEST_DB_NAME = "clc_tutoring_test"
     TEST_MAIN_FILE = "clc_database_test_main.sql"
 
     @classmethod
