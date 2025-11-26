@@ -131,6 +131,7 @@ function render_display_table($conn) {
         $result = prepare_display_table($conn);
         delete_records($result, $conn);
 
+        // COPILOT ADDITION
         if (php_sapi_name() !== 'cli' && isset($_SERVER['REQUEST_URI'])) {
             if (php_sapi_name() !== 'cli' && isset($_SERVER['REQUEST_URI'])) {
                 header("Location: {$_SERVER['REQUEST_URI']}", true, 303);
@@ -144,6 +145,7 @@ function render_display_table($conn) {
 
         if ($inserted || isset($_POST['no'])) {
             // Redirect after insert or cancel (PRG)
+            // COPILOT ADDITION
             if (php_sapi_name() !== 'cli' && isset($_SERVER['REQUEST_URI'])) {
                 header("Location: {$_SERVER['REQUEST_URI']}", true, 303);
                 exit();
@@ -306,7 +308,7 @@ mysqli_next_result($conn);
 
             }
 
-
+            // COPILOT ADDITION
             if (php_sapi_name() !== 'cli' && isset($_SERVER['REQUEST_URI'])) {
                 header("Location: {$_SERVER['REQUEST_URI']}", true, 303);
                 exit();

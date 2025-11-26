@@ -1,4 +1,5 @@
 <?php
+// ADDITIONS FROM COPILOT MARKED
 require_once __DIR__ . '/display_views_tools.php';
 start_view_capture();
 ?>
@@ -28,6 +29,8 @@ start_view_capture();
                 $last = NULL;
                 $allstudents = 1;
         }
+
+        // COPILOT ADDITIONS/CHANGES BEGINS NOW
                 $query = "CALL tutor_agreement_form_view('$first', '$last', '$allstudents')";
                 $result = null;
                 try {
@@ -52,5 +55,7 @@ start_view_capture();
 
         finish_view_capture_and_render($conn, false);
 
+        // COPILOT END
+        
         $conn->close();
 ?>
