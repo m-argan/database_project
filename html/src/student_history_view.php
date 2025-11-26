@@ -23,10 +23,9 @@
                 $last = NULL;
                 $allstudents = 1;
         }
-        // $query = "CALL tutor_history_view('$first', '$last', '$allstudents')";
-        // $result = $conn->query($query);
-        // view_edits($conn, $result, 2);
-   
+        $query = "CALL tutor_history_view('$first', '$last', '$allstudents')";
+        $result = $conn->query($query);
+        view_edits($conn, $result, 2);
 
         $conn->close();
 ?>

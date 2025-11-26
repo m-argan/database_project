@@ -236,7 +236,69 @@ mysqli_next_result($conn);
                     }
     }
 
-        }
+            }
+            if($view == 3)
+            {
+                $result->data_seek(0);
+                $all_rows = $result->fetch_all(MYSQLI_ASSOC); 
+                // Loop through the table row indexes
+                foreach ($all_rows as $i => $row) {
+                    $checkbox_name = "checkbox$i";
+                    if (isset($_POST[$checkbox_name])) {
+                        // Use slot_id from the row for soft delete
+                        $slot_id = $row['slot_id'];
+                        $result->free(); // free the SP result set
+mysqli_next_result($conn); 
+                        $stmt = $conn->prepare("UPDATE slots SET deleted_when = NOW() WHERE slot_id = ?");
+                        $stmt->bind_param("i", $slot_id);
+                        $stmt->execute();
+                        $stmt->close();
+                    }
+    }
+
+            }
+
+            if($view == 2)
+            {
+                $result->data_seek(0);
+                $all_rows = $result->fetch_all(MYSQLI_ASSOC); 
+                // Loop through the table row indexes
+                foreach ($all_rows as $i => $row) {
+                    $checkbox_name = "checkbox$i";
+                    if (isset($_POST[$checkbox_name])) {
+                       
+                        $tutor_id = $row['Student ID'];
+                        $result->free(); // free the SP result set
+                        mysqli_next_result($conn); 
+                        $stmt = $conn->prepare("UPDATE tutors SET deleted_when = NOW() WHERE tutor_id = ?");
+                        $stmt->bind_param("i", $tutor_id);
+                        $stmt->execute();
+                        $stmt->close();
+                    }
+    }
+
+            }
+
+            if($view == 4)
+            {
+                $result->data_seek(0);
+                $all_rows = $result->fetch_all(MYSQLI_ASSOC); 
+                // Loop through the table row indexes
+                foreach ($all_rows as $i => $row) {
+                    $checkbox_name = "checkbox$i";
+                    if (isset($_POST[$checkbox_name])) {
+                       
+                        $tutor_id = $row['Student ID'];
+                        $result->free(); // free the SP result set
+                        mysqli_next_result($conn); 
+                        $stmt = $conn->prepare("UPDATE tutors SET deleted_when = NOW() WHERE tutor_id = ?");
+                        $stmt->bind_param("i", $tutor_id);
+                        $stmt->execute();
+                        $stmt->close();
+                    }
+    }
+
+            }
 
 
             // header("Location: {$_SERVER['REQUEST_URI']}", true, 303);
