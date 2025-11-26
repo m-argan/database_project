@@ -47,7 +47,7 @@
             <thead>
                 <tr>    
                     <!-- Delete row -->    
-                    <td><b>Alter?</b></td>
+                    <td><b>Delete?</b></td>
                     <?php
                         // Header rows
                         while ($field = $result->fetch_field()) {
@@ -131,8 +131,12 @@ function render_display_table($conn) {
         $result = prepare_display_table($conn);
         delete_records($result, $conn);
 
-        header("Location: {$_SERVER['REQUEST_URI']}", true, 303);
-        exit();
+        if (php_sapi_name() !== 'cli' && isset($_SERVER['REQUEST_URI'])) {
+            if (php_sapi_name() !== 'cli' && isset($_SERVER['REQUEST_URI'])) {
+                header("Location: {$_SERVER['REQUEST_URI']}", true, 303);
+                exit();
+            }
+        }
     }
 
     if (isset($_POST['submit']) || isset($_POST['yes']) || isset($_POST['no'])) {
@@ -140,8 +144,10 @@ function render_display_table($conn) {
 
         if ($inserted || isset($_POST['no'])) {
             // Redirect after insert or cancel (PRG)
-            header("Location: {$_SERVER['REQUEST_URI']}", true, 303);
-            exit();
+            if (php_sapi_name() !== 'cli' && isset($_SERVER['REQUEST_URI'])) {
+                header("Location: {$_SERVER['REQUEST_URI']}", true, 303);
+                exit();
+            }
         }
         
     }
@@ -301,8 +307,10 @@ mysqli_next_result($conn);
             }
 
 
-            header("Location: {$_SERVER['REQUEST_URI']}", true, 303);
-            exit();
+            if (php_sapi_name() !== 'cli' && isset($_SERVER['REQUEST_URI'])) {
+                header("Location: {$_SERVER['REQUEST_URI']}", true, 303);
+                exit();
+            }
         }
 
             //display_session_del_errors();
@@ -332,7 +340,9 @@ mysqli_next_result($conn);
     // Function for rendering the webpage altogether; called in display_table.php.
     // if $is_init is true, landing page content is displayed. Otherwise, table content
     // is displayed
-    function render_display_table_page($conn, $is_init) { ?>
+
+    // Minor tweaks from Copilot marked
+    function render_display_table_page($conn, $is_init = false, $content = '') { ?>
         <!DOCTYPE html>
         <html>
         <head>
@@ -347,11 +357,12 @@ mysqli_next_result($conn);
             <div class="main"><?php
                 render_sidebar($conn); ?>
                 <div class="page-content"><?php
-                if($is_init == True){?>
+                if (!empty($content)) {     // ADDITION FROM COPILOT
+                    echo $content;          // ADDITION FROM COPILOT
+                } else if ($is_init == True) {    // ADDITION FROM COPILOT ?>
                     <p>Welcome to the Tutoring Database!</p>
                     <p>Select a table name or view to get started</p><?php
-                }
-                else{
+                } else {
                     render_display_table($conn);
                 }
             ?></div>

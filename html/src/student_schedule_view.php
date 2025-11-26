@@ -1,3 +1,8 @@
+<?php
+require_once __DIR__ . '/display_views_tools.php';
+start_view_capture();
+?>
+
 <!-- Incomplete - errors occur when all fields aren't filled in on form -->
 
 <h2>Select a Student:</h2>
@@ -72,6 +77,13 @@
         $query = "CALL tutor_schedule_view(1, 0, '$first', '$last', '$subject', '$classnumber', '$term', '$tyear', '$allstudents', '$allsubjects', '$allclasses', '$allterms')";
         $result = $conn->query($query);
         view_edits($conn, $result, 1);
+
+        if (isset($result) && $result instanceof mysqli_result) {
+            $result->free();
+            mysqli_next_result($conn);
+        }
+
+        finish_view_capture_and_render($conn, false);
 
         $conn->close();
 ?>

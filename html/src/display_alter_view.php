@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . "/display_views_tools.php";
 require_once __DIR__ . "/setup_tools.php";
 require_once __DIR__ . "/display_database_tools.php";
 require_once __DIR__ . "/display_table_tools.php";
@@ -6,6 +7,8 @@ require_once __DIR__ . "/alter_tools.php";
 
 error_checking();
 $conn = config();
+
+start_view_capture();
 
 if (isset($_POST['submit_btn'])) {
     perform_alter_view($conn);
@@ -15,6 +18,13 @@ else {
     $result = get_result($conn);
     alt($conn);
 }
+
+if (isset($result) && $result instanceof mysqli_result) {
+    $result->free();
+    mysqli_next_result($conn);
+}
+
+finish_view_capture_and_render($conn, false);
 
 $conn->close();
 ?>

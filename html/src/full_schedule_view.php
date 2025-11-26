@@ -1,4 +1,9 @@
-<!-- Database or PHP needs a way to tell the current semester for this page to work, not yet implemented -->
+<?php
+require_once __DIR__ . '/display_views_tools.php';
+start_view_capture();
+
+// Database or PHP needs a way to tell the current semester for this page to work, not yet implemented
+?>
 
 <h2>Select a Subject or Class:</h2>
         <form action="full_schedule_view.php" method="GET">
@@ -40,6 +45,13 @@
         $query = "CALL tutor_schedule_view(false, true, NULL, NULL, '$subject', '$class', '$semester', '$year', true, '$allsubjects', '$allclasses', false)";
         $result = $conn->query($query);
         view_edits($conn, $result, 3);
+
+        if (isset($result) && $result instanceof mysqli_result) {
+            $result->free();
+            mysqli_next_result($conn);
+        }
+
+        finish_view_capture_and_render($conn, false);
 
         $conn->close();
 ?>

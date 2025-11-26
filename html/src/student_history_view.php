@@ -1,3 +1,8 @@
+<?php
+require_once __DIR__ . '/display_views_tools.php';
+start_view_capture();
+?>
+
 <h2>Select a Student:</h2>
         <form action="student_history_view.php" method="GET">
                 <p>First name: <input type="text" name="firstname" /></p>
@@ -26,6 +31,13 @@
         $query = "CALL tutor_history_view('$first', '$last', '$allstudents')";
         $result = $conn->query($query);
         view_edits($conn, $result, 2);
+
+        if (isset($result) && $result instanceof mysqli_result) {
+            $result->free();
+            mysqli_next_result($conn);
+        }
+
+        finish_view_capture_and_render($conn, false);
 
         $conn->close();
 ?>
