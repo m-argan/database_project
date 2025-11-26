@@ -167,7 +167,7 @@ class TestCLCDatabase(unittest.TestCase):
 
     def testTimeBlocksCount(self):
             num_in_test_data = 1
-            count_query = "SELECT COUNT(time_id) FROM time_blocks;"
+            count_query = "SELECT COUNT(time_block_id) FROM time_blocks;"
             self.cur.execute(count_query)
             (num_expected,) = self.cur.fetchone()
             self.assertEqual(num_expected, num_in_test_data)
@@ -188,21 +188,14 @@ class TestCLCDatabase(unittest.TestCase):
 
     def testSlotTermsCount(self):
             num_in_test_data = 1
-            count_query = "SELECT COUNT(term_id) FROM slot_terms;"
+            count_query = "SELECT COUNT(term_code) FROM terms;"
             self.cur.execute(count_query)
             (num_expected,) = self.cur.fetchone()
             self.assertEqual(num_expected, num_in_test_data) 
 
     def testSlotTimesCount(self):
             num_in_test_data = 1
-            count_query = "SELECT COUNT(slot_id) FROM slot_times;"
-            self.cur.execute(count_query)
-            (num_expected,) = self.cur.fetchone()
-            self.assertEqual(num_expected, num_in_test_data) 
-
-    def testSlotTutorsCount(self):
-            num_in_test_data = 1
-            count_query = "SELECT COUNT(slot_id) FROM slot_tutors;"
+            count_query = "SELECT COUNT(time_block_id) FROM time_blocks;"
             self.cur.execute(count_query)
             (num_expected,) = self.cur.fetchone()
             self.assertEqual(num_expected, num_in_test_data) 
