@@ -231,6 +231,25 @@ class TestCLCDatabase(unittest.TestCase):
         add_large_room_num_query = "INSERT INTO slots(building_name, subject_code,class_number,room_number) VALUES (Olin, MAT, 123,6014)"
         self.cur.execute(add_large_room_num_query)
 
+    @unittest.expectedFailure
+    def testSameSlotRoom(self):
+        overlapping_query = "INSERT INTO slots(time_block_id, building_name, place_room_number, subject_code, class_number, tutor_id) VALUES (1,Crounse, 101, CSC, 332, 380932)"
+        self.cur.execute(overlapping_query)
+
+    @unittest.expectedFailure
+    def testOverlappingSlot(self):
+        overlapping_query = "INSERT INTO slots(time_block_id, building_name, place_room_number, subject_code, class_number, tutor_id) VALUES (3,Crounse, 101, CSC, 332, 380932)"
+        overlapping_query2 = "INSERT INTO slots(time_block_id, building_name, place_room_number, subject_code, class_number, tutor_id) VALUES (1,Crounse, 101, CSC, 332, 380932)"
+        self.cur.execute(overlapping_query2)
+    
+    @unittest.expectedFailure
+    def testOverlappingUpdate(self):
+        ts_query = "INSERT INTO time_blocks(time_block_start, time_block_end, week_day_name,term_code,year_term_year) VALUES (8:30, 9:00, Su, FA, 2025)"
+        overlapping_query = "INSERT INTO slots(time_block_id, building_name, place_room_number, subject_code, class_number, tutor_id) VALUES (3,Crounse, 101, CSC, 332, 380932)"
+        update_query = "UPDATE slots SET time_block_id = 5 WHERE time_block_id = 3"
+        self.cur.execute(update_query)
+
+    
 
     # ----- END ACTUAL TEST METHODS -------------------------------------------
 
