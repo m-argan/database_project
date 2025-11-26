@@ -80,6 +80,18 @@
         render_display_table_page($conn, True);
     }
 
+    // ADDITION FROM COPILOT
+    // Backwards-compatible wrapper expected by tests.
+    function render_display_database_page($conn) {
+        // Show the homepage/content using the renderer
+        if (function_exists('render_display_table_page')) {
+            render_display_table_page($conn, True);
+            return;
+        }
+        // Fallback: attempt to render header/sidebar/footer
+        render_header_sidebar_footer($conn);
+    }
+
     function render_header_sidebar_footer($conn) { ?>
         <div class="header">
             <div class="headertitle">

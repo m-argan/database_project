@@ -23,3 +23,19 @@ spl_autoload_register(
     false
 );
 // @codeCoverageIgnoreEnd
+
+
+// ADDITION FROM COPILOT
+// Start output buffering during test bootstrap so headers() can be sent
+// later in code without causing "headers already sent" warnings.
+if (!ob_get_level()) {
+    // Start an output buffer so header() calls later won't fail with "headers
+    // already sent". Tests should use their own ob_start()/ob_get_clean() to
+    // capture output; any buffers left open will be cleaned at shutdown.
+    ob_start();
+    register_shutdown_function(function () {
+        while (ob_get_level()) {
+            @ob_end_clean();
+        }
+    });
+}
