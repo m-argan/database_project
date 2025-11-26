@@ -301,8 +301,8 @@ mysqli_next_result($conn);
             }
 
 
-            // header("Location: {$_SERVER['REQUEST_URI']}", true, 303);
-            // exit();
+            header("Location: {$_SERVER['REQUEST_URI']}", true, 303);
+            exit();
         }
 
             //display_session_del_errors();
