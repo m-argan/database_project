@@ -214,29 +214,29 @@ class TestCLCDatabase(unittest.TestCase):
             (num_expected,) = self.cur.fetchone()
             self.assertEqual(num_expected, num_in_test_data) 
 
-@unittest.expectedFailure
-def testClassNumConstraintLarge(self):
-    add_class_query_too_large = "INSERT INTO classes(subject_code, class_number,class_name) VALUES (MAT, 555, Example Math Class)"
-    #add_class_query_too_small = "INSERT INTO classes(subject_code, class_number,class_name) VALUES (MAT, 12, Example Math Class)"
-    self.cur.execute(add_class_query_too_large)
-    #self.cur.execute(add_class_query_too_small)
+    @unittest.expectedFailure
+    def testClassNumConstraintLarge(self):
+        add_class_query_too_large = "INSERT INTO classes(subject_code, class_number,class_name) VALUES (MAT, 555, Example Math Class)"
+        #add_class_query_too_small = "INSERT INTO classes(subject_code, class_number,class_name) VALUES (MAT, 12, Example Math Class)"
+        self.cur.execute(add_class_query_too_large)
+        #self.cur.execute(add_class_query_too_small)
 
-@unittest.expectedFailure
-def testClassNumConstraintSmall(self):
-    #add_class_query_too_large = "INSERT INTO classes(subject_code, class_number,class_name) VALUES (MAT, 555, Example Math Class)"
-    add_class_query_too_small = "INSERT INTO classes(subject_code, class_number,class_name) VALUES (MAT, 12, Example Math Class)"
-    #self.cur.execute(add_class_query_too_large)
-    self.cur.execute(add_class_query_too_small)
+    @unittest.expectedFailure
+    def testClassNumConstraintSmall(self):
+        #add_class_query_too_large = "INSERT INTO classes(subject_code, class_number,class_name) VALUES (MAT, 555, Example Math Class)"
+        add_class_query_too_small = "INSERT INTO classes(subject_code, class_number,class_name) VALUES (MAT, 12, Example Math Class)"
+        #self.cur.execute(add_class_query_too_large)
+        self.cur.execute(add_class_query_too_small)
 
-@unittest.expectedFailure
-def testRoomNumSmall(self):
-    add_small_room_num_query = "INSERT INTO slots(building_name, subject_code,class_number,room_number) VALUES (Olin, MAT, 123,-1)"
-    self.cur.execute(add_small_room_num_query)
+    @unittest.expectedFailure
+    def testRoomNumSmall(self):
+        add_small_room_num_query = "INSERT INTO slots(building_name, subject_code,class_number,room_number) VALUES (Olin, MAT, 123,-1)"
+        self.cur.execute(add_small_room_num_query)
 
-@unittest.expectedFailure
-def testRoomNumLarge(self):
-    add_large_room_num_query = "INSERT INTO slots(building_name, subject_code,class_number,room_number) VALUES (Olin, MAT, 123,6014)"
-    self.cur.execute(add_large_room_num_query)
+    @unittest.expectedFailure
+    def testRoomNumLarge(self):
+        add_large_room_num_query = "INSERT INTO slots(building_name, subject_code,class_number,room_number) VALUES (Olin, MAT, 123,6014)"
+        self.cur.execute(add_large_room_num_query)
 
 
     # ----- END ACTUAL TEST METHODS -------------------------------------------
