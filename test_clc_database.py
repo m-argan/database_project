@@ -131,7 +131,7 @@ class TestCLCDatabase(unittest.TestCase):
             self.assertEqual(num_expected, num_in_test_data)
 
     def testSubjectsCount(self):
-            num_in_test_data = 4
+            num_in_test_data = 5
             count_query = "SELECT COUNT(subject_code) FROM subjects;"
             self.cur.execute(count_query)
             (num_expected,) = self.cur.fetchone()
@@ -139,62 +139,62 @@ class TestCLCDatabase(unittest.TestCase):
 
     def testYearTermsCount(self):
             num_in_test_data = 5
-            count_query = "SELECT COUNT(term_id) FROM year_terms;"
+            count_query = "SELECT COUNT(term_code) FROM year_terms;"
             self.cur.execute(count_query)
             (num_expected,) = self.cur.fetchone()
             self.assertEqual(num_expected, num_in_test_data) 
 
     def testClassesCount(self):
-            num_in_test_data = 4
+            num_in_test_data = 5
             count_query = "SELECT COUNT(subject_code) FROM classes;"
             self.cur.execute(count_query)
             (num_expected,) = self.cur.fetchone()
             self.assertEqual(num_expected, num_in_test_data) 
 
     def testTutorsCount(self):
-            num_in_test_data = 1
+            num_in_test_data = 3
             count_query = "SELECT COUNT(tutor_id) FROM tutors;"
             self.cur.execute(count_query)
             (num_expected,) = self.cur.fetchone()
             self.assertEqual(num_expected, num_in_test_data) 
 
     def testSlotsCount(self):
-            num_in_test_data = 1
+            num_in_test_data = 6
             count_query = "SELECT COUNT(building_name) FROM slots;"
             self.cur.execute(count_query)
             (num_expected,) = self.cur.fetchone()
             self.assertEqual(num_expected, num_in_test_data) 
 
     def testTimeBlocksCount(self):
-            num_in_test_data = 1
+            num_in_test_data = 4
             count_query = "SELECT COUNT(time_block_id) FROM time_blocks;"
             self.cur.execute(count_query)
             (num_expected,) = self.cur.fetchone()
             self.assertEqual(num_expected, num_in_test_data)
 
     def testTutorAgreedClassesCount(self):
-            num_in_test_data = 1
+            num_in_test_data = 4
             count_query = "SELECT COUNT(tutor_id) FROM tutor_agreed_classes;"
             self.cur.execute(count_query)
             (num_expected,) = self.cur.fetchone()
             self.assertEqual(num_expected, num_in_test_data) 
 
     def testTutorQualifiedSubjectsCount(self):
-            num_in_test_data = 1
+            num_in_test_data = 4
             count_query = "SELECT COUNT(tutor_id) FROM tutor_qualified_subjects;"
             self.cur.execute(count_query)
             (num_expected,) = self.cur.fetchone()
             self.assertEqual(num_expected, num_in_test_data) 
 
     def testSlotTermsCount(self):
-            num_in_test_data = 1
+            num_in_test_data = 4
             count_query = "SELECT COUNT(term_code) FROM terms;"
             self.cur.execute(count_query)
             (num_expected,) = self.cur.fetchone()
             self.assertEqual(num_expected, num_in_test_data) 
 
     def testSlotTimesCount(self):
-            num_in_test_data = 1
+            num_in_test_data = 4
             count_query = "SELECT COUNT(time_block_id) FROM time_blocks;"
             self.cur.execute(count_query)
             (num_expected,) = self.cur.fetchone()
