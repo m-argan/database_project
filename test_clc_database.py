@@ -202,7 +202,7 @@ class TestCLCDatabase(unittest.TestCase):
 
     def testTutorAvailibilitiesCount(self):
             num_in_test_data = 1
-            count_query = "SELECT COUNT(tutor_id) FROM tutor_availibities;"
+            count_query = "SELECT COUNT(tutor_id) FROM tutor_availibilities;"
             self.cur.execute(count_query)
             (num_expected,) = self.cur.fetchone()
             self.assertEqual(num_expected, num_in_test_data) 
