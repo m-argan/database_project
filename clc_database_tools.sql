@@ -270,4 +270,4 @@ GRANT EXECUTE ON PROCEDURE clc_tutoring.deny_tutors TO 'webuser'@'localhost';
 --Permissions for testing
 GRANT EXECUTE ON PROCEDURE clc_tutoring_test.deny_classes TO 'webuser'@'localhost';
 GRANT EXECUTE ON PROCEDURE clc_tutoring_test.deny_slots TO 'webuser'@'localhost';
-GRANT EXECUTE ON PROCEDURE clc_tutoring_test_tutors TO 'webuser'@'localhost';
+GRANT EXECUTE ON PROCEDURE clc_tutoring_test.tutors TO 'webuser'@'localhost';
