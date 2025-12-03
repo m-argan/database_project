@@ -22,14 +22,20 @@ This application makes uses the **LAMP stack** software bundle, i.e.,
 * MariaDB
 * PHP
 
-Please make sure these softwares are installed on your device before proceeding.
-To install AMP on a Linux terminal, you can run the command:
-```sudo apt install apache2 libapache2-mod-php mariadb-server php git vim php8.2-mysql```
+The script also makes use of the **MySQLI** extension. For testing, **PHPUnit** is used. We also used **phpab** to automatically generate test scripts.
 
-To initialize MariaDB, run the command:
-```sudo mysql_secure_installation```
+Please make sure your device has these softwares installed before proceeding.
 
-If you are new to MariaDB, you will need to log into MariaDB with superuser privileges, create a database user for yourself, and grant yourself permissions to modify databases in the client.
+<details>
+<summary>Installing Requirements Tutorial</summary>
+
+<p>To install AMP on a Linux terminal, you can run the command:</p>
+<pre>sudo apt install apache2 libapache2-mod-php mariadb-server php git vim php8.2-mysql</pre>
+
+<p>To initialize MariaDB, run the command:</p>
+<pre>sudo mysql_secure_installation</pre>
+
+<p>If you are new to MariaDB, you will need to log into MariaDB with superuser privileges, create a database user for yourself, and grant yourself permissions to modify databases in the client.</p>
 
 <details>
 <summary>Setting Up MariaDB Tutorial</summary>
@@ -43,15 +49,17 @@ If you are new to MariaDB, you will need to log into MariaDB with superuser priv
     <p>Once again, replace 'user_name' with the username you just defined. Use this command with caution in a team production environment.</p>
 </details>
 
+</details>
+
 <br>
 
-This application also makes use of **MySQLI** extension to connect the database to the web application.
 To install MySQLI, run the command:
 ```$ sudo apt-get install php-mysqli```
 and restart Apache:
 ```sudo systemctl restart apache2```
 
-### Installing
+
+### Installing the Application
 
 The database application can be easily installed by downloading the ZIP file. Click the green "Code" button on the top right of the repository, and click "Download ZIP."
 
@@ -72,6 +80,12 @@ This will build the database from scratch according to the ```clc_database_schem
 At this point, the web application will be usable and viewable through the link, ```http://your_ip_address/repo_name/html/src```. Replace 'your_ip_address' with your external IP address and 'repo_name' with the name of the link you made that redirects Apache to the repository's html folder.
 
 And then you are done!
+
+## Navigating the Repository
+
+The repository is organized with SQL files and test files at the topmost level, as these are the files that may most immediately be subject to editing by future developers. Prepared statements, however, are in a folder, for organizational convenience.
+
+The "html" folder contains PHP files which are used to construct the web application. Test files are organized into the sub-folder, "test."
 
 ## Acknowledgments
 
