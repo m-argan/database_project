@@ -3,13 +3,13 @@
     
     require_once __DIR__ . "/setup_tools.php";
     require_once __DIR__ . "/display_table_tools.php";
-    // require_once __DIR__ . "/display_database_tools.php";
-    // include_once "alter_database.php";
 
-   // session_start();
+    // Start session if not already started
     if (session_status() === PHP_SESSION_NONE) {
     session_start();
-}
+    }
+
+    // Setup and render page
     error_checking();
     $conn = config();
     render_display_table_page($conn, False);
@@ -17,5 +17,6 @@
     // Close connection
     $conn->close();
     
+    // Close session
     session_destroy();
 ?>

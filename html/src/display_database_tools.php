@@ -1,8 +1,10 @@
 <?php
-    // Function definitions for display_database, AKA (currently) index.php.
+    // Function definitions for display_database, AKA index.php.
+    
     require_once __DIR__ . "/display_table_tools.php";
 
-    // Function for listing tables of database:
+
+    // Function for listing links to the tables of the database, displayed in sidebar.
     function list_tables($conn) {
         $dblist = "SHOW TABLES";
         $result = $conn->query($dblist);
@@ -14,30 +16,23 @@
 
         }
         echo "</ul>";
-
     }
 
-    // Function for displaying form at the bottom of the page:
+    // Function for displaying the links to the views, displayed in header.
     function display_form() { ?>
-    <!-- <h2>View a table:</h2> -->
-    <!-- <form action="display_table.php" method="GET"> -->
-        <!-- <p>Table name: <input type="text" name="tablename" /></p> -->
-        <!-- <p><input type="submit" value="See Details"/></p> -->
-    <!-- </form> -->
-    
-    <!-- ADDED BY STELLA -->
         <table style="border-style: none">
                 <tr style="border-style: none">
                         <td style="border-style: none"><a href="student_history_view.php">View Student</a></td>
                         <td style="border-style: none"><a href="student_schedule_view.php">View Student Schedule</a></td>
                         <td style="border-style: none"><a href="full_schedule_view.php">View Full Schedule</a></td>
                         <td style="border-style: none"><a href="student_agreement_view.php">View Student Agreement Forms</a></td>
-                        <!-- <td style="border-style: none"></td> -->
                 </tr>
         </table>
     <?php
     }
 
+
+    // Function for rendering the HTML structure for the header of the page.
     function render_header() { ?>
         <div class="header">
             <div class="headertitle">
@@ -45,35 +40,40 @@
             </div>
             <div class="topnav">
                 <?php
-                // displays the views
+                // Displays the views
                 display_form();
             ?></div>
         </div>
     <?php }
 
+    // Function for rendering the HTML structure for the sidebar of the page.
     function render_sidebar($conn) { ?>
         <div class="sidenav"><?php
             // List the tables of the database
             list_tables($conn);
         ?>
         </div>
-   <?php }
+   <?php 
+    }
 
-   function render_footer() { ?>
+    // Function for rendering the HTML structure for the footer of the page. 
+    function render_footer() { ?>
     <footer>
             <br>
             <p>CSC 362: Database Systems Fall 2025</p>
             <p>Developed by Hannah Morrison, Stella Green, Madeleine Arganbright, Jenna Nicodemus</p>
     </footer>
-  <?php }
+  <?php 
+    }
 
+    // Homepage rendering function. Calls function in display_table_tools.php.
     function render_homepage($conn)
     {
         render_display_table_page($conn, True);
     }
 
-    // ADDITION FROM COPILOT
-    // Backwards-compatible wrapper expected by tests.
+    // Backwards-compatible wrapper function, expected by tests.
+    // !! WRITTEN BY COPILOT !!
     function render_display_database_page($conn) {
         // Show the homepage/content using the renderer
         if (function_exists('render_display_table_page')) {
@@ -84,6 +84,7 @@
         render_header_sidebar_footer($conn);
     }
 
+    // Function that renders the header, sidebar, and footer all together.
     function render_header_sidebar_footer($conn) { ?>
         <div class="header">
             <div class="headertitle">
@@ -92,7 +93,7 @@
 
             <div class="topnav">
                 <?php
-                // displays the views
+                // Displays the views
                  display_form();
             ?></div>
         </div>
@@ -111,7 +112,5 @@
 
 <?php    }
 
-
-   
 ?>
 

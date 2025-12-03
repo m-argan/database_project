@@ -50,6 +50,7 @@ class delete_toolsTest extends TestCase
         return null;
     }
 
+
     // Test build_delete_statement()
     public function test_build_delete_statement() {
         $result = $this->conn->query("SELECT * FROM tutors");
@@ -67,6 +68,7 @@ class delete_toolsTest extends TestCase
             "Wrong number of parameter placeholders"
         );
     }
+
 
     // Test display_session_del_errors() with foreign key error
     public function test_display_session_del_errors_fk() {
@@ -120,6 +122,7 @@ class delete_toolsTest extends TestCase
         $this->assertNotNull($deleted_record['deleted_when'], "Record was not soft deleted");
     }
 
+    
     // Test delete_records() with normal deletion
     public function test_delete_records() {
         $_GET['tablename'] = 'tutors';

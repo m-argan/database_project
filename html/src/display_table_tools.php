@@ -4,10 +4,12 @@
     require_once __DIR__ . "/display_adding_tools.php";
     require_once __DIR__ . "/display_database_tools.php";
 
-    // Function definitions for display_table page.
+
+    // Function definitions for display_table page; correlates to the pages of the tables 
+    // listed on the left gold sidebar.
   
 
-    // Function for formatting table contents:
+    // Function for formatting table contents in HTML, grabbing information from mysqli_result.
     function format_result_as_table(mysqli_result $result): void {  
         ?>
         
@@ -39,7 +41,8 @@
     }
 
 
-    // Function for formatting table contents -- WITH DELETE CHECKBOXES
+    // Function for formatting table contents -- WITH DELETE CHECKBOXES.
+    // Same function as above, but a modified version to include deletion compatibility.
     function format_result_as_table_del(mysqli_result $result): void {  
         ?>
         <form method="POST">
@@ -95,7 +98,7 @@
     }
 
 
-    // Function to prepare statement to display table:
+    // Function to prepare an SQL statement to the DB which will display table:
     function prepare_display_table($conn) {
         $query = "SELECT * FROM " . htmlspecialchars( $_GET['tablename'] ) . ";";
         $query = $conn->prepare($query);
@@ -123,51 +126,53 @@
         return false;
         
     }
-function render_display_table($conn) {
-    $flag = filter_user_input($conn);
-    if (!$flag) { exit(); }
 
-    if (isset($_POST['delbtn'])) {
-        $result = prepare_display_table($conn);
-        delete_records($result, $conn);
 
-        // COPILOT ADDITION
-        if (php_sapi_name() !== 'cli' && isset($_SERVER['REQUEST_URI'])) {
-            if (php_sapi_name() !== 'cli' && isset($_SERVER['REQUEST_URI'])) {
-                header("Location: {$_SERVER['REQUEST_URI']}", true, 303);
-                exit();
-            }
-        }
-    }
+    function render_display_table($conn) {
+        $flag = filter_user_input($conn);
+        if (!$flag) { exit(); }
 
-    if (isset($_POST['submit']) || isset($_POST['yes']) || isset($_POST['no'])) {
-        $inserted = input_new_data($conn);
+        if (isset($_POST['delbtn'])) {
+            $result = prepare_display_table($conn);
+            delete_records($result, $conn);
 
-        if ($inserted || isset($_POST['no'])) {
-            // Redirect after insert or cancel (PRG)
             // COPILOT ADDITION
             if (php_sapi_name() !== 'cli' && isset($_SERVER['REQUEST_URI'])) {
-                header("Location: {$_SERVER['REQUEST_URI']}", true, 303);
-                exit();
+                if (php_sapi_name() !== 'cli' && isset($_SERVER['REQUEST_URI'])) {
+                    header("Location: {$_SERVER['REQUEST_URI']}", true, 303);
+                    exit();
+                }
             }
         }
-        
+
+        if (isset($_POST['submit']) || isset($_POST['yes']) || isset($_POST['no'])) {
+            $inserted = input_new_data($conn);
+
+            if ($inserted || isset($_POST['no'])) {
+                // Redirect after insert or cancel (PRG)
+                // COPILOT ADDITION
+                if (php_sapi_name() !== 'cli' && isset($_SERVER['REQUEST_URI'])) {
+                    header("Location: {$_SERVER['REQUEST_URI']}", true, 303);
+                    exit();
+                }
+            }
+            
+        }
+
+        $result = prepare_display_table($conn);
+
+        if (isset($_POST['alter_btn'])) {
+            alt($conn);
+            exit();
+        }
+
+        format_result_as_table_del($result);
+        display_session_del_errors();
+
+        if (isset($_POST['add_btn'])) {
+            display_adding_forms($conn);
+        }
     }
-
-    $result = prepare_display_table($conn);
-
-    if (isset($_POST['alter_btn'])) {
-        alt($conn);
-        exit();
-    }
-
-    format_result_as_table_del($result);
-    display_session_del_errors();
-
-    if (isset($_POST['add_btn'])) {
-        display_adding_forms($conn);
-    }
-}
 
 
     function view_edits($conn, $result, $view)
@@ -175,7 +180,8 @@ function render_display_table($conn) {
         format_result_as_table_del($result);
 
         if (array_key_exists('delbtn', $_POST)) {
-             if ($view == 1) { // view 1 = slots
+            if ($view == 1) // view 1 = slots
+            { 
                 $result->data_seek(0);
                 $all_rows = $result->fetch_all(MYSQLI_ASSOC); 
                 // Loop through the table row indexes
@@ -185,15 +191,16 @@ function render_display_table($conn) {
                         // Use slot_id from the row for soft delete
                         $slot_id = $row['slot_id'];
                         $result->free(); // free the SP result set
-mysqli_next_result($conn); 
+                        mysqli_next_result($conn); 
                         $stmt = $conn->prepare("UPDATE slots SET deleted_when = NOW() WHERE slot_id = ?");
                         $stmt->bind_param("i", $slot_id);
                         $stmt->execute();
                         $stmt->close();
                     }
-    }
+                }
 
             }
+
             if($view == 3)
             {
                 $result->data_seek(0);
@@ -205,14 +212,13 @@ mysqli_next_result($conn);
                         // Use slot_id from the row for soft delete
                         $slot_id = $row['slot_id'];
                         $result->free(); // free the SP result set
-mysqli_next_result($conn); 
+                        mysqli_next_result($conn); 
                         $stmt = $conn->prepare("UPDATE slots SET deleted_when = NOW() WHERE slot_id = ?");
                         $stmt->bind_param("i", $slot_id);
                         $stmt->execute();
                         $stmt->close();
                     }
-    }
-
+                }
             }
 
             if($view == 2)
@@ -232,7 +238,7 @@ mysqli_next_result($conn);
                         $stmt->execute();
                         $stmt->close();
                     }
-    }
+                }
 
             }
 
@@ -253,7 +259,7 @@ mysqli_next_result($conn);
                         $stmt->execute();
                         $stmt->close();
                     }
-    }
+                }
 
             }
 
@@ -267,25 +273,22 @@ mysqli_next_result($conn);
 
         if (array_key_exists('alter_btn', $_POST))
         {
-                // $table = htmlspecialchars($_GET['tablename']);
-                alt_views($conn, $result, $view);
+            alt_views($conn, $result, $view);
         }
-            // header("Location: {$_SERVER['REQUEST_URI']}", true, 303);
-            // exit();
 
         if(array_key_exists('add_btn', $_POST))
         {
             display_adding_forms_view($conn, $view);
-
         }
 
-
     }
-    // Function for rendering the webpage altogether; called in display_table.php.
-    // if $is_init is true, landing page content is displayed. Otherwise, table content
-    // is displayed
-
-    // Minor tweaks from Copilot marked
+    
+    // Main function for rendering the webpage altogether. The initial domino, so to speak. 
+    // Called in display_table.php.
+    // Notes:
+    //        -  If $is_init is true, landing page content is displayed. Otherwise, table content
+    //          is displayed.
+    //        -  Minor tweaks from Copilot marked
     function render_display_table_page($conn, $is_init = false, $content = '') { ?>
         <!DOCTYPE html>
         <html>
@@ -318,6 +321,8 @@ mysqli_next_result($conn);
 
         </body>
         </html>
-<?php
+    <?php
     }
+
     
+?>

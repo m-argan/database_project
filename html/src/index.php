@@ -4,9 +4,11 @@
     require_once __DIR__ . "/setup_tools.php";
     require_once __DIR__ . "/display_database_tools.php";
     
+    // Set up and render page
     error_checking();
     $conn = config();
     render_homepage($conn);
-    // render_header_sidebar_footer($conn); // Need a homepage
+
+    // Close connection
     $conn->close();
 ?>

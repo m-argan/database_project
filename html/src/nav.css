@@ -1,6 +1,6 @@
-/* Style sheet for navigation sidebar and header */
+/* Style sheet for the website. Includes navigation sidebar and header. */
 /* As of writing, this style sheet relies on display_database_tools.php for HTML structure,
-   specifically the render_display_database_page() funciton. */
+   specifically the render_display_database_page() function. */
 
 html, body {
     height: 100%;
@@ -69,8 +69,6 @@ body {
 
 /* --- BEGIN SIDEBAR --- */
 
-/* NOTE: Known bug where links will stretch outside of sidenav on smaller screens. May need to
-refactor how the HTML is structured to fix this. */
 .sidenav {
     display: flex;
     justify-content: center;
@@ -102,7 +100,7 @@ refactor how the HTML is structured to fix this. */
 
 
 /* --- BEGIN MAIN / PAGE CONTENT --- */
-/* main lumps both the header and page-content of the page together */
+/* Note that main lumps both the header and page-content of the page together */
 
 .main {
     display: flex;
@@ -122,7 +120,7 @@ refactor how the HTML is structured to fix this. */
 
     }
 
-
+/* --- END MAIN / PAGE CONTENT --- */
 
 /* --- BEGIN FOOTER --- */
 

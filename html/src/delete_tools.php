@@ -1,9 +1,8 @@
 <?php
     // Functions that facilitate the deletion of records on display_table.php.
-    // Note these functions will never run unless the user input has passed validity check first.
 
 
-     // Function that queries database to soft delete a record from classes, slots, or tutors.
+    // Function that queries database to soft delete a record from classes, slots, or tutors.
     function soft_delete($row, $conn) {
         // Use __DIR__ to construct a reliable path from current file location
         $base_path = dirname(dirname(__DIR__)) . '/prepared_statements/';
