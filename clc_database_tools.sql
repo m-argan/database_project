@@ -374,7 +374,7 @@ GRANT EXECUTE ON PROCEDURE clc_tutoring.deny_slots TO 'webuser'@'localhost';
 GRANT EXECUTE ON PROCEDURE clc_tutoring.deny_tutors TO 'webuser'@'localhost';
 
 --Permissions for testing
-IF EXISTS(SHOW databases LIKE 'clc_tutoring_test')
+IF ISNULL(SHOW databases LIKE 'clc_tutoring_test')
     BEGIN
         GRANT EXECUTE ON PROCEDURE clc_tutoring_test.deny_classes TO 'webuser'@'localhost';
         GRANT EXECUTE ON PROCEDURE clc_tutoring_test.deny_slots TO 'webuser'@'localhost';
