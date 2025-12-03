@@ -54,6 +54,8 @@ Please make sure your device has these softwares installed before proceeding.
     <p>Once again, replace 'user_name' with the username you just defined. Use this command with caution in a team production environment.</p>
 </details>
 
+</details>
+
 <br>
 
 
