@@ -389,6 +389,8 @@ BEGIN
     ) THEN
         GRANT EXECUTE ON PROCEDURE clc_tutoring_test.deny_classes
             TO 'webuser'@'localhost';
+        GRANT EXECUTE ON PROCEDURE clc_tutoring_test.deny_slots TO 'webuser'@'localhost';
+        GRANT EXECUTE ON PROCEDURE clc_tutoring_test.deny_tutors TO 'webuser'@'localhost';
     END IF;
 END$$
 
