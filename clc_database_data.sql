@@ -72,7 +72,7 @@ INSERT INTO tutor_agreed_classes(tutor_id,subject_code, class_number) VALUES
 
 
 
-INSERT INTO tutor_availibilities(tutor_id, time_block_id) VALUES
+INSERT INTO tutor_availabilities(tutor_id, time_block_id) VALUES
 (380932,1),
 (380932,2),
 (380932,3),
