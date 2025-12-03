@@ -9,10 +9,7 @@
 
         echo "<ul>";
         while ($tablename = $result->fetch_array()) {
-            //echo "<li> $tablename[0] </li>";
-           // $url = "http://34.61.211.5/tutor_db/src/display_table.php?tablename=".$tablename[0];
            $url = "display_table.php?tablename=".$tablename[0];
-            // echo $url;
             echo '<br><a href="'.$url.'">' . $tablename[0] . '</a><br>';
 
         }
@@ -27,12 +24,7 @@
         <!-- <p>Table name: <input type="text" name="tablename" /></p> -->
         <!-- <p><input type="submit" value="See Details"/></p> -->
     <!-- </form> -->
-    <!-- ADDED BY HANNAH -->
-     <!-- <h2>Add to table:</h2>
-    <form action="display_adding.php" method="GET">
-        <p>Table name: <input type="text" name="tablename" /></p>
-        <p><input type="submit" value="See Details"/></p>
-    </form> -->
+    
     <!-- ADDED BY STELLA -->
         <table style="border-style: none">
                 <tr style="border-style: none">
@@ -120,44 +112,6 @@
 <?php    }
 
 
-    // Function for rendering the page (OLD!!!):
-/*
-    function render_display_database_page($conn) { ?>
-        <!DOCTYPE html>
-        <html>
-        <head>
-          <link rel="stylesheet" href="nav.css">
-            <title>CLC Database</title>
-        </head>
-        <body>
-          <div class="header">
-
-            <div class="headertitle">
-                <h1>CLC Database</h1>
-            </div>
-
-            <div class="topnav">
-                <?php
-                // displays the views
-                 display_form();
-            ?></div>
-          </div>
-
-            <div class="sidenav"><?php
-                // List the tables of the database
-                list_tables($conn);
-            ?>
-            </div>
-
-            <footer>
-            <br>
-            <p>CSC 362: Database Systems Fall 2025</p>
-            <p>Developed by Hannah Morrison, Stella Green, Madeleine Arganbright, Jenna Nicodemus</p>
-        </footer>
-        </body>
-
-        </html>
-   <?php }
-*/
+   
 ?>
 

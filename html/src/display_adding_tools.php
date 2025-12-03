@@ -3,8 +3,9 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 include_once "display_table_tools.php";
 
-/**
- * Display add form for a table
+/*
+ This function sets up the input boxes for inputting
+ new entries into table
  */
 function display_adding_forms($conn) {
     $table = $_GET['tablename'] ?? '';
@@ -31,8 +32,9 @@ function display_adding_forms($conn) {
     unset($_SESSION['form_values']);
 }
 
-/**
- * Get table fields
+/*
+ This function retrieves the fields for the table that is being added to.
+ Returns an array of fields as strings.
  */
 function get_fields($conn) {
     $result = prepare_display_table($conn);
@@ -41,8 +43,10 @@ function get_fields($conn) {
     return $fields;
 }
 
-/**
- * Handle new data insert
+/*
+ This function checks if the fields are all filled prior to insert. Also double checks
+ that new inputs do not violate the time block business rules.
+ Returns a boolean reflecting whether an insert was successful.
  */
 function input_new_data($conn): bool {
     $table = $_GET['tablename'] ?? '';
@@ -79,8 +83,9 @@ function input_new_data($conn): bool {
     return true;
 }
 
-/**
- * Convert and validate time_blocks
+/*
+ This function converts time blocks to date time and verifies if they are 
+ between the set time of 7:30-9:00.
  */
 function test_time_blocks($data) {
     if (!isset($data['time_block_start'], $data['time_block_end'])) return true;
@@ -106,8 +111,10 @@ function test_time_blocks($data) {
     return true;
 }
 
-/**
- * Show confirmation form for out-of-hours times
+/*
+ This function displays a message asking a user if they are sure
+ they want to enter a timeblock outside of the specified times.
+ It also displays yes and no buttons for the user to confirm their choice.
  */
 function are_you_sure_time($data) {
     echo "<p>Time is outside normal hours. Are you sure?</p>";
@@ -120,8 +127,10 @@ function are_you_sure_time($data) {
     echo '</form>';
 }
 
-/**
- * Insert data into table
+/*
+ This function performs insert of new data. It checks if foreign keys are in 
+ their parent tables prior to the insert and throws an exception if non valid foreign
+ keys are used.
  */
 function insert_into_table($conn, $table, $data) {
     unset($data['submit'], $data['yes'], $data['no'], $data['tablename']);
@@ -169,8 +178,8 @@ function insert_into_table($conn, $table, $data) {
     $stmt->close();
 }
 
-/**
- * Get auto-increment columns
+/*
+ This function retrieves an array if foreign key names. It returns an array.
  */
 function get_aut_inc_keys($conn, $table_name, $fields) {
     $stmt = $conn->prepare("SELECT COLUMN_NAME
@@ -195,8 +204,8 @@ function get_aut_inc_keys($conn, $table_name, $fields) {
     return $auto_inc_columns;
 }
 
-/**
- * Convert 12h time string to 24h format
+/*
+  This function converts a 12h time string to 24h format. Returns a datetime variable.
  */
 function convert_12h_to_24h($t) {
     $t = trim($t);

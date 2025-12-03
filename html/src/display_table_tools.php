@@ -3,7 +3,7 @@
     require_once __DIR__ . "/alter_tools.php";
     require_once __DIR__ . "/display_adding_tools.php";
     require_once __DIR__ . "/display_database_tools.php";
-   # include "display_adding.php";
+
     // Function definitions for display_table page.
   
 
@@ -158,8 +158,6 @@ function render_display_table($conn) {
 
     if (isset($_POST['alter_btn'])) {
         alt($conn);
-        // Redirect after alter (PRG)
-       // header("Location: {$_SERVER['REQUEST_URI']}", true, 303);
         exit();
     }
 
@@ -171,55 +169,6 @@ function render_display_table($conn) {
     }
 }
 
-     // Function for rendering the table display:
-    //  function render_display_table($conn) {
-    
-    //     $flag = filter_user_input($conn);
-    //     if ($flag == false) { exit(); }     // Exit if invalid input; could be dangerous.
-
-    //     $result = prepare_display_table($conn);
-
-    //     if (array_key_exists('delbtn', $_POST)) {
-    //         delete_records($result, $conn);
-
-    //         header("Location: {$_SERVER['REQUEST_URI']}", true, 303);
-    //         exit();
-    //     }
-        
-    //     format_result_as_table_del($result);
-    //     display_session_del_errors();
-
-    //     if (array_key_exists('alter_btn', $_POST)) {
-    //         // $table = htmlspecialchars($_GET['tablename']);
-    //         alt($conn);
-
-    //         // header("Location: {$_SERVER['REQUEST_URI']}", true, 303);
-    //         // exit();
-    //     }
-    //     if(array_key_exists('add_btn', $_POST))
-    //     {
-    //         display_adding_forms($conn);
-            
-    //     }
-    //     if(array_key_exists('submit', $_POST))
-    //     {
-            
-    //         input_new_data($conn);
-            
-    //        // header("Location: {$_SERVER['REQUEST_URI']}", true, 303);
-    //     exit(); 
-    //     }   
-        
-    //     // if(array_key_exists('yes', $_POST))
-    //     // {
-    //     //     if($incomplete == false)
-    //     //     {
-    //     //         yes_set($conn);}
-    //     //     // header("Location: {$_SERVER['REQUEST_URI']}", true, 303);
-    //     //  exit(); 
-    //     // }  
-
-    //  }
 
     function view_edits($conn, $result, $view)
     {
@@ -315,7 +264,6 @@ mysqli_next_result($conn);
             }
         }
 
-            //display_session_del_errors();
 
         if (array_key_exists('alter_btn', $_POST))
         {
@@ -332,12 +280,6 @@ mysqli_next_result($conn);
         }
 
 
-        /*if(array_key_exists('submit', $_POST))
-        {
-            input_new_data($conn);
-            header("Location: {$_SERVER['REQUEST_URI']}", true, 303);
-            exit();
-        }*/
     }
     // Function for rendering the webpage altogether; called in display_table.php.
     // if $is_init is true, landing page content is displayed. Otherwise, table content
