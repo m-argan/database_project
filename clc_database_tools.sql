@@ -374,11 +374,7 @@ GRANT EXECUTE ON PROCEDURE clc_tutoring.deny_slots TO 'webuser'@'localhost';
 GRANT EXECUTE ON PROCEDURE clc_tutoring.deny_tutors TO 'webuser'@'localhost';
 
 --Permissions for testing
-IF EXISTS(SELECT SCHEMA_NAME
-  FROM INFORMATION_SCHEMA.SCHEMATA
- WHERE SCHEMA_NAME = 'clc_tutoring_test')
-    BEGIN
-        GRANT EXECUTE ON PROCEDURE clc_tutoring_test.deny_classes TO 'webuser'@'localhost';
-        GRANT EXECUTE ON PROCEDURE clc_tutoring_test.deny_slots TO 'webuser'@'localhost';
-        GRANT EXECUTE ON PROCEDURE clc_tutoring_test.deny_tutors TO 'webuser'@'localhost';
-    END
+GRANT EXECUTE ON PROCEDURE clc_tutoring_test.deny_classes TO 'webuser'@'localhost' IF EXISTS(SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = 'clc_tutoring_test');
+    --     GRANT EXECUTE ON PROCEDURE clc_tutoring_test.deny_slots TO 'webuser'@'localhost';
+    --     GRANT EXECUTE ON PROCEDURE clc_tutoring_test.deny_tutors TO 'webuser'@'localhost';
+    -- END
