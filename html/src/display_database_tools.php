@@ -69,15 +69,21 @@
 
     function render_login($conn)
     {
-       ?>
-       <!DOCTYPE html>
-       <html>
-       <head>
-         <link rel="stylesheet" href="nav.css">
-           <title>Login</title>
-           <h1> Are you jessica or student? <h1>
-       </head> <?php
-
+        ?>
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <link rel="stylesheet" href="nav.css">
+            <title>Login</title>
+            <h1> Are you jessica or student? <h1>
+        </head> 
+        <form method="POST">
+        <input type="submit" name="role_admin" value="Admin" />
+        <input type="submit" name="role_student" value="Student" />
+        </form>
+       
+        <?php
+    
 
        // if jess:
        // render_homepage($conn);
