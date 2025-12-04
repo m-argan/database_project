@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/display_views_tools.php';
 
+echo(var_dump($_POST));
 start_view_capture();
 ?>
 <h2>Select a Subject or Class:</h2>
@@ -45,7 +46,7 @@ start_view_capture();
             $result->free();
             mysqli_next_result($conn);
         }
-        echo(var_dump($_POST));
+        
         if(isset($_POST["role_student"])){
             finish_view_capture_and_render($conn, true, false);
         }
