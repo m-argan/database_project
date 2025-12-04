@@ -5,7 +5,7 @@
     require_once __DIR__ . "/display_database_tools.php";
 
     // get password
-    $txt_file = file_get_contents('../../../password.txt');
+    $password = file_get_contents('../../../password.txt');
     //$password = explode("\n", $txt_file);
     echo($password);
     
