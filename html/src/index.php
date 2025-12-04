@@ -7,6 +7,7 @@
     // Set up and render page
     error_checking();
     $conn = config();
+
     if(!isset($_POST['role_admin']) && !isset($_POST['role_student']))
     {render_login($conn);}
     elseif(isset($_POST['role_admin']))
