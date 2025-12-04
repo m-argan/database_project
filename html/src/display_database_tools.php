@@ -74,7 +74,11 @@
         <html>
         <head>
             <link rel="stylesheet" href="nav.css">
-            <title>Login</title>
+            <div class="header">
+                <div class="headertitle">
+                    <h1>Login</h1>
+                </div>
+            </div>
             <h1> Are you jessica or student? <h1>
         </head> 
         <form method="POST">
