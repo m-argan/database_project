@@ -92,7 +92,8 @@
         if($display_error == True)
         {
             //echo "Incorrect password, please try again";
-            echo "<p <small>style='color:red;'>Incorrect password, please try again.<small></p>";
+            ?> <p><small>Incorrect password, please try again.</small></p> <?php
+            //echo "<p <small>style='color:red;'>Incorrect password, please try again.<small></p>";
             $display_error = False;
         }
 
