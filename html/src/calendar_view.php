@@ -18,10 +18,12 @@ require_once __DIR__ . '/display_views_tools.php';
         }
 
         echo(var_dump($_POST));
-        if(isset($_POST["role_admin"]))
-        {finish_view_capture_and_render($conn, false);}
-        elseif(isset($_POST["role_student"]))
-        { echo "hi student";}
+        if(isset($_POST["role_admin"])){
+                finish_view_capture_and_render($conn, false);
+        }
+        elseif(isset($_POST["role_student"])){
+                echo "hi student";
+        }
 
         $conn->close();
 ?>

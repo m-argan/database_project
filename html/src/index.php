@@ -34,5 +34,11 @@
     //render_homepage($conn);
     //echo(var_dump($_POST));
     // Close connection
-    $conn->close();
+
+    try{
+        $conn->close();
+    }
+    catch(Exception $e) {
+        //
+    }
 ?>
