@@ -7,7 +7,8 @@
     // Set up and render page
     error_checking();
     $conn = config();
-    render_login($conn);
+    if(!isset($_POST['role_admin']) && !isset($_POST['role_student']))
+    {render_login($conn);}
     //render_homepage($conn);
 
     // Close connection
