@@ -168,14 +168,16 @@ function insert_into_table($conn, $table, $data) {
             }
             catch (Exception $e) {
                 echo "Error: " . $e->getMessage();
-                //$check->close();
+                $check->close();
                 return;
                 
             }
+
+            
             $check->close();
         }
     }
-  
+  try{
     $placeholders = implode(', ', array_fill(0, count($columns), '?'));
     $col_list = implode(', ', array_map(fn($c) => "`$c`", $columns));
 
@@ -184,9 +186,21 @@ function insert_into_table($conn, $table, $data) {
     $types = str_repeat('s', count($columns));
     $values = array_values($data);
     $stmt->bind_param($types, ...$values);
-    $stmt->execute();
+    $ok = $stmt->execute();
+    if (!$ok) {
+        // This is where trigger errors show up
+        throw new Exception("Trigger error: " . $stmt->error);
+    }
+
     $stmt->close();
     echo "<p style='color:green;'>Record added successfully.</p>";
+  }
+  catch (Throwable $e) {
+                echo "Error: " . $e->getMessage();
+                //$check->close();
+                return;
+                
+            }
 }
 
 /*
