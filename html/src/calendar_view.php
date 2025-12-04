@@ -11,6 +11,7 @@ require_once __DIR__ . '/display_views_tools.php';
         $result = $conn->query($query);
         format_result_as_calendar($result);
 
+        echo $GLOBALS['mypost']['role'];
          if (isset($result) && $result instanceof mysqli_result) {
             $result->free();
             mysqli_next_result($conn);

@@ -58,7 +58,6 @@ if (!function_exists('finish_view_capture_and_render')) {
             }
 
             // Normal web path: render full page with header/sidebar/footer
-            echo $GLOBALS['mypost']['role'];
             render_display_table_page($conn, $is_init, $content);
             return;
         }
