@@ -22,8 +22,6 @@
         }
     elseif(isset($_POST['role_student']))
     {
-        echo "hi student";
-        
         // if (session_status() === PHP_SESSION_NONE) {
         //     session_start();
         //     $_SESSION["role"] = "student";
@@ -35,10 +33,10 @@
     //echo(var_dump($_POST));
     // Close connection
 
-    try{
-        $conn->close();
-    }
-    catch(Exception $e) {
-        echo 'Message: ' .$e->getMessage();
-    }
+    // try{
+    //     $conn->close();
+    // }
+    // catch(Exception $e) {
+    //     echo 'Message: ' .$e->getMessage();
+    // }
 ?>
