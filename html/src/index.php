@@ -23,7 +23,13 @@
     elseif(isset($_POST['role_student']))
     {
         //echo "hi student";
+        
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+            $_SESSION["role"] = "student";
+        }
         include 'calendar_view.php';
+
     }
     //render_homepage($conn);
     //echo(var_dump($_POST));
