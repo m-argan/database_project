@@ -154,18 +154,26 @@ function insert_into_table($conn, $table, $data) {
 
     foreach ($foreign_keys as $col => $ref) {
         if (isset($data[$col])) {
-            $val = $data[$col];
-            $check = $conn->prepare("SELECT 1 FROM `{$ref['ref_table']}` WHERE `{$ref['ref_column']}` = ?");
-            $check->bind_param('s', $val);
-            $check->execute();
-            $check->store_result();
-            if ($check->num_rows == 0) {
-                throw new Exception("Value '$val' for column '$col' does not exist in '{$ref['ref_table']}'");
+            try{
+                $val = $data[$col];
+                $check = $conn->prepare("SELECT 1 FROM `{$ref['ref_table']}` WHERE `{$ref['ref_column']}` = ?");
+                $check->bind_param('s', $val);
+                $check->execute();
+                $check->store_result();
+                
+                if ($check->num_rows == 0) {
+                    throw new Exception("Value '$val' for column '$col' does not exist in '{$ref['ref_table']}'");
+                }
+            }
+            catch (Exception $e) {
+                echo "Error: " . $e->getMessage();
+                $check->close();
+                
             }
             $check->close();
         }
     }
-
+  
     $placeholders = implode(', ', array_fill(0, count($columns), '?'));
     $col_list = implode(', ', array_map(fn($c) => "`$c`", $columns));
 
@@ -176,6 +184,7 @@ function insert_into_table($conn, $table, $data) {
     $stmt->bind_param($types, ...$values);
     $stmt->execute();
     $stmt->close();
+    
 }
 
 /*

@@ -88,7 +88,7 @@ CREATE TABLE time_blocks
     PRIMARY KEY       (time_block_id)
 );
 
-CREATE TABLE tutor_availibilities(
+CREATE TABLE tutor_availabilities(
     tutor_id        INT NOT NULL,
     time_block_id         INT unsigned NOT NULL,
     PRIMARY KEY     (tutor_id, time_block_id),
