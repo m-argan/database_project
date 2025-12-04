@@ -16,7 +16,7 @@
             render_homepage($conn);
             else
             {
-                echo "incorrect password, please try again";
+                ?> <p>Incorrect password, please try again</p><?php
             }
         }
     elseif(isset($_GET['role_student']))
