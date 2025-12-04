@@ -3,6 +3,10 @@
     
     require_once __DIR__ . "/setup_tools.php";
     require_once __DIR__ . "/display_database_tools.php";
+
+    // get password
+    $txt_file = file_get_contents('../../../password.txt');
+    $password = explode("\n", $txt_file);
     
     // Set up and render page
     error_checking();
@@ -13,9 +17,9 @@
     // echo(var_dump($_GET));
     elseif(isset($_POST['role_admin']))
         {
-            if($_POST['admin_password'] == 'p@ss4CLCDB')
+            if($_POST['admin_password'] == $password)
             render_homepage($conn);
-            elseif($_POST['admin_password'] != 'p@ss4CLCDB')
+            elseif($_POST['admin_password'] != $password)
             {
                 render_login($conn, True);
             }
