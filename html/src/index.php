@@ -33,13 +33,7 @@
         //     session_start();
         //     $_SESSION["role"] = "student";
         // }
-        ?>
-        <h2>Select a Subject or Class:</h2>
-        <form method="GET">
-                <p>Subject code(e.g. HIS, MAT): <input type="text" name="subject" /></p>
-                <p>Class (e.g. 110, 330): <input type="integer" name="class" /></p>
-                <p><input type="submit" value="See Details"/></p>
-        </form> <?php
+    
         include 'calendar_view.php'; 
 
     }
