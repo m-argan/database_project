@@ -18,9 +18,9 @@ require_once __DIR__ . '/display_views_tools.php';
         }
 
         echo(var_dump($_POST));
-        if($_POST['role' == 'Admin'])
+        if(isset($_POST["role_admin"]))
         {finish_view_capture_and_render($conn, false);}
-        elseif($_POST['role' == 'Student'])
+        elseif(isset($_POST["role_student"]))
         { echo "hi student";}
 
         $conn->close();
