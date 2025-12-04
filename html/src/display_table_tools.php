@@ -40,7 +40,9 @@
     <?php 
     }
 
-    // Edited version of format_result_as_table for calendar view
+
+    // Function for formatting table contents in a calendar view.
+    // Same function as above, but a modified version for calendar view.
     function format_result_as_calendar(mysqli_result $result): void {
         ?>
 
@@ -72,7 +74,8 @@
     <?php
     }
 
-    // Function for formatting table contents -- WITH DELETE CHECKBOXES.
+
+    // Function for formatting table contents, WITH DELETE CHECKBOXES.
     // Same function as above, but a modified version to include deletion compatibility.
     function format_result_as_table_del(mysqli_result $result): void {  
         ?>
@@ -159,15 +162,19 @@
     }
 
 
+    // Function that handles the page flow and user input.
+    // Called in render_display_table_page().
     function render_display_table($conn) {
         $flag = filter_user_input($conn);
         if (!$flag) { exit(); }
 
+        // Deletion handling
         if (isset($_POST['delbtn'])) {
             $result = prepare_display_table($conn);
             delete_records($result, $conn);
 
             // COPILOT ADDITION
+            // Redirect
             if (php_sapi_name() !== 'cli' && isset($_SERVER['REQUEST_URI'])) {
                 if (php_sapi_name() !== 'cli' && isset($_SERVER['REQUEST_URI'])) {
                     header("Location: {$_SERVER['REQUEST_URI']}", true, 303);
@@ -176,6 +183,7 @@
             }
         }
 
+        // Submission handling for new data input
         if (isset($_POST['submit']) || isset($_POST['yes']) || isset($_POST['no'])) {
             $inserted = input_new_data($conn);
 
@@ -192,20 +200,24 @@
 
         $result = prepare_display_table($conn);
 
+        // Alter handling
         if (isset($_POST['alter_btn'])) {
             alt($conn);
             exit();
         }
 
+        // Format table
         format_result_as_table_del($result);
         display_session_del_errors();
 
+        // Adding handling
         if (isset($_POST['add_btn'])) {
             display_adding_forms($conn);
         }
     }
 
 
+    // Function for displaying edits made to a table.
     function view_edits($conn, $result, $view)
     {
         format_result_as_table_del($result);
@@ -294,7 +306,7 @@
 
             }
 
-            // COPILOT ADDITION
+            // COPILOT ADDITION -- Redirect
             if (php_sapi_name() !== 'cli' && isset($_SERVER['REQUEST_URI'])) {
                 header("Location: {$_SERVER['REQUEST_URI']}", true, 303);
                 exit();
@@ -302,17 +314,20 @@
         }
 
 
+        // Alter handling -- display
         if (array_key_exists('alter_btn', $_POST))
         {
             alt_views($conn, $result, $view);
         }
 
+        // Adding handling -- display
         if(array_key_exists('add_btn', $_POST))
         {
             display_adding_forms_view($conn, $view);
         }
 
     }
+    
     
     // Main function for rendering the webpage altogether. The initial domino, so to speak. 
     // Called in display_table.php.
