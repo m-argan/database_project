@@ -22,7 +22,7 @@
         }
     elseif(isset($_POST['role_student']))
     {
-        //echo "hi student";
+        echo "hi student";
         
         // if (session_status() === PHP_SESSION_NONE) {
         //     session_start();
