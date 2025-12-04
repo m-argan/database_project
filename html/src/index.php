@@ -6,6 +6,7 @@
 
     // get password
     $password = file_get_contents('../../../password.txt');
+    $password = str_replace(' ', '', $password);
     
     // Set up and render page
     error_checking();
@@ -18,7 +19,7 @@
         {
             if($_POST['admin_password'] == $password)
             {
-            render_homepage($conn);
+                render_homepage($conn);
             }
             elseif($_POST['admin_password'] != $password)
             {
