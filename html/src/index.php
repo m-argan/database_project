@@ -14,9 +14,8 @@
         {
             if($_GET['admin_password'] == 'p@ss4CLCDB')
             render_homepage($conn);
-            else
+            elseif($_GET['admin_password'] != 'p@ss4CLCDB')
             {
-                
                 render_login($conn, True);
             }
         }
