@@ -17,7 +17,9 @@
     elseif(isset($_POST['role_admin']))
         {
             if($_POST['admin_password'] == $password)
+            {
             render_homepage($conn);
+            }
             elseif($_POST['admin_password'] != $password)
             {
                 render_login($conn, True);
