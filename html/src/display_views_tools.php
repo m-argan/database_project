@@ -37,7 +37,7 @@ if (!function_exists('finish_view_capture_and_render')) {
      * @param mysqli $conn Active DB connection (used by sidebar/header)
      * @param bool $is_init If true, render homepage content path in template
      */
-    function finish_view_capture_and_render($conn, bool $is_init = false, $is_stu): void {
+    function finish_view_capture_and_render($conn, $is_stu, bool $is_init = false): void {
         // Safely get content from the most recent buffer
         $content = '';
         if (ob_get_level()) {
