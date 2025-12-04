@@ -11,19 +11,17 @@ require_once __DIR__ . '/display_views_tools.php';
         $result = $conn->query($query);
         format_result_as_calendar($result);
 
-        //echo(var_dump($_POST));
-         if (isset($result) && $result instanceof mysqli_result) {
+        if (isset($result) && $result instanceof mysqli_result) {
             $result->free();
             mysqli_next_result($conn);
         }
 
-        //echo(var_dump($_POST));
+        // set $is_student to true if the student role is set
         if(isset($_POST["role_student"])){
-                echo "hi student";
-                finish_view_capture_and_render($conn, true, false);
+            finish_view_capture_and_render($conn, true, false);
         }
         else{
-                finish_view_capture_and_render($conn, false, false);
+            finish_view_capture_and_render($conn, false, false);
         }
 
         $conn->close();

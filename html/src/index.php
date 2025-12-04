@@ -29,8 +29,7 @@
         include 'calendar_view.php';
 
     }
-    //render_homepage($conn);
-    //echo(var_dump($_POST));
+    
     // Close connection
 
     // try{
