@@ -4,7 +4,7 @@ require_once __DIR__ . '/display_views_tools.php';
 start_view_capture();
 ?>
 <h2>Select a Subject or Class:</h2>
-        <form action="calendar_view.php" method="GET">
+        <form action="calendar_view.php" method="POST">
                 <p>Subject code(e.g. HIS, MAT): <input type="text" name="subject" /></p>
                 <p>Class (e.g. 110, 330): <input type="integer" name="class" /></p>
                 <p><input type="submit" value="See Details"/></p>
@@ -46,7 +46,7 @@ start_view_capture();
             mysqli_next_result($conn);
         }
         
-        echo(var_dump($_POST));
+        //echo(var_dump($_POST));
         if(isset($_POST["role_student"])){
             finish_view_capture_and_render($conn, true, false);
         }
