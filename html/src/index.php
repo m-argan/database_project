@@ -7,6 +7,7 @@
     // Set up and render page
     error_checking();
     $conn = config();
+    $my_post = $_POST;
 
     if(!isset($_POST['role_admin']) && !isset($_POST['role_student']))
     {render_login($conn, False);}
@@ -23,6 +24,7 @@
     elseif(isset($_POST['role_student']))
     {
         //echo "hi student";
+        $my_post['role'] = 12345;
         include 'calendar_view.php';
     }
     //render_homepage($conn);
