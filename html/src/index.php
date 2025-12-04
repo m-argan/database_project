@@ -10,7 +10,7 @@
 
     if(!isset($_GET['role_admin']) && !isset($_GET['role_student']))
     {render_login($conn, False);}
-    echo(var_dump($_GET));
+    // echo(var_dump($_GET));
     elseif(isset($_GET['role_admin']))
         {
             if($_GET['admin_password'] == 'p@ss4CLCDB')
