@@ -7,6 +7,7 @@
     // get password
     $txt_file = file_get_contents('../../../password.txt');
     $password = explode("\n", $txt_file);
+    echo($password);
     
     // Set up and render page
     error_checking();
