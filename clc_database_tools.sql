@@ -268,18 +268,24 @@ DELIMITER ;
 DROP PROCEDURE IF EXISTS calendar_pivot_view;
 DELIMITER //
 
-CREATE PROCEDURE calendar_pivot_view()
+DROP PROCEDURE IF EXISTS calendar_pivot_view;
+DELIMITER //
+
+CREATE PROCEDURE calendar_pivot_view(
+    IN subject_code CHAR(3),
+    IN class_number INT,
+    IN all_subjects BOOLEAN,
+    IN all_classes BOOLEAN
+)
 BEGIN
     DECLARE current_month INT;
     DECLARE current_year INT;
     DECLARE current_term VARCHAR(2);
     DECLARE query_statement VARCHAR(4000);
-    DECLARE dynamic_pivot_clause VARCHAR(1000);
 
     -- Displays current semester using current_date function
     SET current_month = MONTH(CURRENT_DATE());
     SET current_year = YEAR(CURRENT_DATE());
-
     IF current_month BETWEEN 2 AND 5 THEN
         SET current_term = 'SP';
     ELSEIF current_month BETWEEN 6 AND 7 THEN
@@ -290,9 +296,8 @@ BEGIN
         SET current_term = 'WI';
     END IF;
 
-    -- Create a derived table with a row number for each slot, partitioned by weekday and sorted by start time
-
-    SET query_statement = CONCAT('
+    -- Create the base query statement
+    SET query_statement = '
         WITH NumberedSlots AS (
             SELECT
                 ROW_NUMBER() OVER(PARTITION BY time_blocks.week_day_name ORDER BY time_blocks.time_block_start) AS row_num,
@@ -304,7 +309,18 @@ BEGIN
                 time_blocks.week_day_name
             FROM slots
             INNER JOIN time_blocks ON slots.time_block_id = time_blocks.time_block_id
-            WHERE term_code = ? AND year_term_year = ?
+            WHERE term_code = ? AND year_term_year = ?';
+
+    -- Conditionally add WHERE clauses for filtering
+    IF all_subjects = false THEN
+        SET query_statement = CONCAT(query_statement, ' AND subject_code = ?');
+        IF all_classes = false THEN
+                SET query_statement = CONCAT(query_statement, ' AND class_number = ?');
+        END IF;
+END IF;
+
+    -- Complete the query with the pivot logic
+    SET query_statement = CONCAT(query_statement, '
         )
         SELECT
             MAX(CASE WHEN week_day_name = "Su" THEN slot_details END) AS `Sunday`,
@@ -314,14 +330,24 @@ BEGIN
             MAX(CASE WHEN week_day_name = "TH" THEN slot_details END) AS `Thursday`
         FROM NumberedSlots
         GROUP BY row_num
-        ORDER BY row_num;
-    ');
+        ORDER BY row_num;');
 
+    -- Prepare and execute the statement with correct parameter handling
     PREPARE stmt FROM query_statement;
-    EXECUTE stmt USING current_term, current_year;
-    DEALLOCATE PREPARE stmt;
 
+    IF all_subjects = false THEN
+        IF all_classes = false THEN
+            EXECUTE stmt USING current_term, current_year, subject_code, class_number;
+        ELSE
+            EXECUTE stmt USING current_term, current_year, subject_code;
+        END IF;
+    ELSE
+        EXECUTE stmt USING current_term, current_year;
+    END IF;
+
+    DEALLOCATE PREPARE stmt;
 END //
+
 DELIMITER ;
 
 --Grant permissions
