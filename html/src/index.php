@@ -8,7 +8,6 @@
     $password = file_get_contents('../../../password.txt');
     $password = trim($password);
     
-    echo(var_dump($_POST));
     // Set up and render page
     error_checking();
     $conn = config();
