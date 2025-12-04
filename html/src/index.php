@@ -7,7 +7,7 @@
     // Set up and render page
     error_checking();
     $conn = config();
-    render_login($conn)
+    render_login($conn);
     //render_homepage($conn);
 
     // Close connection
