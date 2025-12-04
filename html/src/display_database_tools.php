@@ -79,9 +79,9 @@
                     <h1>Login</h1>
                 </div>
             </div>
-            <h1> Please select your role below: <h1>
+            <h1> Please enter your password to view the schedule builder: <h1>
         </head> 
-        <form method="POST">
+        <form method="GET">
         <input type="text" name="admin_password"/>
         <input type="submit" name="role_admin" value="Admin" />
         <input type="submit" name="role_student" value="Student" />

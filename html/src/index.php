@@ -8,13 +8,13 @@
     error_checking();
     $conn = config();
 
-    if(!isset($_POST['role_admin']) && !isset($_POST['role_student']))
+    if(!isset($_GET['role_admin']) && !isset($_GET['role_student']))
     {render_login($conn);}
-    elseif(isset($_POST['role_admin']))
+    elseif(isset($_GET['role_admin']))
         {
             render_homepage($conn);
         }
-    elseif(isset($_POST['role_student']))
+    elseif(isset($_GET['role_student']))
     {
         echo "hi student";
     }
