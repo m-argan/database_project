@@ -37,7 +37,7 @@ if (!function_exists('finish_view_capture_and_render')) {
      * @param mysqli $conn Active DB connection (used by sidebar/header)
      * @param bool $is_init If true, render homepage content path in template
      */
-    function finish_view_capture_and_render($conn, bool $is_init = false): void {
+    function finish_view_capture_and_render($conn, bool $is_init = false, $is_stu): void {
         // Safely get content from the most recent buffer
         $content = '';
         if (ob_get_level()) {
@@ -58,8 +58,13 @@ if (!function_exists('finish_view_capture_and_render')) {
             }
 
             // Normal web path: render full page with header/sidebar/footer
+            if($is_stu == false){
             render_display_table_page($conn, $is_init, $content);
-            return;
+            return;}
+            elseif($is_stu == true){
+                render_display_table_page_student($conn, $is_init, $content);
+                return;}
+            }
         }
 
         // Fallback: just output the captured content
