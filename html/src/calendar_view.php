@@ -15,9 +15,7 @@ start_view_capture();
         error_checking();
         $conn = config();
         
-        if(isset($_POST["submit"])){
-                echo "?>>";
-        }
+        
         
         if (isset($_GET['subject']) && !empty($_GET['subject']))
         {
