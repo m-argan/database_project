@@ -17,13 +17,13 @@ require_once __DIR__ . '/display_views_tools.php';
             mysqli_next_result($conn);
         }
 
-        echo(var_dump($_POST));
-        if(isset($_POST["role_admin"])){
-                finish_view_capture_and_render($conn, false, false);
-        }
-        elseif(isset($_POST["role_student"])){
+        //echo(var_dump($_POST));
+        if(isset($_POST["role_student"])){
                 echo "hi student";
                 finish_view_capture_and_render($conn, true, false);
+        }
+        else{
+                finish_view_capture_and_render($conn, false, false);
         }
 
         $conn->close();
