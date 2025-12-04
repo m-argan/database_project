@@ -25,7 +25,7 @@
         echo "hi student";
     }
     //render_homepage($conn);
-
+    echo(var_dump($_GET));
     // Close connection
     $conn->close();
 ?>
