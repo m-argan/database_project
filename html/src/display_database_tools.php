@@ -79,9 +79,10 @@
                     <h1>Login</h1>
                 </div>
             </div>
-            <h1> Are you jessica or student? <h1>
+            <h1> Please select your role below: <h1>
         </head> 
         <form method="POST">
+        <input type="text" name="admin_password"/>
         <input type="submit" name="role_admin" value="Admin" />
         <input type="submit" name="role_student" value="Student" />
         </form>
