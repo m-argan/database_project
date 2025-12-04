@@ -372,5 +372,42 @@
     <?php
     }
 
+
+    function render_display_table_page_student($conn, $is_init = false, $content = '') { ?>
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <link rel="stylesheet" href="nav.css">
+            <title>CLC Database</title>
+        </head>
+        <body> 
+            <?php
+            //render_header();
+            ?>
+
+            <div class="main"><?php
+                render_sidebar($conn); ?>
+                <div class="page-content"><?php
+                if (!empty($content)) {     // ADDITION FROM COPILOT
+                    echo $content;          // ADDITION FROM COPILOT
+                } else if ($is_init == True) {    // ADDITION FROM COPILOT ?>
+                    <p>Welcome to the Tutoring Database!</p>
+                    <p>Select a table name or view to get started</p><?php
+                } else {
+                    render_display_table($conn);
+                }
+            ?></div>
+            </div>
+
+            <?php
+            //render_footer();
+            ?>
+
+        </body>
+        </html>
+    <?php
+    }
+
+
     
 ?>
