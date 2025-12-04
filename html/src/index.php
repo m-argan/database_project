@@ -39,6 +39,6 @@
         $conn->close();
     }
     catch(Exception $e) {
-        //
+        echo 'Message: ' .$e->getMessage();
     }
 ?>
