@@ -189,14 +189,14 @@
         if (isset($_POST['submit']) || isset($_POST['yes']) || isset($_POST['no'])) {
             $inserted = input_new_data($conn);
 
-            if ($inserted || isset($_POST['no'])) {
-                // Redirect after insert or cancel (PRG)
-                // COPILOT ADDITION
-                if (php_sapi_name() !== 'cli' && isset($_SERVER['REQUEST_URI'])) {
-                    header("Location: {$_SERVER['REQUEST_URI']}", true, 303);
-                    exit();
-                }
-            }
+            // if ($inserted || isset($_POST['no'])) {
+            //     // Redirect after insert or cancel (PRG)
+            //     // COPILOT ADDITION
+            //     if (php_sapi_name() !== 'cli' && isset($_SERVER['REQUEST_URI'])) {
+            //         header("Location: {$_SERVER['REQUEST_URI']}", true, 303);
+            //         exit();
+            //     }
+            // }
             
         }
 

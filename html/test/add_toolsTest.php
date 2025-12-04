@@ -8,7 +8,7 @@ require_once __DIR__ . '/../src/display_table_tools.php';
 
 class add_toolsTest extends TestCase
 {
-    // private $conn;
+    private $conn;
     // protected function setUp(): void {
     //     $this->conn = config();
     // }
@@ -70,7 +70,7 @@ protected function tearDown(): void
     public function testInsertIntoTableInvalidForeignKey()
     {
         $this->expectException(Exception::class);
-        $this->expectExceptionMessage("does not exist");
+        $this->expectExceptionMessage("Value '123456' for column 'tutor_id' does not exist in 'tutors'");
         $data = [
             "tutor_id" => "123456",
             "subject_code" => "CSC" 

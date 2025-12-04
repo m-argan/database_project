@@ -79,7 +79,7 @@ function input_new_data($conn): bool {
 
     // Insert
     insert_into_table($conn, $table, $_POST);
-    echo "<p style='color:green;'>Record added successfully.</p>";
+    // echo "<p style='color:green;'>Record added successfully.</p>";
     return true;
 }
 
@@ -162,12 +162,14 @@ function insert_into_table($conn, $table, $data) {
                 $check->store_result();
                 
                 if ($check->num_rows == 0) {
-                    throw new Exception("Value '$val' for column '$col' does not exist in '{$ref['ref_table']}'");
+                 throw new Exception("Value '$val' for column '$col' does not exist in '{$ref['ref_table']}'");
+                   
                 }
             }
             catch (Exception $e) {
                 echo "Error: " . $e->getMessage();
-                $check->close();
+                //$check->close();
+                return;
                 
             }
             $check->close();
@@ -184,7 +186,7 @@ function insert_into_table($conn, $table, $data) {
     $stmt->bind_param($types, ...$values);
     $stmt->execute();
     $stmt->close();
-    
+    echo "<p style='color:green;'>Record added successfully.</p>";
 }
 
 /*
