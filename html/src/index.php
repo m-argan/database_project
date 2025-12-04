@@ -16,9 +16,9 @@
     // echo(var_dump($_GET));
     elseif(isset($_POST['role_admin']))
         {
-            if($_POST['admin_password'] == "test")
+            if($_POST['admin_password'] == $password)
             render_homepage($conn);
-            elseif($_POST['admin_password'] != "test")
+            elseif($_POST['admin_password'] != $password)
             {
                 render_login($conn, True);
             }
