@@ -83,7 +83,15 @@
         </form>
        
         <?php
-    
+
+        if(isset($_POST['role_admin']))
+        {
+            render_homepage($conn)
+        }
+        if(isset($_POST['role_student']))
+        {
+            echo "hi student";
+        }
 
        // if jess:
        // render_homepage($conn);
