@@ -14,7 +14,10 @@ start_view_capture();
         require_once __DIR__ . "/display_table_tools.php";
         error_checking();
         $conn = config();
-
+        
+        if(isset($_POST["submit"])){
+                echo "?>>";
+        }
         
         if (isset($_GET['subject']) && !empty($_GET['subject']))
         {
