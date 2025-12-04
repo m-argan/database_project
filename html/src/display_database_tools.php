@@ -86,7 +86,7 @@
 
         if(isset($_POST['role_admin']))
         {
-            render_homepage($conn)
+            render_homepage($conn);
         }
         if(isset($_POST['role_student']))
         {
