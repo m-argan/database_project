@@ -78,14 +78,15 @@
                 <div class="headertitle">
                     <h1>Login</h1>
                 </div>
+            <h1> STUDENTS-> Click the button below to view the schedule as a guest: <h1>
+                <form method="POST">    
+                <input type="submit" name="role_student" value="Student View" />
+            <h4> ADMIN-> Enter your password to view the schedule builder: <h4>
+                <input type="text" name="admin_password" placeholder='Enter password'/>
+                <input type="submit" name="role_admin" value="Login" />
+                </form>
             </div>
-            <h1> Please enter your password to view the schedule builder: <h1>
-        </head> 
-        <form method="POST">
-        <input type="text" name="admin_password"/>
-        <input type="submit" name="role_admin" value="Admin" />
-        <input type="submit" name="role_student" value="Student" />
-        </form>
+
        
         <?php
 
