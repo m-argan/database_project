@@ -24,8 +24,6 @@
     {
         echo "hi student";
     }
-    header("Location: {$_SERVER['REQUEST_URI']}", true, 303);
-    exit();
     //render_homepage($conn);
     echo(var_dump($_GET));
     // Close connection

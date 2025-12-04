@@ -93,6 +93,8 @@
         {
             echo "Incorrect password, please try again";
             $display_error = False;
+            header("Location: {$_SERVER['REQUEST_URI']}", true, 303);
+            exit();
         }
 
        // if jess:
