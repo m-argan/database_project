@@ -9,14 +9,15 @@
     $conn = config();
 
     if(!isset($_GET['role_admin']) && !isset($_GET['role_student']))
-    {render_login($conn);}
+    {render_login($conn, False);}
     elseif(isset($_GET['role_admin']))
         {
             if($_GET['admin_password'] == 'p@ss4CLCDB')
             render_homepage($conn);
             else
             {
-                ?> <p>Incorrect password, please try again</p><?php
+                
+                render_login($conn, True);
             }
         }
     elseif(isset($_GET['role_student']))

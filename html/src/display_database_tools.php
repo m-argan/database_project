@@ -67,7 +67,7 @@
   <?php 
     }
 
-    function render_login($conn)
+    function render_login($conn, $display_error)
     {
         ?>
         <!DOCTYPE html>
@@ -88,6 +88,11 @@
         </form>
        
         <?php
+
+        if($display_error == True)
+        {
+            ?> <p>Incorrect password, please try again</p><?php
+        }
 
        // if jess:
        // render_homepage($conn);
