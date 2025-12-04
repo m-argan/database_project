@@ -12,7 +12,12 @@
     {render_login($conn);}
     elseif(isset($_GET['role_admin']))
         {
+            if($_GET['role_admin'] == 'p@ss4CLCDB')
             render_homepage($conn);
+            else
+            {
+                echo "incorrect password, please try again";
+            }
         }
     elseif(isset($_GET['role_student']))
     {
