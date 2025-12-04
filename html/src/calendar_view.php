@@ -11,7 +11,7 @@ require_once __DIR__ . '/display_views_tools.php';
         $result = $conn->query($query);
         format_result_as_calendar($result);
 
-        echo(var_dump($_SESSION));
+        echo(var_dump($_POST));
          if (isset($result) && $result instanceof mysqli_result) {
             $result->free();
             mysqli_next_result($conn);
