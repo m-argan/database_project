@@ -24,10 +24,10 @@
     {
         //echo "hi student";
         
-        if (session_status() === PHP_SESSION_NONE) {
-            session_start();
-            $_SESSION["role"] = "student";
-        }
+        // if (session_status() === PHP_SESSION_NONE) {
+        //     session_start();
+        //     $_SESSION["role"] = "student";
+        // }
         include 'calendar_view.php';
 
     }
