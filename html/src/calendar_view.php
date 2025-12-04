@@ -3,12 +3,7 @@ require_once __DIR__ . '/display_views_tools.php';
 
 start_view_capture();
 ?>
-<h2>Select a Subject or Class:</h2>
-        <form method="POST">
-                <p>Subject code(e.g. HIS, MAT): <input type="text" name="subject" /></p>
-                <p>Class (e.g. 110, 330): <input type="integer" name="class" /></p>
-                <p><input type="submit" value="See Details"/></p>
-        </form>
+
 <?php
         require_once __DIR__ . "/setup_tools.php";
         require_once __DIR__ . "/display_table_tools.php";
