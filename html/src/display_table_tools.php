@@ -40,6 +40,37 @@
     <?php 
     }
 
+    // Edited version of format_result_as_table for calendar view
+    function format_result_as_calendar(mysqli_result $result): void {
+        ?>
+
+        <table style="width:100%">
+            <thead>
+                <tr>
+                    <?php
+                        // Header rows
+                        while ($field = $result->fetch_field()) {
+                            echo "<td><b>$field->name</b></td>";
+                        }
+                    ?>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                    // Data rows
+                    while ($row = $result->fetch_row()) {
+                        echo "<tr>";
+                        for ($i = 0; $i < count($row); $i++) {
+                                $cell_value = $row[$i] ?? '';
+                                echo "<td>" . nl2br(htmlspecialchars($cell_value)) . "</td>";
+                        }
+                        echo "</tr>";
+                    }
+            ?>
+            </tbody>
+        </table>
+    <?php
+    }
 
     // Function for formatting table contents -- WITH DELETE CHECKBOXES.
     // Same function as above, but a modified version to include deletion compatibility.
