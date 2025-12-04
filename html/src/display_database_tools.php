@@ -92,6 +92,7 @@
         if($display_error == True)
         {
             echo "Incorrect password, please try again";
+            $display_error = False;
         }
 
        // if jess:
