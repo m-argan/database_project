@@ -47,9 +47,10 @@ start_view_capture();
             mysqli_next_result($conn);
         }
         
-        if(isset($_POST["role_student"])){
-            finish_view_capture_and_render($conn, true, false);
-        }
+        // if(isset($_POST["role_student"])){
+        //     finish_view_capture_and_render($conn, true, false);
+        // }
+        finish_view_capture_and_render($conn, true, false);
 
         $conn->close();
 ?>
