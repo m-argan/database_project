@@ -39,8 +39,8 @@
                 <p>Subject code(e.g. HIS, MAT): <input type="text" name="subject" /></p>
                 <p>Class (e.g. 110, 330): <input type="integer" name="class" /></p>
                 <p><input type="submit" value="See Details"/></p>
-        </form>
-        include 'calendar_view.php'; <?php
+        </form> <?php
+        include 'calendar_view.php'; 
 
     }
     
