@@ -22,7 +22,8 @@
         }
     elseif(isset($_POST['role_student']))
     {
-        echo "hi student";
+        //echo "hi student";
+        include 'calendar_view.php';
     }
     //render_homepage($conn);
     //echo(var_dump($_POST));
