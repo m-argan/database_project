@@ -8,24 +8,24 @@
     error_checking();
     $conn = config();
 
-    if(!isset($_GET['role_admin']) && !isset($_GET['role_student']))
+    if(!isset($_POST['role_admin']) && !isset($_POST['role_student']))
     {render_login($conn, False);}
     // echo(var_dump($_GET));
-    elseif(isset($_GET['role_admin']))
+    elseif(isset($_POST['role_admin']))
         {
-            if($_GET['admin_password'] == 'p@ss4CLCDB')
+            if($_POST['admin_password'] == 'p@ss4CLCDB')
             render_homepage($conn);
-            elseif($_GET['admin_password'] != 'p@ss4CLCDB')
+            elseif($_POST['admin_password'] != 'p@ss4CLCDB')
             {
                 render_login($conn, True);
             }
         }
-    elseif(isset($_GET['role_student']))
+    elseif(isset($_POST['role_student']))
     {
         echo "hi student";
     }
     //render_homepage($conn);
-    echo(var_dump($_GET));
+    echo(var_dump($_POST));
     // Close connection
     $conn->close();
 ?>
