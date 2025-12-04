@@ -67,6 +67,23 @@
   <?php 
     }
 
+    function render_login($conn)
+    {
+       ?>
+       <!DOCTYPE html>
+       <html>
+       <head>
+         <link rel="stylesheet" href="nav.css">
+           <title>Login</title>
+           <h1> Are you jessica or student? <h1>
+       </head> <?php
+
+
+       // if jess:
+       // render_homepage($conn);
+    }
+
+
     // Homepage rendering function. Calls function in display_table_tools.php.
     function render_homepage($conn)
     {
