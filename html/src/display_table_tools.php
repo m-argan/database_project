@@ -386,7 +386,7 @@
             ?>
 
             <div class="main"><?php
-                render_sidebar($conn); ?>
+                //render_sidebar($conn); ?>
                 <div class="page-content"><?php
                 if (!empty($content)) {     // ADDITION FROM COPILOT
                     echo $content;          // ADDITION FROM COPILOT
