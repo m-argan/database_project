@@ -6,7 +6,7 @@
 
     // get password
     $password = file_get_contents('../../../password.txt');
-    $password = str_replace(' ', '', $password);
+    $password = trim($password);
     
     // Set up and render page
     error_checking();
