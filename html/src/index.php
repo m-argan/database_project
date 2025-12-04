@@ -18,6 +18,8 @@
             elseif($_GET['admin_password'] != 'p@ss4CLCDB')
             {
                 render_login($conn, True);
+                header("Location: {$_SERVER['REQUEST_URI']}", true, 303);
+                exit();
             }
         }
     elseif(isset($_GET['role_student']))
