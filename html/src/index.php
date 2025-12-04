@@ -9,6 +9,14 @@
     $conn = config();
     if(!isset($_POST['role_admin']) && !isset($_POST['role_student']))
     {render_login($conn);}
+    elseif(isset($_POST['role_admin']))
+        {
+            render_homepage($conn);
+        }
+    elseif(isset($_POST['role_student']))
+    {
+        echo "hi student";
+    }
     //render_homepage($conn);
 
     // Close connection
