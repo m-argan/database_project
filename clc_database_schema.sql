@@ -155,8 +155,30 @@ DELIMITER ;
 
 DELIMITER //
 
-CREATE TRIGGER tutor_qualifications
+CREATE TRIGGER tutor_qualifications_agreed_classes
 BEFORE INSERT ON tutor_agreed_classes
+FOR EACH ROW
+BEGIN
+    DECLARE qualified INT DEFAULT 0;
+
+    SELECT COUNT(*)
+    INTO qualified
+    FROM tutor_qualified_subjects
+    WHERE tutor_id = NEW.tutor_id
+      AND TRIM(subject_code) = TRIM(NEW.subject_code);
+
+    IF qualified = 0 THEN
+        SIGNAL SQLSTATE '45000'
+            SET MESSAGE_TEXT = 'Tutor is unqualified.';
+    END IF;
+
+END //
+
+DELIMITER ;
+
+DELIMITER //
+CREATE TRIGGER tutor_qualifications_slots
+BEFORE INSERT ON slots
 FOR EACH ROW
 BEGIN
     DECLARE qualified INT DEFAULT 0;

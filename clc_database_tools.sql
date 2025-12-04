@@ -268,8 +268,6 @@ DELIMITER ;
 DROP PROCEDURE IF EXISTS calendar_pivot_view;
 DELIMITER //
 
-DROP PROCEDURE IF EXISTS calendar_pivot_view;
-DELIMITER //
 
 CREATE PROCEDURE calendar_pivot_view(
     IN subject_code CHAR(3),
