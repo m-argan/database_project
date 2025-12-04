@@ -1,11 +1,6 @@
 <?php
 
-// Temporary functions to help render the View pages, generated
-// by Copilot, just so things can function on the front end for now.
-// Will eventually factor all the logic into one function.
-
-
-// --- COPILOT GENERATED CODE BEGINS NOW ---
+// --- COPILOT GENERATED ---
 
 
 /**
