@@ -46,6 +46,7 @@
     function format_result_as_calendar(mysqli_result $result): void {
         ?>
 
+        <div class="calendar">
         <table style="width:100%">
             <thead>
                 <tr>
@@ -71,6 +72,7 @@
             ?>
             </tbody>
         </table>
+        </div>
     <?php
     }
 
@@ -328,7 +330,7 @@
 
     }
     
-    
+
     // Main function for rendering the webpage altogether. The initial domino, so to speak. 
     // Called in display_table.php.
     // Notes:

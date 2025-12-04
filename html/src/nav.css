@@ -31,7 +31,7 @@ body {
 }
 
 .header table {
-    width: 75%;
+    width: 100%;
 }
 
 .topnav {
@@ -118,9 +118,55 @@ body {
             
         }
 
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+
+        /* Calendar-specific styles */
+        .calendar table {
+            table-layout: fixed;
+        }
+
+        /* Alternate column colors for calendar */
+        .calendar table tr th:nth-child(1),
+        .calendar table tr td:nth-child(1) {
+            background-color: lightgrey;
+        }
+
+        .calendar table tr th:nth-child(2),
+        .calendar table tr td:nth-child(2) {
+            background-color: white;
+        }
+
+        .calendar table tr th:nth-child(3),
+        .calendar table tr td:nth-child(3) {
+            background-color: lightgrey;
+        }
+
+        .calendar table tr th:nth-child(4),
+        .calendar table tr td:nth-child(4) {
+            background-color: white; 
+        }
+
+        .calendar table tr th:nth-child(5),
+        .calendar table tr td:nth-child(5) {
+            background-color: lightgrey; 
+        }
+
+
     }
 
 /* --- END MAIN / PAGE CONTENT --- */
+
+
+
 
 /* --- BEGIN FOOTER --- */
 
