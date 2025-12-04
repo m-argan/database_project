@@ -62,7 +62,7 @@ if (!function_exists('finish_view_capture_and_render')) {
             render_display_table_page($conn, $is_init, $content);
             return;}
             elseif($is_stu == true){
-                render_display_table_page($conn, $is_init, $content);
+                render_display_table_page_student($conn, $is_init, $content);
                 return;
             }
         }

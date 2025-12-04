@@ -23,7 +23,7 @@ require_once __DIR__ . '/display_views_tools.php';
         }
         elseif(isset($_POST["role_student"])){
                 echo "hi student";
-                finish_view_capture_and_render_student($conn, true, false);
+                finish_view_capture_and_render($conn, true, false);
         }
 
         $conn->close();
