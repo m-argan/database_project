@@ -16,7 +16,6 @@ start_view_capture();
         $conn = config();
         
         
-        
         if (isset($_GET['subject']) && !empty($_GET['subject']))
         {
                 $subject = htmlspecialchars($_GET['subject']);
@@ -48,12 +47,8 @@ start_view_capture();
             mysqli_next_result($conn);
         }
         
-        echo(var_dump($_POST));
         if(isset($_POST["role_student"])){
             finish_view_capture_and_render($conn, true, false);
-        }
-        else{
-            finish_view_capture_and_render($conn, false, false);
         }
 
         $conn->close();
