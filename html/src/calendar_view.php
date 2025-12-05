@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . '/display_views_tools.php';
+require_once __DIR__ . "/display_database_tools.php";
 
 start_view_capture();
 ?>
@@ -18,9 +19,7 @@ start_view_capture();
 
         if(isset($_GET['submit_back']))
         {
-                include 'index.php'; 
-                header("Location: {$_SERVER['REQUEST_URI']}", true, 303);
-                exit();
+                render_login($conn, False);
         }
 
         if (isset($_GET['subject']) && !empty($_GET['subject']))
