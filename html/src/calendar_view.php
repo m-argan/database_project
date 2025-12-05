@@ -20,9 +20,7 @@ start_view_capture();
         echo(var_dump($_POST));
         if(isset($_POST['submit_back']))
         {
-                include_once 'index.php';
-                header("Location: {$_SERVER['REQUEST_URI']}", true, 303);
-                    exit();
+                render_login($conn, False);
         }
 
         if (isset($_GET['subject']) && !empty($_GET['subject']))
