@@ -132,7 +132,7 @@ function perform_alter($conn, $doExit = true)
     try {
     $stmt->execute();
     } catch (mysqli_sql_exception $error) {
-    return "This value cannot be edited.";
+    return "This value cannot be edited."; 
 }
 
 
@@ -142,12 +142,12 @@ function perform_alter($conn, $doExit = true)
     {
         display_session_errors();
     }
-    else if ($doExit) {
+    if ($doExit && empty($error_message)) {
     header("Location: display_table.php?tablename=" . urlencode($table));
     exit;
-}
+    }
 
-return "";
+    return null; // success case
 }
 
 
