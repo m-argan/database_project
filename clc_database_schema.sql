@@ -279,3 +279,30 @@ BEGIN
 END //
 
 DELIMITER ;
+
+
+
+DELIMITER //
+
+CREATE TRIGGER prevent_tutor_unagreed_time
+BEFORE INSERT ON slots
+FOR EACH ROW
+BEGIN
+    DECLARE allowed_count INT DEFAULT 0;
+
+    -- Check whether the tutor agreed to this time block
+    SELECT COUNT(*)
+    INTO allowed_count
+    FROM tutor_availabilities tat
+    WHERE tat.tutor_id = NEW.tutor_id
+      AND tat.time_block_id = NEW.time_block_id;
+
+    IF allowed_count = 0 THEN
+        SIGNAL SQLSTATE '45000'
+            SET MESSAGE_TEXT = 'Tutor has not agreed to this time block.';
+    END IF;
+
+END //
+
+DELIMITER ;
+
