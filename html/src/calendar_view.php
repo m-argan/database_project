@@ -17,8 +17,6 @@ start_view_capture();
         error_checking();
         $conn = config();
 
-        echo "<a href='index.php'>Back to login</a>";
-
         if (isset($_GET['subject']) && !empty($_GET['subject']))
         {
                 $subject = htmlspecialchars($_GET['subject']);
@@ -51,6 +49,8 @@ start_view_capture();
         }
 
         finish_view_capture_and_render($conn, true, false);
+
+        echo "<a href='index.php'>Back to login</a>";
 
         $conn->close();
 ?>
