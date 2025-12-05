@@ -9,7 +9,6 @@ start_view_capture();
                         <p>Subject code(e.g. HIS, MAT): <input type="text" name="subject" /></p>
                         <p>Class (e.g. 110, 330): <input type="integer" name="class" /></p>
                         <p><input type="submit" value="See Details"/></p>
-                        <p><input type="submit" name= "submit_back" value="Back"/></p>
                 </form>
         <?php
         require_once __DIR__ . "/setup_tools.php";
@@ -17,13 +16,7 @@ start_view_capture();
         error_checking();
         $conn = config();
 
-        echo(var_dump($_POST));
-        if(isset($_POST['submit_back']))
-        {
-                //render_login($conn, False);
-                echo "<a href='index.php'>back</a>";
-                
-        }
+        echo "<a href='index.php'>back</a>";
 
         if (isset($_GET['subject']) && !empty($_GET['subject']))
         {
