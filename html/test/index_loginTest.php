@@ -1,6 +1,8 @@
 <?php
 use PHPUnit\Framework\TestCase;
 
+// Test for login page
+// WRITTEN BY COPILOT (Claude Haiku 4.5)
 require_once __DIR__ . '/../src/setup_tools.php';
 require_once __DIR__ . '/../src/display_database_tools.php';
 
