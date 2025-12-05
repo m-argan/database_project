@@ -240,6 +240,8 @@ function convert_12h_to_24h($t) {
     return date("H:i", $parsed);
 }
 
+//This function redirects according to which view is being added to.
+//If the view is some version of the slots table, the user will be redirected to add information directly there, to ensure no PK/FK rules are broken
 function display_adding_forms_view($conn, $view)
 {
         if ($view == 1 || $view == 2 || $view == 3)
@@ -258,6 +260,8 @@ function display_adding_forms_view($conn, $view)
         }
 }
 
+//This function is an altered version of the add functionality edited for views.
+//Since the tables which will be added to are known, the view builds around user input with these tables in mind
 function perform_add_view($conn)
 {
         // Get user input and sanitize.
