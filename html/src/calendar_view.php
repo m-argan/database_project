@@ -1,4 +1,5 @@
 <?php
+//Page which displays the calendar_view. Uses a series "if" statements to determine the view procedure's arguments
 require_once __DIR__ . '/display_views_tools.php';
 require_once __DIR__ . "/display_database_tools.php";
 
