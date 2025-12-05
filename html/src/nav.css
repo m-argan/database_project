@@ -24,12 +24,6 @@ body {
     background-color: #363333;
 }
 
-.header link {
-  color: rgb(107, 128, 0);
-  background-color: transparent;
-  text-decoration: none;
-}
-
 .header .headertitle h1 {
     margin: 0px;
     padding: 15px;
