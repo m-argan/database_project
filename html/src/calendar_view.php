@@ -19,6 +19,7 @@ start_view_capture();
 
         if(isset($_GET['submit_back']))
         {
+                echo "hi";
                 render_login($conn, False);
         }
 
