@@ -101,7 +101,9 @@ INSERT INTO tutor_availabilities(tutor_id, time_block_id) VALUES
 (000001,2),
 (000001,10),
 (123543, 3),
-(654321, 9);
+(654321, 9),
+(123543, 2),
+(654321, 6);
 
 INSERT INTO slots(time_block_id, building_name, place_room_number,subject_code,class_number,tutor_id) VALUES
 (1,"Crounse", 101,"MAT", "330", 380932),

@@ -376,3 +376,182 @@ END$$
 DELIMITER ;
 
 CALL grant_perm_if_exists();
+
+-- Trigger to prevent slot overlap in the same room
+DELIMITER //
+
+CREATE TRIGGER prevent_slot_overlap
+BEFORE INSERT ON slots
+FOR EACH ROW
+BEGIN
+    DECLARE overlap_count INT DEFAULT 0;
+
+    SELECT COUNT(s.slot_id)
+    INTO overlap_count
+    FROM slots AS s
+    JOIN time_blocks AS tb_existing
+        ON s.time_block_id = tb_existing.time_block_id
+    JOIN time_blocks AS tb_new
+        ON tb_new.time_block_id = NEW.time_block_id
+    WHERE
+        s.deleted_when = 0
+        AND s.building_name = NEW.building_name
+        AND s.place_room_number = NEW.place_room_number
+
+        AND tb_existing.week_day_name = tb_new.week_day_name
+        AND tb_existing.term_code = tb_new.term_code
+        AND tb_existing.year_term_year = tb_new.year_term_year
+
+        AND STR_TO_DATE(tb_new.time_block_start, '%H:%i')
+              < STR_TO_DATE(tb_existing.time_block_end, '%H:%i')
+        AND STR_TO_DATE(tb_new.time_block_end, '%H:%i')
+              > STR_TO_DATE(tb_existing.time_block_start, '%H:%i');
+
+    IF overlap_count > 0 THEN
+        SIGNAL SQLSTATE '45000'
+            SET MESSAGE_TEXT = 'Time slot overlaps an existing slot in this room.';
+    END IF;
+
+END //
+
+DELIMITER ;
+
+-- Trigger to check if tutors are qualified on insert in tutor agreed classes
+DELIMITER //
+
+CREATE TRIGGER tutor_qualifications_agreed_classes
+BEFORE INSERT ON tutor_agreed_classes
+FOR EACH ROW
+BEGIN
+    DECLARE qualified INT DEFAULT 0;
+
+    SELECT COUNT(*)
+    INTO qualified
+    FROM tutor_qualified_subjects
+    WHERE tutor_id = NEW.tutor_id
+      AND TRIM(subject_code) = TRIM(NEW.subject_code);
+
+    IF qualified = 0 THEN
+        SIGNAL SQLSTATE '45000'
+            SET MESSAGE_TEXT = 'Tutor is unqualified.';
+    END IF;
+
+END //
+
+DELIMITER ;
+
+-- Trigger to check if tutors are qualified on insert in slots
+DELIMITER //
+CREATE TRIGGER tutor_qualifications_slots
+BEFORE INSERT ON slots
+FOR EACH ROW
+BEGIN
+    DECLARE qualified INT DEFAULT 0;
+
+    SELECT COUNT(*)
+    INTO qualified
+    FROM tutor_qualified_subjects
+    WHERE tutor_id = NEW.tutor_id
+      AND TRIM(subject_code) = TRIM(NEW.subject_code);
+
+    IF qualified = 0 THEN
+        SIGNAL SQLSTATE '45000'
+            SET MESSAGE_TEXT = 'Tutor is unqualified.';
+    END IF;
+
+END //
+
+DELIMITER ;
+
+--Trigger to prevent overlapping time slot for tutors on insert
+DELIMITER //
+
+CREATE TRIGGER prevent_tutor_time_overlap
+BEFORE INSERT ON slots
+FOR EACH ROW
+BEGIN
+    DECLARE overlap_count INT DEFAULT 0;
+
+    SELECT COUNT(s.slot_id)
+    INTO overlap_count
+    FROM slots AS s
+    JOIN time_blocks AS tb_existing
+        ON s.time_block_id = tb_existing.time_block_id
+    JOIN time_blocks AS tb_new
+        ON tb_new.time_block_id = NEW.time_block_id
+    WHERE
+        s.deleted_when = 0
+        AND s.tutor_id = NEW.tutor_id
+
+        -- same weekday / term / year
+        AND tb_existing.week_day_name = tb_new.week_day_name
+        AND tb_existing.term_code = tb_new.term_code
+        AND tb_existing.year_term_year = tb_new.year_term_year
+
+        -- time overlap condition
+        AND STR_TO_DATE(tb_new.time_block_start, '%H:%i')
+              < STR_TO_DATE(tb_existing.time_block_end, '%H:%i')
+        AND STR_TO_DATE(tb_new.time_block_end, '%H:%i')
+              > STR_TO_DATE(tb_existing.time_block_start, '%H:%i');
+
+    IF overlap_count > 0 THEN
+        SIGNAL SQLSTATE '45000'
+            SET MESSAGE_TEXT = 'Tutor already has a conflicting time slot.';
+    END IF;
+
+END //
+
+DELIMITER ;
+
+
+
+--Trigger to check if tutors are being scheduled to their agreed times
+DELIMITER //
+
+CREATE TRIGGER prevent_tutor_unagreed_time
+BEFORE INSERT ON slots
+FOR EACH ROW
+BEGIN
+    DECLARE allowed_count INT DEFAULT 0;
+
+    -- Check whether the tutor agreed to this time block
+    SELECT COUNT(*)
+    INTO allowed_count
+    FROM tutor_availabilities tat
+    WHERE tat.tutor_id = NEW.tutor_id
+      AND tat.time_block_id = NEW.time_block_id;
+
+    IF allowed_count = 0 THEN
+        SIGNAL SQLSTATE '45000'
+            SET MESSAGE_TEXT = 'Tutor has not agreed to this time block.';
+    END IF;
+
+END //
+
+DELIMITER ;
+
+-- Trigger to check if the class actually exists
+DELIMITER //
+
+CREATE TRIGGER check_valid_class_for_slot
+BEFORE INSERT ON slots
+FOR EACH ROW
+BEGIN
+    DECLARE class_exists INT DEFAULT 0;
+
+    -- Check if (subject_code, class_number) pair exists in classes
+    SELECT COUNT(*)
+    INTO class_exists
+    FROM classes
+    WHERE subject_code = NEW.subject_code
+      AND class_number = NEW.class_number;
+
+    IF class_exists = 0 THEN
+        SIGNAL SQLSTATE '45000'
+            SET MESSAGE_TEXT =
+                'Invalid class: (subject_code, class_number) pair does not exist in classes.';
+    END IF;
+
+END //
+
+DELIMITER ;
