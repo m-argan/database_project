@@ -4,38 +4,17 @@ require_once __DIR__ . "/display_database_tools.php";
 require_once __DIR__ . "/display_table_tools.php";
 require_once __DIR__ . "/alter_tools.php";
 
+error_checking();
 $conn = config();
-$error_message = null;
 
-// Was the form submitted?
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_btn'])) {
 
-    // Safely check for tablename
-    if (!isset($_POST['tablename'])) {
-        $error_message = "Error: Missing table name.";
-    } else {
-        $error_message = perform_alter($conn, false); // doExit=false
-    }
+if (isset($_POST['submit_btn'])) {
+    perform_alter($conn);
+    display_session_errors();
+} else {
+    $result = get_result($conn);
+    alt($conn);
 }
 
-// Now display the form (always)
+$conn->close();
 ?>
-
-<!DOCTYPE html>
-<html>
-<body>
-
-<?php if (!empty($error_message)): ?>
-    <p style="color:red;"><?= htmlspecialchars($error_message); ?></p>
-<?php endif; ?>
-
-<?php
-// ALWAYS display the form after processing
-$result = get_result($conn);
-alt($conn);
-?>
-
-</body>
-</html>
-
-<?php $conn->close(); ?>

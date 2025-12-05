@@ -130,24 +130,22 @@ function perform_alter($conn, $doExit = true)
 
     // If user attempts to change primary key(s), throws exception 
     try {
-    $stmt->execute();
+        $stmt->execute();
     } catch (mysqli_sql_exception $error) {
-    return "This value cannot be edited."; 
-}
-
-
+        $_SESSION['pk_error_msg'] = "Cannot alter primary keys";
+        
+    }
     
     // Redirects to make updates display on webpage
     if(isset($_SESSION['pk_error_msg']))
     {
         display_session_errors();
     }
-    if ($doExit && empty($error_message)) {
-    header("Location: display_table.php?tablename=" . urlencode($table));
-    exit;
+    else if ($doExit) {
+        header("Location: display_table.php?tablename=" . urlencode($table));
+        exit;
     }
-
-    return null; // success case
+    return true;
 }
 
 
@@ -173,7 +171,7 @@ function get_result($conn)
 function display_session_errors(){
 
     if (array_key_exists('pk_error_msg', $_SESSION) && $_SESSION['pk_error_msg'] == true) {
-        //echo "<p style='color:red;'>This value cannot be edited!.</p>";
+        echo "<p style='color:red;'>This value cannot be edited!.</p>";
         unset($_SESSION['pk_error_msg']);
     }
 
