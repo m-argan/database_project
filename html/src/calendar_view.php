@@ -21,7 +21,8 @@ start_view_capture();
         if(isset($_POST['submit_back']))
         {
                 include_once 'index.php';
-                $conn->close();
+                header("Location: {$_SERVER['REQUEST_URI']}", true, 303);
+                    exit();
         }
 
         if (isset($_GET['subject']) && !empty($_GET['subject']))
