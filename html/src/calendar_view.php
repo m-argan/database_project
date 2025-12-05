@@ -17,9 +17,9 @@ start_view_capture();
         error_checking();
         $conn = config();
 
+        echo(var_dump($_GET));
         if(isset($_GET['submit_back']))
         {
-                echo "hi";
                 render_login($conn, False);
         }
 
