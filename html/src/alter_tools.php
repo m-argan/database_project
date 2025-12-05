@@ -132,10 +132,9 @@ function perform_alter($conn, $doExit = true)
     try {
     $stmt->execute();
     } catch (mysqli_sql_exception $error) {
-        $error_message = "This value cannot be edited.";
-        include "display_alter.php"; // reload same page with error
-        return;
-    }
+    return "This value cannot be edited.";
+}
+
 
     
     // Redirects to make updates display on webpage
@@ -144,10 +143,11 @@ function perform_alter($conn, $doExit = true)
         display_session_errors();
     }
     else if ($doExit) {
-        header("Location: display_table.php?tablename=" . urlencode($table));
-        exit;
-    }
-    return true;
+    header("Location: display_table.php?tablename=" . urlencode($table));
+    exit;
+}
+
+return "";
 }
 
 
