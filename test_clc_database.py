@@ -109,6 +109,7 @@ class TestCLCDatabase(unittest.TestCase):
         # can't delete year id
         self.performDelete("year_term","term_id",1)
 
+    #Tests to check accurate numbers of entities
     def testTermsCount(self):
         num_in_test_data = 4
         count_query = "SELECT COUNT(term_code) FROM terms;"
@@ -207,6 +208,7 @@ class TestCLCDatabase(unittest.TestCase):
         (num_expected,) = self.cur.fetchone()
         self.assertEqual(num_expected, num_in_test_data) 
 
+    #Tests to check triggers and check constrainst
     @unittest.expectedFailure
     def testClassNumConstraintLarge(self):
         add_class_query_too_large = "INSERT INTO classes(subject_code, class_number,class_name) VALUES (MAT, 555, Example Math Class)"
@@ -241,8 +243,6 @@ class TestCLCDatabase(unittest.TestCase):
         overlapping_query = "INSERT INTO slots(time_block_id, building_name, place_room_number, subject_code, class_number, tutor_id) VALUES (3,Crounse, 101, CSC, 332, 380932)"
         overlapping_query2 = "INSERT INTO slots(time_block_id, building_name, place_room_number, subject_code, class_number, tutor_id) VALUES (1,Crounse, 101, CSC, 332, 380932)"
         self.cur.execute(overlapping_query2)
-    
-
 
     @unittest.expectedFailure
     def test_prevent_slot_overlap():

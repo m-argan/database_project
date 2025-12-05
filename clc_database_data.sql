@@ -99,6 +99,7 @@ INSERT INTO tutor_availabilities(tutor_id, time_block_id) VALUES
 (380012,4),
 (380012,8),
 (000001,2),
+(000001,5),
 (000001,10),
 (123543, 3),
 (654321, 9),
