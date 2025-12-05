@@ -14,28 +14,43 @@ function select_from_db($result, $index, $conn, $row)
 
     // echo $result->field_count . " field(s) in results.<br>";
 
-    foreach ($row as $field_name => $value):
-        // Prevent "deleted_when" from being edited
-        if(htmlspecialchars($field_name) != 'deleted_when')
-        {
-            echo htmlspecialchars($field_name) . ": ";
-            ?>
-                <!-- Turns the values of each field into text boxes which are autofilled with existing db data -->
-            <input type="text" name="<?php echo htmlspecialchars($field_name); ?>" value="<?php echo htmlspecialchars($value) ?>"/><br>
+    <?php
+$pk_cols = get_primary_keys($conn, $_GET['tablename']);
 
-            <?php 
-        }
-    endforeach; 
-    
-    $pk_cols = get_primary_keys($conn, $_GET['tablename']);
-    foreach ($pk_cols as $pk) {
-        ?>
-        <!-- Form also stores PK of selected row to be altered later -->
-        <input type="hidden" name="orig_<?php echo $pk ?>" value="<?php echo htmlspecialchars($row[$pk]); ?>">
-        <?php
+foreach ($row as $field_name => $value):
+
+    // Don't display "deleted_when" as editable
+    if ($field_name === 'deleted_when') {
+        continue;
     }
+
+    echo htmlspecialchars($field_name) . ": ";
+
+    // If field is a primary key, show value but do NOT give editable textbox
+    if (in_array($field_name, $pk_cols)) {
+        echo "<strong>" . htmlspecialchars($value) . "</strong><br>";
+        continue;
+    }
+    ?>
+
+    <!-- Editable field for non-PK columns -->
+    <input type="text"
+        name="<?php echo htmlspecialchars($field_name); ?>"
+        value="<?php echo htmlspecialchars($value); ?>"
+    /><br>
+
+    <?php endforeach; ?>
+
+    <?php
+    // Store PK values as hidden fields so the update knows the original row
+    foreach ($pk_cols as $pk): ?>
+        <input type="hidden"
+            name="orig_<?php echo htmlspecialchars($pk); ?>"
+            value="<?php echo htmlspecialchars($row[$pk]); ?>">
+    <?php endforeach; ?>
+
     
-    ?><p><input type="submit" name="submit_btn" value="Submit"></p>
+    <p><input type="submit" name="submit_btn" value="Submit"></p>
     </form>
     <?php
     
