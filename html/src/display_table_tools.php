@@ -343,6 +343,7 @@
         <head>
           <link rel="stylesheet" href="nav.css">
             <title>CLC Database</title>
+            <title><?php echo "<a href='index.php'>Back to login</a>";?></title>
         </head>
         <body> 
             <?php

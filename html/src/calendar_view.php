@@ -16,7 +16,7 @@ start_view_capture();
         error_checking();
         $conn = config();
 
-        echo "<a href='index.php'>back</a>";
+        echo "<a href='index.php'>Back to login</a>";
 
         if (isset($_GET['subject']) && !empty($_GET['subject']))
         {
