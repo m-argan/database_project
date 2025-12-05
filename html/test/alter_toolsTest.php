@@ -305,5 +305,58 @@ class alter_toolsTest extends TestCase
     //     "Cannot alter already deleted course");
     // }
 
+    /**
+     * Test get_primary_keys() returns array of PK fields
+     */
+    public function test_get_primary_keys_returns_array() {
+        $pks = get_primary_keys($this->conn, 'tutors');
+        
+        $this->assertIsArray($pks);
+        $this->assertNotEmpty($pks);
+    }
+
+    /**
+     * Test get_primary_keys() identifies correct PK for tutors
+     */
+    public function test_get_primary_keys_identifies_tutor_pk() {
+        $pks = get_primary_keys($this->conn, 'tutors');
+        
+        $this->assertContains('tutor_id', $pks);
+    }
+
+    /**
+     * Test select_from_db() outputs form with field inputs
+     */
+    public function test_select_from_db_outputs_form() {
+        $_GET['tablename'] = 'tutors';
+        $result = $this->conn->query("SELECT * FROM tutors LIMIT 1");
+        $row = $result->fetch_assoc();
+        
+        ob_start();
+        select_from_db($result, 0, $this->conn, $row);
+        $output = ob_get_clean();
+        
+        $this->assertStringContainsString('<form', $output);
+        $this->assertStringContainsString('method="POST"', $output);
+    }
+
+    /**
+     * Test select_from_db() includes field names as inputs
+     */
+    public function test_select_from_db_includes_field_inputs() {
+        $_GET['tablename'] = 'tutors';
+        $result = $this->conn->query("SELECT * FROM tutors LIMIT 1");
+        $row = $result->fetch_assoc();
+        
+        ob_start();
+        select_from_db($result, 0, $this->conn, $row);
+        $output = ob_get_clean();
+        
+        // Should include field input
+        $this->assertStringContainsString('type="text"', $output);
+        // Should NOT include deleted_when field for editing
+        $this->assertStringNotContainsString('name="deleted_when"', $output);
+    }
+
 }
 ?>
