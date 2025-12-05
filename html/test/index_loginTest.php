@@ -1,8 +1,8 @@
 <?php
 use PHPUnit\Framework\TestCase;
 
-require_once __DIR__ . '/../src/setup_tools.php';
-require_once __DIR__ . '/../src/display_database_tools.php';
+// require_once __DIR__ . '/../src/setup_tools.php';
+// require_once __DIR__ . '/../src/display_database_tools.php';
 require_once __DIR__ . '/../src/index.php';
 
 class index_loginTest extends TestCase
