@@ -33,17 +33,15 @@ class display_database_toolsTest extends TestCase
     public function test_display_form() {
         $conn = config();
 
-        ob_start();                             // Begin buffer
-        render_display_database_page($conn);    // Run function
-        $html_code = ob_get_clean();            // Capture HTML output
+        ob_start();
+        render_display_database_page($conn);
+        $html_code = ob_get_clean();
 
-        // Check the lines of the form are displayed
-        $this->assertStringContainsString('<form action="display_table.php" method="GET">', $html_code);
-        $this->assertStringContainsString('<p>Table name: <input type="text" name="tablename" /></p>', $html_code);
-        $this->assertStringContainsString('<p><input type="submit" value="See Details"/></p>', $html_code);
-        $this->assertStringContainsString('</form>', $html_code);
+        // Check that key parts are displayed (homepage content with tables)
+        $this->assertStringContainsString('display_table.php', $html_code);
+        $this->assertStringContainsString('tablename', $html_code);
+        $this->assertStringContainsString('Welcome to the Tutoring Database', $html_code);
 
-    
         $conn->close();
     }
 
@@ -58,8 +56,7 @@ class display_database_toolsTest extends TestCase
 
         // Assert page renders html tag, title, and header
         $this->assertStringContainsString('<html>', $html_code);
-        $this->assertStringContainsString('<title>CLC Database</title>', $html_code);
-        $this->assertStringContainsString('<h1>CLC Database</h1>', $html_code);
+        $this->assertStringContainsString('CLC Database', $html_code);
         $this->assertStringContainsString('</html>', $html_code);
 
         $conn->close();

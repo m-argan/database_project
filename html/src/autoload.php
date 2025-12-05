@@ -9,9 +9,15 @@ spl_autoload_register(
             $classes = array(
                 'add_toolstest' => '/../test/add_toolsTest.php',
                 'alter_toolstest' => '/../test/alter_toolsTest.php',
+                'calendar_viewtest' => '/../test/calendar_viewTest.php',
                 'delete_toolstest' => '/../test/delete_toolsTest.php',
                 'display_database_toolstest' => '/../test/display_database_toolsTest.php',
-                'display_table_toolstest' => '/../test/display_table_toolsTest.php'
+                'display_table_toolstest' => '/../test/display_table_toolsTest.php',
+                'full_schedule_viewtest' => '/../test/full_schedule_viewTest.php',
+                'index_logintest' => '/../test/index_loginTest.php',
+                'student_history_viewtest' => '/../test/student_history_viewTest.php',
+                'student_schedule_viewtest' => '/../test/student_schedule_viewTest.php',
+                'vieweditstest' => '/../test/ViewEditsTest.php'
             );
         }
         $cn = strtolower($class);
