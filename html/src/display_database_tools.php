@@ -38,6 +38,9 @@
         <div class="header">
             <div class="headertitle">
                 <h1>CLC Database</h1>
+            <?php 
+            echo "<a href='index.php'>Back to login</a>";
+            ?> 
             </div>
             <div class="topnav">
                 <?php
