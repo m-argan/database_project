@@ -1,4 +1,5 @@
 <?php
+//Page which displays the student_history_view. Uses an "if" statement to determine the view procedure's arguments
 // ADDITIONS FROM COPILOT MARKED
 require_once __DIR__ . '/display_views_tools.php';
 start_view_capture();
