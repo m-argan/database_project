@@ -19,6 +19,8 @@ start_view_capture();
         if(isset($_GET['submit_back']))
         {
                 include 'index.php'; 
+                header("Location: {$_SERVER['REQUEST_URI']}", true, 303);
+                exit();
         }
 
         if (isset($_GET['subject']) && !empty($_GET['subject']))
