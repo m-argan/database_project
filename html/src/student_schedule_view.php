@@ -1,4 +1,5 @@
 <?php
+//Page which displays the student_schedule_view. Uses a series of "if" statements to fill in arguments for the view's query
 // ADDITIONS FROM COPILOT MARKED
 require_once __DIR__ . '/display_views_tools.php';
 start_view_capture();
