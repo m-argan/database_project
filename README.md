@@ -75,6 +75,7 @@ Developers can also fork the repository and clone it to their local devices with
 * The project folder should be downloaded in your home directory.
 * The ```var/www/html``` folder that Apache recognizes by default should contain a link to the ```html``` folder inside the repository folder. You will need to make this manually.
 * You will need to create your own ```mysqli.ini``` file. This is so that PHP can parse the credentials to log into your MariaDB database. Place this file in your home directory with the host, user, and password information correlating to your database credentials. It follows the same syntax as ```php.ini```. See <a href="https://www.php.net/manual/en/function.parse-ini-file.php">documentation</a>.
+* You will also need to create your own ```password.txt``` file. This differentiates administrator permissions from user permissions. Simply enter your password into this file (no whitespace) and use it to log into the web application. Place this file in your home directory.
 
 ### Executing
 
