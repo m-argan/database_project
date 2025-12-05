@@ -50,7 +50,7 @@ start_view_capture();
 
         finish_view_capture_and_render($conn, true, false);
 
-        echo "<a href='index.php'>Back to login</a>";
+        //echo "<a href='index.php'>Back to login</a>";
 
         $conn->close();
 ?>
