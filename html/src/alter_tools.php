@@ -3,6 +3,7 @@ require_once __DIR__ . "/display_table_tools.php";
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
+# Function which selects and displays the elements of the table, to be edited by the user.
 function select_from_db($result, $index, $conn, $row)
 {
     ?>
