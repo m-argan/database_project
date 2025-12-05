@@ -8,12 +8,18 @@ start_view_capture();
                         <p>Subject code(e.g. HIS, MAT): <input type="text" name="subject" /></p>
                         <p>Class (e.g. 110, 330): <input type="integer" name="class" /></p>
                         <p><input type="submit" value="See Details"/></p>
+                        <p><input type="submit_back" value="Back"/></p>
                 </form>
         <?php
         require_once __DIR__ . "/setup_tools.php";
         require_once __DIR__ . "/display_table_tools.php";
         error_checking();
         $conn = config();
+
+        if(isset($_GET['submit_back']))
+        {
+                include 'index.php'; 
+        }
 
         if (isset($_GET['subject']) && !empty($_GET['subject']))
         {
