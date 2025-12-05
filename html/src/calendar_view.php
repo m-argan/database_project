@@ -11,7 +11,7 @@ start_view_capture();
                         <p><input type="submit" value="See Details"/></p>
                 </form>
 
-                <form method="GET">
+                <form method="POST">
                         <p><input type="submit" value="Back"/></p>
                 </form>
         <?php
@@ -20,7 +20,7 @@ start_view_capture();
         error_checking();
         $conn = config();
 
-        echo(var_dump($_GET));
+        echo(var_dump($_POST));
         if(isset($_GET['submit_back']))
         {
                 render_login($conn, False);
