@@ -8,6 +8,10 @@
     $password = file_get_contents('../../../password.txt');
     $password = trim($password);
     
+    // Set up and render page
+    error_checking();
+    $conn = config();
+
     function login($password){
         // If password is correct, display Admin view
         if($_POST['admin_password'] == $password)
@@ -20,10 +24,7 @@
             render_login($conn, True);
         }
     }
-    // Set up and render page
-    error_checking();
-    $conn = config();
-
+    
     // If roles have not been set, default to login page
     if(!isset($_POST['role_admin']) && !isset($_POST['role_student']))
     {render_login($conn, False);}
