@@ -130,11 +130,13 @@ function perform_alter($conn, $doExit = true)
 
     // If user attempts to change primary key(s), throws exception 
     try {
-        $stmt->execute();
+    $stmt->execute();
     } catch (mysqli_sql_exception $error) {
-        $_SESSION['pk_error_msg'] = "Cannot alter primary keys";
-        
+        $error_message = "This value cannot be edited.";
+        include "display_alter.php"; // reload same page with error
+        return;
     }
+
     
     // Redirects to make updates display on webpage
     if(isset($_SESSION['pk_error_msg']))
@@ -171,7 +173,7 @@ function get_result($conn)
 function display_session_errors(){
 
     if (array_key_exists('pk_error_msg', $_SESSION) && $_SESSION['pk_error_msg'] == true) {
-        echo "<p style='color:red;'>This value cannot be edited!.</p>";
+        //echo "<p style='color:red;'>This value cannot be edited!.</p>";
         unset($_SESSION['pk_error_msg']);
     }
 
