@@ -24,7 +24,7 @@ body {
     background-color: #363333;
 }
 
-a:link {
+header:link {
   color: rgb(107, 128, 0);
   background-color: transparent;
   text-decoration: none;
