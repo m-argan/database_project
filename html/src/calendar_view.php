@@ -1,23 +1,20 @@
 <?php
-//Page which displays the calendar_view. Uses a series "if" statements to determine the view procedure's arguments
 require_once __DIR__ . '/display_views_tools.php';
-require_once __DIR__ . "/display_database_tools.php";
 
 start_view_capture();
 ?>
-        <h2>Select a Subject or Class:</h2>
-                <form action="calendar_view.php" method="POST">
-                        <p>Subject code(e.g. HIS, MAT): <input type="text" name="subject" /></p>
-                        <p>Class (e.g. 110, 330): <input type="integer" name="class" /></p>
-                        <p><input type="submit" value="See Details"/></p>
-                </form>
-        <?php
+<h2>Select a Subject or Class:</h2>
+        <form action="calendar_view.php" method="GET">
+                <p>Subject code(e.g. HIS, MAT): <input type="text" name="subject" /></p>
+                <p>Class (e.g. 110, 330): <input type="integer" name="class" /></p>
+                <p><input type="submit" value="See Details"/></p>
+        </form>
+<?php
         require_once __DIR__ . "/setup_tools.php";
         require_once __DIR__ . "/display_table_tools.php";
         error_checking();
         $conn = config();
 
-        echo(var_dump($_GET));
         if (isset($_GET['subject']) && !empty($_GET['subject']))
         {
                 $subject = htmlspecialchars($_GET['subject']);
@@ -50,8 +47,6 @@ start_view_capture();
         }
 
         finish_view_capture_and_render($conn, true, false);
-
-        echo "<a href='index.php'>Back to login</a>";
 
         $conn->close();
 ?>
