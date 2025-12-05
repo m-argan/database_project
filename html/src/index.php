@@ -8,36 +8,37 @@
     $password = file_get_contents('../../../password.txt');
     $password = trim($password);
     
+    function login($password){
+        // If password is correct, display Admin view
+        if($_POST['admin_password'] == $password)
+        {
+            render_homepage($conn);
+        }
+        elseif($_POST['admin_password'] != $password)
+        {
+            // Reload login page, but this time with an error message
+            render_login($conn, True);
+        }
+    }
     // Set up and render page
     error_checking();
     $conn = config();
 
+    // If roles have not been set, default to login page
     if(!isset($_POST['role_admin']) && !isset($_POST['role_student']))
     {render_login($conn, False);}
-    // echo(var_dump($_GET));
+
     elseif(isset($_POST['role_admin']))
         {
-            if($_POST['admin_password'] == $password)
-            {
-                render_homepage($conn);
-            }
-            elseif($_POST['admin_password'] != $password)
-            {
-                render_login($conn, True);
-            }
+            login($password);
         }
+
     elseif(isset($_POST['role_student']))
     {
-        // if (session_status() === PHP_SESSION_NONE) {
-        //     session_start();
-        //     $_SESSION["role"] = "student";
-        // }
-    
         include 'calendar_view.php'; 
-
     }
     
-    // Close connection
+    // Close connection -> commented out because calendary_view already closes the connection
 
     // try{
     //     $conn->close();

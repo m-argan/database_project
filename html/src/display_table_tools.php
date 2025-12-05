@@ -372,7 +372,9 @@
     <?php
     }
 
-
+    // Function modeled after render_display_table_page, as reuse was not possible due to the 
+    // configuration of the login system. Designed to apply the stylesheet to the student 
+    // view without the sidebar or footers. 
     function render_display_table_page_student($conn, $is_init = false, $content = '') { ?>
         <!DOCTYPE html>
         <html>
@@ -381,16 +383,11 @@
             <title>CLC Database</title>
         </head>
         <body> 
-            <?php
-            //render_header();
-            ?>
-
-            <div class="main"><?php
-                //render_sidebar($conn); ?>
+            <div class="main"><?php?>
                 <div class="page-content"><?php
-                if (!empty($content)) {     // ADDITION FROM COPILOT
-                    echo $content;          // ADDITION FROM COPILOT
-                } else if ($is_init == True) {    // ADDITION FROM COPILOT ?>
+                if (!empty($content)) {   
+                    echo $content;          
+                } else if ($is_init == True) {?>
                     <p>Welcome to the Tutoring Database!</p>
                     <p>Select a table name or view to get started</p><?php
                 } else {
@@ -398,11 +395,6 @@
                 }
             ?></div>
             </div>
-
-            <?php
-            //render_footer();
-            ?>
-
         </body>
         </html>
     <?php
