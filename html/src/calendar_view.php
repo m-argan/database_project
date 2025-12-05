@@ -20,7 +20,7 @@ start_view_capture();
         echo(var_dump($_GET));
         if(isset($_GET['submit_back']))
         {
-                render_login($conn, False);
+                include_once 'index.php';
         }
 
         if (isset($_GET['subject']) && !empty($_GET['subject']))
