@@ -20,7 +20,9 @@ start_view_capture();
         echo(var_dump($_POST));
         if(isset($_POST['submit_back']))
         {
-                render_login($conn, False);
+                //render_login($conn, False);
+                echo "<a href='index.php'>back</a>";
+                
         }
 
         if (isset($_GET['subject']) && !empty($_GET['subject']))
