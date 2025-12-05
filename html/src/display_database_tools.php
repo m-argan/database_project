@@ -37,7 +37,7 @@
     function render_header() { ?>
         <div class="header">
             <div class="headertitle">
-                <h1> CLC Database <?php echo "<a href='index.php'>Back to login</a>";?> </h1>
+                <h1> CLC Database <a href="index.php" style="color:#FF0000;">Back to Login</a> </h1> 
             </div>
             <div class="topnav">
                 <?php
