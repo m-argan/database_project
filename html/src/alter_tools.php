@@ -115,7 +115,7 @@ function perform_alter($conn, $doExit = true)
     if (empty($updates)) {
         if ($doExit) {
            //
-    header("Location: display_table.php?tablename=" . urlencode($table));
+ header("Location: display_table.php?tablename=" . urlencode($table));
             exit;
         }
         return true;
@@ -132,8 +132,7 @@ function perform_alter($conn, $doExit = true)
     try {
         $stmt->execute();
     } catch (mysqli_sql_exception $error) {
-        echo "<p style='color:red;'>This value cannot be edited!.</p>";
-        //$_SESSION['pk_error_msg'] = "Cannot alter primary keys";
+        $_SESSION['pk_error_msg'] = "Cannot alter primary keys";
         
     }
     
