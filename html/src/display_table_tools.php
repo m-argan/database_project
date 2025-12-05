@@ -342,7 +342,7 @@
         <html>
         <head>
           <link rel="stylesheet" href="nav.css">
-            <title>CLC Database <?php echo "<a href='index.php'>Back to login</a>";?></title>
+            <title>CLC Database!</title>
         </head>
         <body> 
             <?php
