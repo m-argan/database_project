@@ -383,11 +383,16 @@
             <title>CLC Database</title>
         </head>
         <body> 
-            <div class="main"><?php?>
+            <?php
+            //render_header();
+            ?>
+
+            <div class="main"><?php
+                //render_sidebar($conn); ?>
                 <div class="page-content"><?php
-                if (!empty($content)) {   
-                    echo $content;          
-                } else if ($is_init == True) {?>
+                if (!empty($content)) {     // ADDITION FROM COPILOT
+                    echo $content;          // ADDITION FROM COPILOT
+                } else if ($is_init == True) {    // ADDITION FROM COPILOT ?>
                     <p>Welcome to the Tutoring Database!</p>
                     <p>Select a table name or view to get started</p><?php
                 } else {
@@ -395,6 +400,11 @@
                 }
             ?></div>
             </div>
+
+            <?php
+            //render_footer();
+            ?>
+
         </body>
         </html>
     <?php
