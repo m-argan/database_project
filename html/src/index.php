@@ -24,14 +24,22 @@
             render_login($conn, True);
         }
     }
-    
+
     // If roles have not been set, default to login page
     if(!isset($_POST['role_admin']) && !isset($_POST['role_student']))
     {render_login($conn, False);}
 
     elseif(isset($_POST['role_admin']))
         {
-            login($password);
+            if($_POST['admin_password'] == $password)
+        {
+            render_homepage($conn);
+        }
+        elseif($_POST['admin_password'] != $password)
+        {
+            // Reload login page, but this time with an error message
+            render_login($conn, True);
+        }
         }
 
     elseif(isset($_POST['role_student']))
