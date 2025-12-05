@@ -21,6 +21,7 @@ start_view_capture();
         if(isset($_POST['submit_back']))
         {
                 include_once 'index.php';
+                $conn->close();
         }
 
         if (isset($_GET['subject']) && !empty($_GET['subject']))
