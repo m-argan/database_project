@@ -12,6 +12,7 @@
     error_checking();
     $conn = config();
 
+    // Function to check password against password in file saved to machine
     function login($password, $conn){
         // If password is correct, display Admin view
         if($_POST['admin_password'] == $password)

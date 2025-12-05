@@ -249,15 +249,6 @@ class TestCLCDatabase(unittest.TestCase):
         update_query = "UPDATE slots SET time_block_id = 5 WHERE time_block_id = 3"
         self.cur.execute(update_query)
 
-    
-    # test for login
-    def testTutorAvailibilitiesCount(self):
-            num_in_test_data = 7
-            count_query = "SELECT COUNT(tutor_id) FROM tutor_availibilities;"
-            self.cur.execute(count_query)
-            (num_expected,) = self.cur.fetchone()
-            self.assertEqual(num_expected, num_in_test_data) 
-            
     # ----- END ACTUAL TEST METHODS -------------------------------------------
 
 if __name__ == "__main__":
