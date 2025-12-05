@@ -9,15 +9,6 @@ require_once __DIR__ . '/../src/display_table_tools.php';
 class add_toolsTest extends TestCase
 {
     private $conn;
-    // protected function setUp(): void {
-    //     $this->conn = config();
-    // }
-
-    // protected function tearDown(): void {
-    //     if ($this->conn) {
-    //         $this->conn->close();
-    //     }
-    // }
     protected function setUp(): void
 {
     $this->conn = config();
@@ -33,6 +24,7 @@ protected function tearDown(): void
 }
 
     /** @test */
+    //Tests returned list of autoincremented keys is accurate
     public function testGetAutoIncrementKeys()
     {
         // First, get the fields from the slots table
@@ -52,6 +44,7 @@ protected function tearDown(): void
     }
 
     /** @test */
+    //Tests that a valid input is accurately inserted
     public function testInsertIntoTableValidForeignKey()
     {
         $data = [
@@ -67,19 +60,44 @@ protected function tearDown(): void
     }
 
     /** @test */
+    //Tests that the proper error message appears and a record with an improper
+    //foreign key is not inserted
     public function testInsertIntoTableInvalidForeignKey()
     {
-        $this->expectException(Exception::class);
-        $this->expectExceptionMessage("Value '123456' for column 'tutor_id' does not exist in 'tutors'");
         $data = [
-            "tutor_id" => "123456",
-            "subject_code" => "CSC" 
+            "tutor_id" => 123456,
+            "subject_code" => "ENS"
         ];
-
+   
+        ob_start();
         insert_into_table($this->conn, "tutor_qualified_subjects", $data);
+        $output = ob_get_clean();
+
+       
+        $this->assertStringContainsString("Error: Value '123456' for column 'tutor_id' does not exist in 'tutors'", $output);
     }
 
     /** @test */
+    //Tests that proper error message shows and that
+    //an unqualified tutor record can't be created
+    public function testUnqualifiedTutor()
+    {
+        $data = [
+            "tutor_id" => 380932,
+            "subject_code" => "ENS",
+            "class_number" => 110
+        ];
+   
+        ob_start();
+        insert_into_table($this->conn, "tutor_agreed_classes", $data);
+        $output = ob_get_clean();
+
+       
+        $this->assertStringContainsString("Error: Tutor is unqualified.", $output);
+    }
+
+    /** @test */
+    //Tests that forms are properly displayed
     public function testDisplayAddingFormsOutputsForm()
     {
         $_GET['tablename'] = "slots";
@@ -94,6 +112,7 @@ protected function tearDown(): void
     }
 
     /** @test */
+    //Tests that error message pops up when submit is hit with empty fields
     public function testDisplayAddingFormsSubmissionIncomplete()
     {
         $_GET['tablename'] = "buildings";
@@ -107,6 +126,7 @@ protected function tearDown(): void
     }
 
     /** @test */
+    //Tests that success message is displayed and the insert was executed successfully.
     public function testDisplayAddingFormsSubmissionSuccess()
     {
         $_GET['tablename'] = "buildings";
@@ -126,4 +146,47 @@ protected function tearDown(): void
         $result = $this->conn->query("SELECT * FROM buildings WHERE building_name = 'ABCD'");
         $this->assertEquals(1, $result->num_rows);
     }
+
+    /** @test */
+    //Tests that error message shows when timeslots overlap for same tutor
+    public function testTutorOverlap()
+    {
+        $data = [
+            "time_block_id" => 1,
+            "building_name" => "Young",
+            "place_room_number" => 111,
+            "subject_code" => "MAT",
+            "class_number" => 332,
+            "tutor_id" => 380932
+        ];
+   
+        ob_start();
+        insert_into_table($this->conn, "slots", $data);
+        $output = ob_get_clean();
+
+       
+        $this->assertStringContainsString("Error: Tutor already has a conflicting time slot.", $output);
+    }
+
+    /** @test */
+    //Tests that error message shows when timeslots overlap for same room
+    public function testRoomTimeOverlap()
+    {
+        $data = [
+            "time_block_id" => 1,
+            "building_name" => "Crounse",
+            "place_room_number" => 101,
+            "subject_code" => "ENS",
+            "class_number" => 110,
+            "tutor_id" => 1
+        ];
+   
+        ob_start();
+        insert_into_table($this->conn, "slots", $data);
+        $output = ob_get_clean();
+
+       
+        $this->assertStringContainsString("Error: Time slot overlaps an existing slot in this room.", $output);
+    }
+     
 }
